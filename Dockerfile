@@ -49,7 +49,6 @@ EXPOSE ${PORT}
 
 WORKDIR /app
 COPY /bin/d2-map.exe /app/bin/d2-map.exe
-COPY /bin/d2.install.reg /app/
 COPY package.json /app/
 RUN npm install canvas --build-from-source
 RUN npm install --production

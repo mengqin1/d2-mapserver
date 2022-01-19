@@ -7,6 +7,13 @@ export function drawRectangle(ctx, x, y, width, height, color) {
   ctx.stroke();
 }
 
+export function drawCenteredRectangle(ctx, x, y, width, height, color) {
+  ctx.beginPath();
+  ctx.fillStyle = color;
+  ctx.fillRect(x-(width/2), y-(height/2), width, height);
+  ctx.stroke();
+}
+
 export function drawCircle(ctx, x, y, size, color) {
   ctx.beginPath();
   ctx.fillStyle = color;

@@ -55,12 +55,12 @@ export async function mapImage(req, res) {
         .toString("base64")
         .replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
       responseData = new ImageResponse(levelImage, base64Data); // serialize the response data for caching
-      fs.writeFile(cacheFileName, JSON.stringify(responseData), function (err) {
-        if (err) {
-          console.error("Error writing cache file " + cacheFileName);
-          return console.error(err);
-        }
-      });
+      // fs.writeFile(cacheFileName, JSON.stringify(responseData), function (err) {
+      //   if (err) {
+      //     console.error("Error writing cache file " + cacheFileName);
+      //     return console.error(err);
+      //   }
+      // });
     }
 
     const img = Buffer.from(responseData.base64Data, "base64");

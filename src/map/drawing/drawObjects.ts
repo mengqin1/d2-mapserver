@@ -1,6 +1,6 @@
 import { NodeCanvasRenderingContext2D } from "canvas";
 import { Level, ObjectType } from "../../types/level.type";
-import { drawRectangle, drawImage, drawImageOutline } from "./drawPrimatives";
+import { drawRectangle, drawImage, drawImageOutline, drawCenteredRectangle, drawCircle } from "./drawPrimatives";
 
 export async function drawObjects(ctx: NodeCanvasRenderingContext2D, levelData: Level, scale: number) {
   // this part adds the special objects (doors, waypoints etc)
@@ -48,10 +48,39 @@ export async function drawObjects(ctx: NodeCanvasRenderingContext2D, levelData: 
 
       // yellow doors
       if (mapObject.name == "door" || mapObject.name == "Door") {
-        let size = scale * 3;
+        // These are all the maps which have 'doors':
+        // 26 Monastery Gate
+        // 27 Outer Cloister
+        // 28 Barracks
+        // 29 Jail Level 1
+        // 30 Jail Level 2
+        // 31 Jail Level 3
+        // 32 Inner Cloister
+        // 33 Cathedral
+        // 34 Catacombs Level 1
+        // 35 Catacombs Level 2
+        // 36 Catacombs Level 3
+        // 37 Catacombs Level 4
+        // 51 Harem Level 2
+        // 52 Palace Cellar Level 1
+        // 53 Palace Cellar Level 2
+        // 54 Palace Cellar Level 3
+        // 55 Stony Tomb Level 1
+        // 56 Halls of the Dead Level 1
+        // 57 Halls of the Dead Level 2
+        // 58 Claw Viper Temple Level 1
+        // 59 Stony Tomb Level 2
+        // 60 Halls of the Dead Level 3
+        // 64 Maggot Lair Level 3
+        // 72 Tal Rasha's Tomb
+        // 73 Duriel's Lair
+        
+        const doorLength = scale * 5;
+        const doorThickness = (scale * 2);
+
         // cat lvl 4
         if (mapObject.id == 47) {
-          drawRectangle(ctx, x+1.8, y-0.8, scale * 3, (scale * 3)/2, "#FFFF00"); // vertical
+          drawRectangle(ctx, x - (doorLength /2), y - (doorThickness/2)+scale, doorLength*2, doorThickness, "#FFFF00"); // horizontal
         }
         switch(mapObject.id) {
           case 13:
@@ -60,31 +89,31 @@ export async function drawObjects(ctx: NodeCanvasRenderingContext2D, levelData: 
           case 290: // harem
           case 292: // palace
           //case 294:
-            drawRectangle(ctx, x+1.8, y-1.6, size/3, size, "#FFFF00"); // vertical
+            drawCenteredRectangle(ctx, x+(scale*1), y+(scale*0.5), doorThickness, doorLength, "#FFFF00"); // vertical
             break;
           case 14:
           case 16:
           case 291:
           // case 293:
           case 295:
-            drawRectangle(ctx, x, y-0.3, size, size/3, "#FFFF00"); // horizontal
+            drawCenteredRectangle(ctx, x+(scale*0.9), y+(scale*0.5), doorLength, doorThickness, "#FFFF00"); // horizontal
             break;
         }
 
         // stony tomb doors
         if (mapObject.id == 91) {
-          drawRectangle(ctx, x+1.6, y, (scale * 3)/2, (scale * 3), "#FFFF00"); // vertical
+          drawRectangle(ctx, x+(scale/2), y-(scale/2), doorThickness, doorLength, "#FFFF00"); // vertical
         }
         if (mapObject.id == 92) {
-          drawRectangle(ctx, x+3.5, y-0.7, (scale * 3), (scale * 3)/2, "#FFFF00"); // horizontal
+          drawRectangle(ctx, x+(scale/2), y-(scale/2), doorLength, doorThickness, "#FFFF00"); // horizontal
         }
 
         // maggot lair doors
         if (mapObject.id == 230) {
-          drawRectangle(ctx, x+1.6, y+2, (scale * 3)/2, (scale * 4), "#FFFF00"); // vertical
+          drawRectangle(ctx, x+(scale/3), y, doorThickness, doorLength, "#FFFF00"); // vertical
         }
         if (mapObject.id == 229) {
-          drawRectangle(ctx, x+4, y-0.7, (scale * 4), (scale * 3)/2, "#FFFF00"); // horizontal
+          drawRectangle(ctx, x+(scale), y-(scale/2), doorLength, doorThickness, "#FFFF00"); // horizontal
         }
       }
     }
