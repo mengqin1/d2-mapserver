@@ -2,6 +2,8 @@
 
 There are two ways to run the map server, the easy way (this page) or using docker, see [DOCKERSERVER.md](./DOCKERSERVER.md)
 
+**NOTE**: You don't need to run this on a dedicated server, it's just software you can run on your own PC.
+
 ## Installation
 
 You can find the latest version here:
@@ -20,6 +22,15 @@ If you see this then the map server is running.
 Minimize this window, if you close it the map server will stop.  
 
 You should then be able to access this URL in your browser <http://localhost:3002/v1/map/12345/2/117/image>  
-In your d2r-mapview `settings.ini` change the baseUrl to `baseUrl=http://localhost:3002`  
 
-You should then be able to start using the map hack.
+
+### Configure the Map Hack
+
+Download the latest version here:
+<https://github.com/joffreybesos/d2r-mapview/releases/latest>
+
+- Download the `d2r-v2.x.x.exe` and `settings.ini` files
+- Edit the `settings.ini` file change the baseUrl setting to `baseUrl=http://localhost:3002`  
+
+Now you can start D2R and then run the `d2rmap-v2.x.x.exe` after you start the game.
+
