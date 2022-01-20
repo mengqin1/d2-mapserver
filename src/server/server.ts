@@ -31,23 +31,7 @@ const app = express();
 const PORT = process.env.PORT || 3002;
 
 app.listen(PORT, () => {
-  const fontFile = path.resolve("./build/static/Roboto-Regular.ttf");
-  const fontFileBold = path.resolve("./build/static/Roboto-Bold.ttf");
-  const fontFileExocet = path.resolve("./build/static/exocetblizzardot-medium.otf");
-  const fontFileSC = path.resolve("./build/static/NotoSansSC-Regular.otf");
-  if (fs.existsSync(fontFile)) {
-    
-    console.log("Adding font " + fontFileExocet);
-    registerFont(fontFileExocet, { family: 'ExocetBlizzardMixedCapsOTMedium', weight: 'bold' })
-    registerFont(fontFileExocet, { family: 'ExocetBlizzardMixedCapsOTMedium' })
-    console.log("Adding font " + fontFileSC);
-    registerFont(fontFileSC, { family: 'Noto Sans Simplified Chinese', weight: 'regular' })
-    console.log("Adding font " + fontFile);
-    registerFont(fontFile, { family: 'Roboto' })
-    console.log("Adding font " + fontFileBold);
-    registerFont(fontFileBold, { family: 'Roboto', weight: 'bold' })
-    
-  }
+
   const generationQueue = './cache/queue.txt'
   if (fs.existsSync(generationQueue)) {
     fs.unlinkSync(generationQueue);
@@ -58,6 +42,23 @@ app.listen(PORT, () => {
     if (!fs.existsSync("/app/game/Fog.dll")) {
       console.error("Fog.dll not found in /app/game, check your game files volume path");
       process.exit();
+    }
+    const fontFile = path.resolve("./build/static/Roboto-Regular.ttf");
+    const fontFileBold = path.resolve("./build/static/Roboto-Bold.ttf");
+    const fontFileExocet = path.resolve("./build/static/exocetblizzardot-medium.otf");
+    const fontFileSC = path.resolve("./build/static/NotoSansSC-Regular.otf");
+    if (fs.existsSync(fontFile)) {
+      
+      console.log("Adding font " + fontFileExocet);
+      registerFont(fontFileExocet, { family: 'ExocetBlizzardMixedCapsOTMedium', weight: 'bold' })
+      registerFont(fontFileExocet, { family: 'ExocetBlizzardMixedCapsOTMedium' })
+      console.log("Adding font " + fontFileSC);
+      registerFont(fontFileSC, { family: 'Noto Sans Simplified Chinese', weight: 'regular' })
+      console.log("Adding font " + fontFile);
+      registerFont(fontFile, { family: 'Roboto' })
+      console.log("Adding font " + fontFileBold);
+      registerFont(fontFileBold, { family: 'Roboto', weight: 'bold' })
+      
     }
     console.log(`Setting up wine config...`);
     execSync("winecfg", { env: { WINEPREFIX: '/app/wine_d2', WINEDEBUG: '-all,fixme-all', WINEARCH: 'win32' } });
