@@ -34,3 +34,18 @@ Download the latest version here:
 
 Now you can start D2R and then run the `d2rmap-v2.x.x.exe` after you start the game.
 
+
+## Troubleshooting
+
+Error messages:
+1. "Did not find the Diablo 2 LoD files in the expected location"
+    This means you may have extracted the D2 LOD files incorrectly. In the zip file, the folder is called `Diablo II 1.13c` but it should be `game`
+3. "Error: listen EADDRINUSE: address already in use :::3002"
+    This means you have another instance of the map server running, or some other process using that port on your PC.
+    Either kills the other instance of the map server, or use a different port with `set PORT=3003`
+2. "Did not find static files in build folder"
+3. "Did not find ./bin/d2-map.exe files"
+    This means somehow those files are missing, restore them from the original zip file
+4. "Server error generating map"
+    If you get this in the browser when testing the server, look at the map server window for more information
+    
