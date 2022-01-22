@@ -8,6 +8,7 @@ import * as path from 'path';
 import { mapData, mapImage, prefetch } from "./routes";
 
 const uest = require('uest')
+const bodyParser = require('body-parser');
 const { registerFont } = require('canvas')
 var morgan = require('morgan')
 const moment = require('moment-timezone').tz(process.env.TZ)
@@ -124,10 +125,9 @@ app.get(
   mapImage
 );
 
-app.post("/v1/map/prefetch",
-  param("seed").isNumeric(),
-  param("difficulty").isNumeric(),
-  param("mapid").isNumeric(),
+app.use(bodyParser.json());
+app.post(
+  "/v1/map/prefetch",
   prefetch
 );
 

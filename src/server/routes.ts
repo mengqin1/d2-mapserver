@@ -3,11 +3,12 @@ import path = require("path");
 import { generateMapImage } from "../map/generateMapImage";
 import { ImageResponse } from "../types/ImageResponse";
 import * as fs from "fs";
-import { getMapData } from "../data/getMapData";
+import { getAllMapData, getMapData } from "../data/getMapData";
 import { Level } from "../types/level.type";
 import { PrefetchRequest } from "../types/PrefetchRequest";
 import { LevelImage } from "../types/LevelImage";
 import { RequestConfig } from "../types/RequestConfig";
+import { off } from "process";
 
 var historyLogStream = fs.createWriteStream("./cache/history.log", { flags: "a" });
 
@@ -118,34 +119,32 @@ export async function mapData(req, res) {
 export async function prefetch(req, res) {
     try {
         const pf: PrefetchRequest = req.body;
-        const accessGranted: boolean = (pf.password == "I'm not telling you")
-        if (!process.env.DISABLE_PREFETCH || accessGranted) {
+        if (!process.env.DISABLE_PREFETCH) {
             const seed: string = pf.seed;
             const difficulty: string = pf.difficulty;
-
-            await pf.mapIds.forEach(mapId => {
-                
-                let queryStr: string[] = [];
-                //queryStr.push(pf.playerName !== undefined ? ("playerName=" + pf.playerName) : "");
-                pf.verbose !== undefined ? queryStr.push("verbose=" + pf.verbose) : "";
-                pf.trim !== undefined ? queryStr.push("trim=" + pf.trim) : "";
-                pf.isometric !== undefined ? queryStr.push("isometric=" + pf.isometric) : "";
-                pf.edge !== undefined ? queryStr.push("edge=" + pf.edge) : "";
-                pf.wallthickness !== undefined ? queryStr.push("wallthickness=" + pf.wallthickness) : "";
-                pf.serverScale !== undefined ? queryStr.push("serverScale=" + pf.serverScale) : "";
-                
-                req.uest({
-                    method: 'GET',
-                    url: `/v1/map/${seed}/${difficulty}/${mapId}/image?${queryStr.join('&')}`
-                }, (er, resp, body) => {
-                    //console.log(`${seed}/${difficulty}/${mapId}`);
-                });
+            getAllMapData(pf.seed, pf.difficulty, 0).then(levelList => {
+              pf.mapIds.forEach(mapId => {
+                  
+                  let queryStr: string[] = [];
+                  pf.verbose !== undefined ? queryStr.push("verbose=" + pf.verbose) : "";
+                  pf.trim !== undefined ? queryStr.push("trim=" + pf.trim) : "";
+                  pf.isometric !== undefined ? queryStr.push("isometric=" + pf.isometric) : "";
+                  pf.edge !== undefined ? queryStr.push("edge=" + pf.edge) : "";
+                  pf.wallthickness !== undefined ? queryStr.push("wallthickness=" + pf.wallthickness) : "";
+                  pf.serverScale !== undefined ? queryStr.push("serverScale=" + pf.serverScale) : "";
+                  req.uest({
+                      method: 'GET',
+                      url: `/v1/map/${seed}/${difficulty}/${mapId}/image?${queryStr.join('&')}`
+                  }, (er, resp, body) => {
+                      //console.log(`${seed}/${difficulty}/${mapId}`);
+                  });
+              });
+              res.send(`Prefetched ${pf.mapIds.length} maps`);
             });
-            res.send(`Prefetched ${pf.mapIds.length} maps`);
         } else {
             res.send("Prefetch not available on public free server.\nPlease run your own server\nRefer to this guide https://github.com/joffreybesos/d2r-mapview/blob/master/SERVER.md");
         }
     } catch (e) {
-        res.status(500).send("Error prefetching");
+        res.status(500).send("Error prefetching\n" + e);
     }
 }
