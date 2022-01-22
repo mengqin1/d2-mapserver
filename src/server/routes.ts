@@ -32,7 +32,6 @@ export async function mapImage(req, res) {
       150,
       process.env.ENABLE_WATERMARK ? true : false
     );
-
     
     const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;
     let cached = false;
@@ -91,7 +90,7 @@ export async function mapImage(req, res) {
     );
     res.end(img);
   } catch (err) {
-    res.status(500).send("Server error generating map image");
+    res.status(500).send("Server error generating map image, look at map server logs for more info\n" + err);
   }
 }
 
@@ -112,7 +111,7 @@ export async function mapData(req, res) {
             res.send("Please run your own server for raw JSON data");
         }
     } catch (err) {
-        res.status(500).send("Server error generating map");
+        res.status(500).send("Server error generating map, look at map server logs for more info\n" + err);
     }
 }
 

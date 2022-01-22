@@ -73,12 +73,16 @@ async function getSingleMapFromWine(
   let mapsData: Level[]
   if (process.env.WINEARCH) {
     mapsData = await getFromWine(seed, difficulty, mapid);
+    if (mapsData.length == 0) {
+      throw new Error("Failed generating data, likely a problem with your D2 Lod Game files\nCheck ./cache/winerrors.log for more detail");
+    }
   } else {
     mapsData = await getFromWindowsExe(seed, difficulty, mapid);
+    if (mapsData.length == 0) {
+      throw new Error("Failed generating data, likely a problem with your D2 Lod Game files\nCheck ./cache/windowserrors.log for more detail");
+    }
   }
-  if (mapsData.length == 0) {
-    throw new Error("Failed generating data, no level data found");
-  }
+  
   const seedData: LevelList = {
     seed: seed,
     difficulty: difficulty,
@@ -111,7 +115,7 @@ async function getAllMapsFromWine(
     mapsData = await getFromWindowsExe(seed, difficulty);
   }
   if (mapsData.length == 0) {
-    throw new Error("Failed generating data, no level data found");
+    throw new Error("Failed generating data, likely a problem with your D2 Lod Game files");
   }
   const seedData: LevelList = {
     seed: seed,

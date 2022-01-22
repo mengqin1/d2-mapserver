@@ -1,6 +1,7 @@
 import { execSync } from "child_process";
 import * as express from "express";
 import { param } from "express-validator";
+var http = require('http');
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -30,7 +31,12 @@ var accessLogStream = fs.createWriteStream('./cache/access.log', { flags: 'a' })
 const app = express();
 const PORT = process.env.PORT || 3002;
 
-app.listen(PORT, () => {
+var server = http.createServer(app);
+server.on('error', function (e) {
+  console.log(e)
+  exit()
+});
+server.listen(PORT, () => {
 
   const generationQueue = './cache/queue.txt'
   if (fs.existsSync(generationQueue)) {
@@ -64,13 +70,28 @@ app.listen(PORT, () => {
     execSync("winecfg", { env: { WINEPREFIX: '/app/wine_d2', WINEDEBUG: '-all,fixme-all', WINEARCH: 'win32' } });
   } else {
     if (!fs.existsSync(path.join(D2_GAME_FILES, "Fog.dll"))) {
+      console.error("Did not find the Diablo 2 LoD files in the expected location");
       console.error("Expected game files in this folder: " + path.resolve(D2_GAME_FILES));
       console.error("You can configure the folder with 'set D2_GAME_FILES=D:\\Games\\Diablo 2'");
-      process.exit();
+      console.error("Exiting....");
+      exit();
+    }
+    
+    if (!fs.existsSync("./build/static")) {
+      console.error("Did not find static files in build folder");
+      console.error("Check you have extracted the map server files correctly");
+      console.error("Exiting....");
+      exit();
+    }
+    if (!fs.existsSync("./bin/d2-map.exe")) {
+      console.error("Did not find ./bin/d2-map.exe files");
+      console.error("Check you have extracted the map server files correctly");
+      console.error("Exiting....");
+      exit();
     }
   }
   console.log(`Test this server by opening this link in your browser: http://localhost:${PORT}/v1/map/12345/2/117/image`);
-  console.log(`For troubleshooting refer to https://github.com/joffreybesos/d2r-mapview/blob/master/SERVER.md#troubleshoot`);
+  console.log(`For troubleshooting refer to https://github.com/joffreybesos/d2-mapserver/blob/master/INSTALLATION.md#troubleshooting`);
   console.log(`Running on http://localhost:${PORT}`);
 });
 
@@ -118,3 +139,9 @@ app.get('/health', (req, res) => {
   }
   res.status(200).send(data);
 });
+
+function exit() {
+  var start = new Date().getTime(), expire = start + 15000;
+  while (new Date().getTime() < expire) { }
+  process.exit();
+}

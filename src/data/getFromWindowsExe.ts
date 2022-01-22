@@ -22,8 +22,8 @@ export async function getFromWindowsExe(
     cmd.push("--map");
     cmd.push(mapId.toString());
   }
-  console.log("Spawning process: " + cmd.join(" ").toString());
-  let scriptOutput = "";
+  console.log("Spawning process: bin/d2-map.exe " + cmd.join(" ").toString());
+  let scriptOutput: string = "";
   const errorFile = "./cache/windowserrors.log";
   let mapLines: Level[] = [];
 
@@ -44,6 +44,10 @@ export async function getFromWindowsExe(
         processStdOut(scriptOutput).then((mapLines) => {
           return resolve(mapLines);
         });
+      }
+      if (data.includes("Init:Failed:UnknownGameVersion")) {
+        console.error("Error in D2 LOD game files, cannot generate map data");
+        errorStream.write(scriptOutput);
       }
     });
     child.stderr.setEncoding("utf8");

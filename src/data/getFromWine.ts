@@ -50,6 +50,10 @@ export async function getFromWine(
           return resolve(mapLines);
         });
       }
+      if (data.includes("Init:Failed:UnknownGameVersion")) {
+        console.error("Error in D2 LOD game files, cannot generate map data");
+        errorStream.write(scriptOutput);
+      }
     });
     child.stderr.setEncoding("utf8");
     child.stderr.on("data", (data) => {
