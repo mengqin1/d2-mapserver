@@ -44,6 +44,14 @@ server.listen(PORT, () => {
     fs.unlinkSync(generationQueue);
   }
 
+  // delete cache json files
+  const filenames = fs.readdirSync("./cache");
+  filenames.forEach(file => {
+    if (file.endsWith('.json')) {
+      fs.unlinkSync("./cache/" + file);
+    }
+  });
+
   // if in docker, setup wine
   if (process.env.WINEARCH) {
     if (!fs.existsSync("/app/game/Fog.dll")) {

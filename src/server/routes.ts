@@ -3,14 +3,11 @@ import path = require("path");
 import { generateMapImage } from "../map/generateMapImage";
 import { ImageResponse } from "../types/ImageResponse";
 import * as fs from "fs";
-import { getAllMapData, getMapData } from "../data/getMapData";
+import { getAllMapData, getAllMapsFromWine, getMapData } from "../data/getMapData";
 import { Level } from "../types/level.type";
 import { PrefetchRequest } from "../types/PrefetchRequest";
 import { LevelImage } from "../types/LevelImage";
 import { RequestConfig } from "../types/RequestConfig";
-import { off } from "process";
-
-var historyLogStream = fs.createWriteStream("./cache/history.log", { flags: "a" });
 
 export async function mapImage(req, res) {
   try {
@@ -119,12 +116,17 @@ export async function mapData(req, res) {
 export async function prefetch(req, res) {
     try {
         const pf: PrefetchRequest = req.body;
+        
         if (!process.env.DISABLE_PREFETCH) {
-            const seed: string = pf.seed;
-            const difficulty: string = pf.difficulty;
-            getAllMapData(pf.seed, pf.difficulty, 0).then(levelList => {
+          const seed: string = pf.seed;
+          const difficulty: string = pf.difficulty;
+          const cachedFile = `./cache/${seed}_${difficulty}.json`;
+          if (pf.seed == undefined || pf.difficulty == undefined) {
+            throw new Error("Invalid prefetch request");
+          }
+          getAllMapsFromWine(seed, difficulty, cachedFile).then(levelList => {
+            try {
               pf.mapIds.forEach(mapId => {
-                  
                   let queryStr: string[] = [];
                   pf.verbose !== undefined ? queryStr.push("verbose=" + pf.verbose) : "";
                   pf.trim !== undefined ? queryStr.push("trim=" + pf.trim) : "";
@@ -140,9 +142,12 @@ export async function prefetch(req, res) {
                   });
               });
               res.send(`Prefetched ${pf.mapIds.length} maps`);
-            });
+            } catch (e) {
+              res.status(500).send("Error prefetching, invalid mapid list");
+            }
+          });
         } else {
-            res.send("Prefetch not available on public free server.\nPlease run your own server\nRefer to this guide https://github.com/joffreybesos/d2r-mapview/blob/master/SERVER.md");
+          res.send("Prefetch not available on public free server.\nPlease run your own server\nRefer to this guide https://github.com/joffreybesos/d2r-mapview/blob/master/SERVER.md");
         }
     } catch (e) {
         res.status(500).send("Error prefetching\n" + e);

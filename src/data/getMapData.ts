@@ -103,7 +103,7 @@ async function getAllMapsFromWineOnce(
   }
 }
 
-async function getAllMapsFromWine(
+export async function getAllMapsFromWine(
   seed: string,
   difficulty: string,
   cachedFile: string
