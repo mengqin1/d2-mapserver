@@ -11,8 +11,8 @@ https://github.com/joffreybesos/d2-mapserver/releases/latest
 
 - Download the `d2-mapserver-vxxx.zip` file from the above link.
 - Extract the zip file to it's own folder.
-- Download the D2 LoD game files - [zip download link](https://mega.nz/file/EgdmXT7C#sRNJGN-QlB24-9jqaI5DBWgFrbCw0Bezj-S0aY_Jn6k).
-- Extract the D2 LoD game files to a sub folder called `game` in your `d2-mapserver` folder (rename `Diablo II 1.13c` from the zip to `game`)  
+- Download the D2 LoD game files - [zip download link](https://mega.nz/file/AhNDgIYY#fGM0RqANpqICodEARRToXbAXt1Yp3JVz5Dk1M8XlZNI).
+- Extract the zip file in your `d2-mapserver` folder, it should create a new folder called `game`
     Your files should look like this:  
     ![](gamefiles.png)  
 - Double click the `d2-mapserver.exe` executable  
