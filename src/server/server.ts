@@ -62,6 +62,8 @@ server.listen(PORT, () => {
     const fontFileBold = path.resolve("./build/static/Roboto-Bold.ttf");
     const fontFileExocet = path.resolve("./build/static/exocetblizzardot-medium.otf");
     const fontFileSC = path.resolve("./build/static/NotoSansSC-Regular.otf");
+    const fontFileKR = path.resolve("./build/static/NotoSansKR-Regular.otf");
+    
     if (fs.existsSync(fontFile)) {
       
       console.log("Adding font " + fontFileExocet);
@@ -69,6 +71,8 @@ server.listen(PORT, () => {
       registerFont(fontFileExocet, { family: 'ExocetBlizzardMixedCapsOTMedium' })
       console.log("Adding font " + fontFileSC);
       registerFont(fontFileSC, { family: 'Noto Sans Simplified Chinese', weight: 'regular' })
+      console.log("Adding font " + fontFileKR);
+      registerFont(fontFileKR, { family: 'Noto Sans Korean', weight: 'regular' })
       console.log("Adding font " + fontFile);
       registerFont(fontFile, { family: 'Roboto' })
       console.log("Adding font " + fontFileBold);

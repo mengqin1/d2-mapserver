@@ -9,6 +9,10 @@ export function drawWatermark(ctx: NodeCanvasRenderingContext2D, reqConfig: Requ
     watermarks.push("This free map server is\nshutting down in a few weeks.");   
     watermarks.push("如果您为此付款，您就被骗了。\n在 Github 上搜索 d2r-mapview");
     watermarks.push("收费行为均为诈骗");
+    watermarks.push("당신이 이것을 지불했다면\n당신은 사기를 당한 것입니다.\nGithub에서 'd2r-mapview' 검색");
+    watermarks.push("이 무료 지도 서버는 몇\n주 후에 종료됩니다.");
+    watermarks.push("Этот бесплатный\nкартографический сервер закрывается\nчерез несколько недель.");
+    watermarks.push("Если вы заплатили\nза это, вас обманули\nНайдите «d2r-mapview» на Github");
 
     let watermarkText = watermarks[Math.floor(Math.random()*watermarks.length)];
     if (!reqConfig.watermark) watermarkText = "";
