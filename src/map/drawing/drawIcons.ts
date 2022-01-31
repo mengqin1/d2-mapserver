@@ -1,9 +1,9 @@
 import { Level, ObjectType } from "../../types/level.type";
 import * as fs from "fs";
 import { drawImage } from "./drawPrimatives";
-import { NodeCanvasRenderingContext2D } from "canvas";
+import { CanvasRenderingContext2D } from "canvas";
 
-export async function drawIcons(ctx: NodeCanvasRenderingContext2D, levelData: Level, scale: number) {
+export async function drawIcons(ctx: CanvasRenderingContext2D, levelData: Level, scale: number) {
   levelData.objects.forEach(async (mapObject) => {
     let x = mapObject.x * scale;
     let y = mapObject.y * scale;

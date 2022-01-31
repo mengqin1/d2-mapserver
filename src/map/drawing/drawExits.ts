@@ -1,10 +1,10 @@
-import { NodeCanvasRenderingContext2D } from "canvas";
+import { CanvasRenderingContext2D } from "canvas";
 import { RequestConfig } from "../../types/RequestConfig";
 import { Level, ObjectType } from "../../types/level.type";
 import { drawRectangle, drawText } from "./drawPrimatives";
 
 export async function drawExits(
-  ctx: NodeCanvasRenderingContext2D,
+  ctx: CanvasRenderingContext2D,
   levelData: Level,
   scale: number,
   mapRefList,

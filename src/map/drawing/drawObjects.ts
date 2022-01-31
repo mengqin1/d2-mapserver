@@ -1,8 +1,8 @@
-import { NodeCanvasRenderingContext2D } from "canvas";
+import { CanvasRenderingContext2D } from "canvas";
 import { Level, ObjectType } from "../../types/level.type";
 import { drawRectangle, drawImage, drawImageOutline, drawCenteredRectangle, drawCircle } from "./drawPrimatives";
 
-export async function drawObjects(ctx: NodeCanvasRenderingContext2D, levelData: Level, scale: number) {
+export async function drawObjects(ctx: CanvasRenderingContext2D, levelData: Level, scale: number) {
   // this part adds the special objects (doors, waypoints etc)
   levelData.objects.forEach((mapObject) => {
     let x = (mapObject.x * scale) + scale - 1.5;

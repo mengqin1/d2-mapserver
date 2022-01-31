@@ -1,8 +1,8 @@
-import { NodeCanvasRenderingContext2D } from "canvas";
+import { CanvasRenderingContext2D } from "canvas";
 import { Level } from "../../types/level.type";
 import { RequestConfig } from "../../types/RequestConfig";
 
-export async function drawWalls(ctx: NodeCanvasRenderingContext2D, levelData: Level, scale: number, reqConfig: RequestConfig) {
+export async function drawWalls(ctx: CanvasRenderingContext2D, levelData: Level, scale: number, reqConfig: RequestConfig) {
   // this part generates the walls (collisions as it's called)
   const fullWidth = levelData.size.width * scale;
   levelData.map.forEach((coord, index) => {

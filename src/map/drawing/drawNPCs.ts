@@ -1,8 +1,8 @@
-import { NodeCanvasRenderingContext2D } from "canvas";
+import { CanvasRenderingContext2D } from "canvas";
 import { Level, ObjectType } from "../../types/level.type";
 import { drawCircle, drawText } from "./drawPrimatives";
 
-export async function drawNPCs(ctx: NodeCanvasRenderingContext2D, levelData: Level, scale: number) {
+export async function drawNPCs(ctx: CanvasRenderingContext2D, levelData: Level, scale: number) {
   // add NPCs
   levelData.objects.forEach((mapObject) => {
     let x = mapObject.x * scale;

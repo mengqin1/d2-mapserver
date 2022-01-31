@@ -1,9 +1,9 @@
-import { NodeCanvasRenderingContext2D } from "canvas";
+import { CanvasRenderingContext2D } from "canvas";
 import { Level, ObjectType } from "../../types/level.type";
 import { drawCircle, drawText, drawImageOutline } from "./drawPrimatives";
 
 export async function drawQuestItems(
-  ctx: NodeCanvasRenderingContext2D,
+  ctx: CanvasRenderingContext2D,
   levelData: Level,
   scale: number
 ) {

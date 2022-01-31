@@ -1,4 +1,4 @@
-import { Canvas, createCanvas, NodeCanvasRenderingContext2D } from "canvas";
+import { Canvas, createCanvas, CanvasRenderingContext2D } from "canvas";
 import { Level } from "../types/level.type";
 import { LevelImage } from "../types/LevelImage";
 import { RequestConfig } from "../types/RequestConfig";
@@ -133,7 +133,7 @@ export async function stitchOutdoorMaps(
   return primaryMap;
 }
 
-function edgeGradientBottom(outdoorctx: NodeCanvasRenderingContext2D, canvas: Canvas) {
+function edgeGradientBottom(outdoorctx: CanvasRenderingContext2D, canvas: Canvas) {
   const gradient = outdoorctx.createLinearGradient(0, canvas.height-100, 0, canvas.height);
   gradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
   gradient.addColorStop(1, 'rgba(255, 255, 255, 1)');
@@ -141,7 +141,7 @@ function edgeGradientBottom(outdoorctx: NodeCanvasRenderingContext2D, canvas: Ca
   outdoorctx.fillRect(0, canvas.height-100, canvas.width, canvas.height);
 }
 
-function edgeGradientTop(outdoorctx: NodeCanvasRenderingContext2D, canvas: Canvas) {
+function edgeGradientTop(outdoorctx: CanvasRenderingContext2D, canvas: Canvas) {
   const gradient = outdoorctx.createLinearGradient(0, 0, 0, 100);
   gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
   gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
@@ -149,7 +149,7 @@ function edgeGradientTop(outdoorctx: NodeCanvasRenderingContext2D, canvas: Canva
   outdoorctx.fillRect(0, 0, canvas.width, 100);
 }
 
-function edgeGradientLeft(outdoorctx: NodeCanvasRenderingContext2D, canvas: Canvas) {
+function edgeGradientLeft(outdoorctx: CanvasRenderingContext2D, canvas: Canvas) {
   const gradient = outdoorctx.createLinearGradient(0, 0, 100, 0);
   gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
   gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
@@ -157,7 +157,7 @@ function edgeGradientLeft(outdoorctx: NodeCanvasRenderingContext2D, canvas: Canv
   outdoorctx.fillRect(0, 0, 100, canvas.height);
 }
 
-function edgeGradientRight(outdoorctx: NodeCanvasRenderingContext2D, canvas: Canvas) {
+function edgeGradientRight(outdoorctx: CanvasRenderingContext2D, canvas: Canvas) {
   const gradient = outdoorctx.createLinearGradient(canvas.width-100, 0, canvas.width, 0);
   gradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
   gradient.addColorStop(1, 'rgba(255, 255, 255, 1)');

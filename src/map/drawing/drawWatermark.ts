@@ -1,7 +1,7 @@
-import { Canvas, createCanvas, NodeCanvasRenderingContext2D } from "canvas";
+import { Canvas, createCanvas, CanvasRenderingContext2D } from "canvas";
 import { RequestConfig } from "../../types/RequestConfig";
 
-export function drawWatermark(ctx: NodeCanvasRenderingContext2D, reqConfig: RequestConfig): Canvas {
+export function drawWatermark(ctx: CanvasRenderingContext2D, reqConfig: RequestConfig): Canvas {
   
     let watermarks = [];
     watermarks.push("If you paid for this you \nhave been scammed\nSearch 'd2r-mapview' on Github");
@@ -18,7 +18,7 @@ export function drawWatermark(ctx: NodeCanvasRenderingContext2D, reqConfig: Requ
     if (!reqConfig.watermark) watermarkText = "";
     
     const canvas2: Canvas = createCanvas(ctx.canvas.width, ctx.canvas.height+20);
-    const ctx2: NodeCanvasRenderingContext2D = canvas2.getContext("2d");
+    const ctx2: CanvasRenderingContext2D = canvas2.getContext("2d");
     ctx2.drawImage(ctx.canvas, 0,0);
     ctx2.save();
     

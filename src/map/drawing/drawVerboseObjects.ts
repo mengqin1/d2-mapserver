@@ -1,9 +1,9 @@
-import { NodeCanvasRenderingContext2D } from "canvas";
+import { CanvasRenderingContext2D } from "canvas";
 import { Level, Object } from "../../types/level.type";
 import { drawCircle, drawText } from "./drawPrimatives";
 
 export async function drawVerboseObjects(
-  ctx: NodeCanvasRenderingContext2D,
+  ctx: CanvasRenderingContext2D,
   levelData: Level,
   scale: number
 ) {

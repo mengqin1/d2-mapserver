@@ -1,8 +1,8 @@
-import { NodeCanvasRenderingContext2D } from "canvas";
+import { CanvasRenderingContext2D } from "canvas";
 import { RequestConfig } from "../../types/RequestConfig";
 import { Level } from "../../types/level.type";
 
-export async function drawWallEdges(ctx: NodeCanvasRenderingContext2D, levelData: Level, scale: number, reqConfig: RequestConfig) {
+export async function drawWallEdges(ctx: CanvasRenderingContext2D, levelData: Level, scale: number, reqConfig: RequestConfig) {
   
   const imgWidth = ctx.canvas.width
   const imgHeight = ctx.canvas.height
