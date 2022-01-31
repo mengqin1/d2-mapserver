@@ -58,8 +58,8 @@ export async function drawQuestItems(
       // lam essens tome
       drawImageOutline(
         ctx,
-        x - 60,
-        y - 25,
+        x,
+        y,
         "./build/static/pedastal.png",
         20,
         30,
@@ -130,11 +130,11 @@ export async function drawQuestItems(
       case "StoneLambda":
         drawImageOutline(
           ctx,
-          x - 50,
-          y - 10,
+          x - 18,
+          y + 20,
           "./build/static/stone.png",
-          scale * 3.5,
-          scale * 15,
+          scale * 4,
+          scale * 13,
           "#00FF00"
         );
         break;
@@ -150,11 +150,11 @@ export async function drawQuestItems(
       case "StoneDelta":
         drawImageOutline(
           ctx,
-          x - 50,
-          y - 10,
+          x - 18,
+          y + 20,
           "./build/static/stone.png",
-          scale * 3.5,
-          scale * 15,
+          scale * 4,
+          scale * 13,
           "#00FF00"
         );
         break;

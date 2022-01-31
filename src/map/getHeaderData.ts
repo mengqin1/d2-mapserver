@@ -97,7 +97,7 @@ function getQuestHeaderdata(levelData: Level): string {
     }
 
     if (mapObject.name == "StoneGamma") {
-      questData.push(`Stones,${x-25},${y-15}`);
+      questData.push(`Stones,${x-8},${y}`);
     }
 
     // anya

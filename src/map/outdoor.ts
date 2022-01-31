@@ -10,6 +10,7 @@ export async function getOutdoorConnectedMapIds(
 ): Promise<number[]> {
   switch (mapid) {
     // act 1
+    case 1: return [2];
     case 2: return [1,3];
     case 3: return [2,4, 17];
     case 4: return [3];
@@ -24,6 +25,7 @@ export async function getOutdoorConnectedMapIds(
     case 33: return [32];
 
     // act 2
+    case 40: return [41];
     case 41: return [40,42];
     case 42: return [41,43];
     case 43: return [42,44];
@@ -31,6 +33,7 @@ export async function getOutdoorConnectedMapIds(
     case 45: return [44];
 
     // act 3
+    case 75: return [76];
     case 76: return [75,77,78];
     case 77: return [76,78];
     case 78: return [76,77,79];
@@ -41,6 +44,7 @@ export async function getOutdoorConnectedMapIds(
     case 83: return [82];
 
     //act 4
+    case 103: return [104];
     case 104: return [103,105];
     case 105: return [104,106];
     case 106: return [105];
@@ -48,6 +52,7 @@ export async function getOutdoorConnectedMapIds(
     case 108: return [107];
 
     //act 5
+    case 109: return [110];
     case 110: return [109,111];
     case 111: return [110,112];
     case 112: return [111];
@@ -94,25 +99,25 @@ export async function stitchOutdoorMaps(
       const textX = topX + padding + indent;
       let textY = topY + mapData.size.height + padding;
       textY = minmaxY(textY, canvas);
-      drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#888", 270);
+      drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#DDD", 270);
     } else if (topX == -(mapData.size.width * scale)) {
       // console.log(`${mapData.name} is left of ${primaryMapData.name}`);
       const textX = topX + (mapData.size.width * scale) + padding - indent;
       let textY = topY + mapData.size.height + padding;
       textY = minmaxY(textY, canvas);
-      drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#888", 270);
+      drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#DDD", 270);
     } else if (topY == -(mapData.size.height * scale)) {
       // console.log(`${mapData.name} is above ${primaryMapData.name}`);
       let textX = topX + mapData.size.width + padding;
       const textY = topY + (mapData.size.height * scale) + padding - indent;
       textX = minmaxX(textX, canvas);
-      drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#888", 0);
+      drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#DDD", 0);
     } else if (topY == (primaryMapData.size.height * scale)) {
       // console.log(`${mapData.name} is below ${primaryMapData.name}`);
       let textX = topX + primaryMapData.size.width + padding;
       const textY = topY + padding + indent;
       textX = minmaxX(textX, canvas);
-      drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#888", 0);
+      drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#DDD", 0);
     }
   }
   outdoorctx.drawImage(primaryMap.canvas, 0, 0);

@@ -3,7 +3,7 @@ import path = require("path");
 import { generateMapImage } from "../map/generateMapImage";
 import { ImageResponse } from "../types/ImageResponse";
 import * as fs from "fs";
-import { getAllMapData, getAllMapsFromWine, getMapData } from "../data/getMapData";
+import { getAllMapsFromWine, getMapData } from "../data/getMapData";
 import { Level } from "../types/level.type";
 import { PrefetchRequest } from "../types/PrefetchRequest";
 import { LevelImage } from "../types/LevelImage";
