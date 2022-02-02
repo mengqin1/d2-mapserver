@@ -17,7 +17,7 @@ https://github.com/joffreybesos/d2-mapserver/releases/latest
     ![](gamefiles.png)  
 - Double click the `d2-mapserver.exe` executable  
 
-If you get this prompt, just click 'Allow access'
+If you get this prompt, just click 'Allow access'  
 ![](firewall.png)  
 
 You should see a window popup with the text `Running on http://localhost:3002`  
