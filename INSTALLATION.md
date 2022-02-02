@@ -17,7 +17,7 @@ https://github.com/joffreybesos/d2-mapserver/releases/latest
     ![](gamefiles.png)  
 - Double click the `d2-mapserver.exe` executable  
 
-If you get this prompt, just click 'Allow access'
+If you get this prompt, just click 'Allow access'  
 ![](firewall.png)  
 
 You should see a window popup with the text `Running on http://localhost:3002`  
@@ -41,6 +41,12 @@ Now you can start D2R and then run the `d2rmap-v2.x.x.exe` after you start the g
 
 If the window quickly pops up and disappears straight away, try running `d2-mapserver.exe` from the cmd prompt.
 That will give you a more detailed error message.
+
+From the command prompt try these commands:  
+`cd bin`  
+`d2-map.exe ../game --seed 123456 --difficulty 2 --map 1`  
+If you see a bunch of numbers being logged then your map server should work.  
+If you don't see a lot of numbers then paste that into the discord.  
 
 If you are having startup issues, delete this temp folder: `C:\Users\<username>\AppData\Local\Temp\caxa`
 
