@@ -116,7 +116,6 @@ export async function mapData(req, res) {
 export async function prefetch(req, res) {
     try {
         const pf: PrefetchRequest = req.body;
-        
         if (!process.env.DISABLE_PREFETCH) {
           const seed: string = pf.seed;
           const difficulty: string = pf.difficulty;
@@ -141,7 +140,7 @@ export async function prefetch(req, res) {
                       //console.log(`${seed}/${difficulty}/${mapId}`);
                   });
               });
-              res.send(`Prefetched ${pf.mapIds.length} maps`);
+              res.send(`Prefetched 1 maps`);
             } catch (e) {
               res.status(500).send("Error prefetching, invalid mapid list");
             }

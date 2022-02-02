@@ -4,6 +4,7 @@ import { param } from "express-validator";
 var http = require('http');
 import * as fs from 'fs';
 import * as path from 'path';
+import { testInstallation } from "../data/testInstallation";
 
 import { mapData, mapImage, prefetch } from "./routes";
 
@@ -37,14 +38,16 @@ server.on('error', function (e) {
   console.log(e)
   exit()
 });
-server.listen(PORT, () => {
+server.listen(PORT, async () => {
 
+  console.log(`**** D2-mapserver launched ****`);
   const generationQueue = './cache/queue.txt'
   if (fs.existsSync(generationQueue)) {
     fs.unlinkSync(generationQueue);
   }
 
   // delete cache json files
+  console.log(`Deleting cache files...`);
   const filenames = fs.readdirSync("./cache");
   filenames.forEach(file => {
     if (file.endsWith('.json')) {
@@ -105,6 +108,15 @@ server.listen(PORT, () => {
   }
   console.log(`Test this server by opening this link in your browser: http://localhost:${PORT}/v1/map/12345/2/117/image`);
   console.log(`For troubleshooting refer to https://github.com/joffreybesos/d2-mapserver/blob/master/INSTALLATION.md#troubleshooting`);
+  console.log(`If you close this window the map server will shut down.`);
+  console.log(`Testing installation...`);
+  const result = await testInstallation();
+  if (result) {
+    console.error(`Error generating map, here is a raw dump of the logs:`);
+    console.error(result);
+    exit();
+  }
+
   console.log(`Running on http://localhost:${PORT}`);
 });
 

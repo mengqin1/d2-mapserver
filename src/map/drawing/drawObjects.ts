@@ -32,7 +32,7 @@ export async function drawObjects(ctx: CanvasRenderingContext2D, levelData: Leve
       }
       
       if (mapObject.name == "Shrine") {
-        drawImage(ctx, x-15, y+17, "./build/static/shrine.png", 20, 32);
+        drawImage(ctx, x-11, y+16, "./build/static/shrine.png", 19, 32);
       }
 
       if (mapObject.name == "Well") {
