@@ -1,8 +1,9 @@
 import { CanvasRenderingContext2D } from "canvas";
 import { Level, ObjectType } from "../../types/level.type";
+import { RequestConfig } from "../../types/RequestConfig";
 import { drawCircle, drawText } from "./drawPrimatives";
 
-export async function drawNPCs(ctx: CanvasRenderingContext2D, levelData: Level, scale: number) {
+export async function drawNPCs(ctx: CanvasRenderingContext2D, levelData: Level, scale: number, reqConfig: RequestConfig) {
   // add NPCs
   levelData.objects.forEach((mapObject) => {
     let x = mapObject.x * scale;
@@ -10,24 +11,32 @@ export async function drawNPCs(ctx: CanvasRenderingContext2D, levelData: Level, 
 
     if (levelData.name == "Arcane Sanctuary") {
       if (mapObject.id == 250) {
-        drawText(ctx, x - 10, y - 10, 14, "Summoner", "#FFFFFF");
-        drawCircle(ctx, x - 5, y - 15, scale * 15, "#FF0000"); //extra large red dot
+        if (reqConfig.showTextLabels) {
+          drawText(ctx, x - 10, y - 10, 14, "Summoner", "#FFFFFF");
+        }
+        drawCircle(ctx, x - 5, y - 15, scale * 5, "#FF0000"); //extra large red dot
       }
     }
 
     if (mapObject.type === ObjectType.NPC) {
       switch (levelData.name) {
         case "Plains of Despair": // izual
-          drawText(ctx, x - 5, y + 5, 14, "Izual", "#FFFFFF");
+          if (reqConfig.showTextLabels) {
+            drawText(ctx, x - 5, y + 5, 14, "Izual", "#FFFFFF");
+          }
           drawCircle(ctx, x, y, 2 * 10, "#FF0000"); //extra large red dot
           break;
         case "Maggot Lair Level 3": // maggot boss
-          drawText(ctx, x - 5, y + 5, 14, "Maggot Boss", "#FFFFFF");
+          if (reqConfig.showTextLabels) {
+            drawText(ctx, x - 5, y + 5, 14, "Maggot Boss", "#FFFFFF");
+          }
           drawCircle(ctx, x, y, 2 * 10, "#FF0000"); //extra large red dot
           break;
         case "Sewers Level 3": // radament
           if (mapObject.id == 744) {
-            drawText(ctx, x - 5, y + 5, 14, "Radament", "#FFFFFF");
+            if (reqConfig.showTextLabels) {
+              drawText(ctx, x - 5, y + 5, 14, "Radament", "#FFFFFF");
+            }
             drawCircle(ctx, x, y, 2 * 10, "#FF0000"); //extra large red dot
           }
           break;
@@ -55,7 +64,9 @@ export async function drawNPCs(ctx: CanvasRenderingContext2D, levelData: Level, 
           }
           x = x * scale;
           y = y * scale;
-          drawText(ctx, x, y, 14, "Nihlathak", "#FFFFFF");
+          if (reqConfig.showTextLabels) {
+            drawText(ctx, x, y, 14, "Nihlathak", "#FFFFFF");
+          }
           drawCircle(ctx, x, y, 2 * 10, "#FF0000");
           break;
       }

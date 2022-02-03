@@ -1,26 +1,27 @@
 import { generatePNG } from "./generatePNG";
 import { makeIsometric } from "./makeIsometric";
 import { getOutdoorConnectedMapIds, stitchOutdoorMaps } from "./outdoor";
-import { getAllMapData, getMapData } from "../data/getMapData";
+import { getAllMapData } from "../data/getMapData";
 import trim from 'trim-canvas';
 import { RequestConfig } from "../types/RequestConfig";
 import { LevelImage } from "../types/LevelImage";
+import { LevelList } from "../types/level.type";
 
-export async function generateMapImage(reqConfig: RequestConfig): Promise<any> {
+export async function generateMapImage(reqConfig: RequestConfig, seedData: LevelList): Promise<any> {
     
     let levelImage = new LevelImage();
     levelImage.padding = reqConfig.padding;
     
+    levelImage.seedData = seedData;
+    levelImage.mapData = levelImage.seedData.levels.find((map) => map.id === (reqConfig.mapid));
     const connectedMaps = await getOutdoorConnectedMapIds(reqConfig.mapid);
     if (connectedMaps.length > 0) {
       // if outdoors then force downloading of all seed data
-      levelImage.seedData = await getAllMapData(reqConfig.seed, reqConfig.difficulty, 0);
-      levelImage.mapData = levelImage.seedData.levels.find((map) => map.id === (reqConfig.mapid));
       levelImage = await stitchOutdoorMaps(levelImage, reqConfig, connectedMaps);
     } else {
-      levelImage.mapData = await getMapData(reqConfig.seed, reqConfig.difficulty, reqConfig.mapid);
       levelImage = await generatePNG(levelImage, reqConfig);  
     }
+
     if (reqConfig.isometric) {
         levelImage = await makeIsometric(levelImage)
     }

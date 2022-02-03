@@ -1,11 +1,13 @@
 import { CanvasRenderingContext2D } from "canvas";
 import { Level, ObjectType } from "../../types/level.type";
+import { RequestConfig } from "../../types/RequestConfig";
 import { drawCircle, drawText, drawImageOutline } from "./drawPrimatives";
 
 export async function drawQuestItems(
   ctx: CanvasRenderingContext2D,
   levelData: Level,
-  scale: number
+  scale: number,
+  reqConfig: RequestConfig
 ) {
   // this part adds the special objects (doors, waypoints etc)
   levelData.objects.forEach((mapObject) => {
@@ -14,21 +16,29 @@ export async function drawQuestItems(
     //quest items adding a green circle
     switch (mapObject.name) {
       case "orifice": // act 2 orifice
-        drawText(ctx, x - 5, y + 5, 14, "Orifice", "#FFFFFF");
+        if (reqConfig.showTextLabels) {
+          drawText(ctx, x - 5, y + 5, 14, "Orifice", "#FFFFFF");
+        }
         drawCircle(ctx, x, y - 10, 20, "#00FF00");
         break;
       case "gidbinn altar":
         if (levelData.id != 75) {
-          drawText(ctx, x - 5, y + 5, 14, "Gidbinn Altar", "#FFFFFF");
+          if (reqConfig.showTextLabels) {
+            drawText(ctx, x - 5, y + 5, 14, "Gidbinn Altar", "#FFFFFF");
+          }
           drawCircle(ctx, x, y, 20, "#00FF00");
         }
         break;
       case "Hellforge": // act 4 hellforge
-        drawText(ctx, x + 5, y - 5, 14, "Hellforge", "#FFFFFF");
+        if (reqConfig.showTextLabels) {
+          drawText(ctx, x + 5, y - 5, 14, "Hellforge", "#FFFFFF");
+        }
         drawCircle(ctx, x + 10, y - 10, 20, "#00FF00");
         break;
       case "cagedwussie1": // prisoners act 5
-        drawText(ctx, x, y, 14, "Caged Barbs", "#FFFFFF");
+        if (reqConfig.showTextLabels) {
+          drawText(ctx, x, y, 14, "Caged Barbs", "#FFFFFF");
+        }
         drawImageOutline(
           ctx,
           x + 75,
@@ -113,7 +123,9 @@ export async function drawQuestItems(
         levelData.name == "Cellar of Pity" ||
         levelData.name == "Frozen River"
       ) {
-        drawText(ctx, x, y, 14, "Anya", "#FFFFFF");
+        if (reqConfig.showTextLabels) {
+          drawText(ctx, x, y, 14, "Anya", "#FFFFFF");
+        }
         drawCircle(ctx, x+10, y - 10, 20, "#00FF00");
       }
     }
@@ -131,7 +143,7 @@ export async function drawQuestItems(
         drawImageOutline(
           ctx,
           x - 18,
-          y + 20,
+          y + 18,
           "./build/static/stone.png",
           scale * 4,
           scale * 13,
@@ -151,7 +163,7 @@ export async function drawQuestItems(
         drawImageOutline(
           ctx,
           x - 18,
-          y + 20,
+          y + 18,
           "./build/static/stone.png",
           scale * 4,
           scale * 13,

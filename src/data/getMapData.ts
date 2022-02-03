@@ -10,14 +10,13 @@ export async function getMapData(
   difficulty: string,
   mapid: number
 ): Promise<Level> {
-  const seedData: LevelList = await getAllMapData(seed, difficulty, mapid);
+  const seedData: LevelList = await getAllMapData(seed, difficulty);
   return seedData.levels.find((map) => map.id === mapid);
 }
 
 export async function getAllMapData(
   seed: string,
-  difficulty: string,
-  mapid: number
+  difficulty: string
 ): Promise<LevelList> {
   const start = performance.now();
   let cachedFile = `./cache/${seed}_${difficulty}.json`;
@@ -33,26 +32,13 @@ export async function getAllMapData(
       )}ms`
     );
   } else {
-    if (mapid != 0) {
-      // load all data asynchrously
-      // but wait for individual map
-      seedData = await getSingleMapFromWine(seed, difficulty, mapid);
-      getAllMapsFromWineOnce(seed, difficulty, cachedFile);
-      const end = performance.now();
-      console.log(
-        `Generated single map data ${seed} ${difficulty}, took ${Math.trunc(
-          end - start
-        )}ms`
-      );
-    } else {
-      seedData = await getAllMapsFromWine(seed, difficulty, cachedFile);
-      const end = performance.now();
-      console.log(
-        `Generated full map data for outdoors ${seed} ${difficulty}, took ${Math.trunc(
-          end - start
-        )}ms`
-      );
-    }
+    seedData = await generateMapsOnce(seed, difficulty, cachedFile);
+    const end = performance.now();
+    console.log(
+      `Generated full map data for ${seed} ${difficulty}, took ${Math.trunc(
+        end - start
+      )}ms`
+    );
   }
   return seedData;
 }
@@ -64,46 +50,27 @@ function saveFile(fileName: string, data: string) {
   console.log(`Saved JSON ${fileName}`);
 }
 
-async function getSingleMapFromWine(
-  seed: string,
-  difficulty: string,
-  mapid: number
-): Promise<LevelList> {
-  console.log("Getting single map " + mapid);
-  let mapsData: Level[]
-  if (process.env.WINEARCH) {
-    mapsData = await getFromWine(seed, difficulty, mapid);
-    if (mapsData.length == 0) {
-      throw new Error("Failed generating data, likely a problem with your D2 Lod Game files\nCheck ./cache/winerrors.log for more detail");
-    }
-  } else {
-    mapsData = await getFromWindowsExe(seed, difficulty, mapid);
-    if (mapsData.length == 0) {
-      throw new Error("Failed generating data, likely a problem with your D2 Lod Game files\nCheck ./cache/windowserrors.log for more detail");
-    }
-  }
-  
-  const seedData: LevelList = {
-    seed: seed,
-    difficulty: difficulty,
-    levels: mapsData,
-  };
-  return seedData;
-}
 
-async function getAllMapsFromWineOnce(
+export async function generateMapsOnce(
   seed: string,
   difficulty: string,
   cachedFile: string
-): Promise<void> {
+): Promise<LevelList> {
   let skipGeneration: boolean = await isInQueue(cachedFile);
   if (!skipGeneration) {
     // dont execute if there's an existing request
-    getAllMapsFromWine(seed, difficulty, cachedFile);
+    return generateMapData(seed, difficulty, cachedFile);
+  } else {
+    let found = await waitForFileExists(cachedFile);
+    if (!found) { // try to create anyway
+      return generateMapData(seed, difficulty, cachedFile);
+    } else {
+      return getAllMapsFromCache(cachedFile);
+    }
   }
 }
 
-export async function getAllMapsFromWine(
+async function generateMapData(
   seed: string,
   difficulty: string,
   cachedFile: string
@@ -158,4 +125,13 @@ async function getAllMapsFromCache(cachedFile: string): Promise<LevelList> {
     fs.unlinkSync(cachedFile);
   }
   return seedData;
+}
+
+async function waitForFileExists(filePath, currentTime = 0, timeout = 10000) {
+  if (fs.existsSync(filePath)) return true;
+  if (currentTime === timeout) return false;
+  // wait for 1 second
+  await new Promise((resolve, reject) => setTimeout(() => resolve(true), 100));
+  // waited for 1 second
+  return waitForFileExists(filePath, currentTime + 100, timeout);
 }

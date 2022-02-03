@@ -3,8 +3,8 @@ import path = require("path");
 import { generateMapImage } from "../map/generateMapImage";
 import { ImageResponse } from "../types/ImageResponse";
 import * as fs from "fs";
-import { getAllMapsFromWine, getMapData } from "../data/getMapData";
-import { Level } from "../types/level.type";
+import { getAllMapData, getMapData } from "../data/getMapData";
+import { Level, LevelList } from "../types/level.type";
 import { PrefetchRequest } from "../types/PrefetchRequest";
 import { LevelImage } from "../types/LevelImage";
 import { RequestConfig } from "../types/RequestConfig";
@@ -17,6 +17,14 @@ export async function mapImage(req, res) {
     const difficulty: string = req.params.difficulty;
     const mapid: number = parseInt(req.params.mapid);
     console.log(`New request for image ${seed} ${difficulty} ${mapid}...`);
+    let showTextLabels = true;
+    if (req.query.showTextLabels == "false") {
+      showTextLabels = false;
+    }
+    let showLevelTitles = true;
+    if (req.query.showLevelTitles == "false") {
+      showLevelTitles = false;
+    }
     const reqConfig = new RequestConfig(
       seed,
       difficulty,
@@ -28,12 +36,15 @@ export async function mapImage(req, res) {
       parseFloat(req.query.wallthickness),
       parseFloat(req.query.serverScale),
       150,
-      process.env.ENABLE_WATERMARK ? true : false
+      process.env.ENABLE_WATERMARK ? true : false,
+      "#AAA",
+      showTextLabels,
+      showLevelTitles,
     );
     
     const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;
     let cached = false;
-    let responseData;
+    let responseData: ImageResponse;
     if (fs.existsSync(cacheFileName)) {
       try {
         const cachedText = fs.readFileSync(path.resolve(cacheFileName), {
@@ -46,18 +57,8 @@ export async function mapImage(req, res) {
       }
     }
     if (!cached) {
-      const levelImage: LevelImage = await generateMapImage(reqConfig);
-      const base64Data = await levelImage.canvas
-        .toBuffer("image/png")
-        .toString("base64")
-        .replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
-      responseData = new ImageResponse(levelImage, base64Data); // serialize the response data for caching
-      fs.writeFile(cacheFileName, JSON.stringify(responseData), function (err) {
-        if (err) {
-          console.error("Error writing cache file " + cacheFileName);
-          return console.error(err);
-        }
-      });
+      const seedData = await getAllMapData(reqConfig.seed, reqConfig.difficulty);
+      responseData = await createImage(reqConfig, seedData, cacheFileName)
     }
 
     const img = Buffer.from(responseData.base64Data, "base64");
@@ -92,6 +93,24 @@ export async function mapImage(req, res) {
   }
 }
 
+async function createImage(reqConfig: RequestConfig, seedData: LevelList, cacheFileName: string): Promise<ImageResponse> {
+  
+  const levelImage: LevelImage = await generateMapImage(reqConfig, seedData);
+  const base64Data = await levelImage.canvas
+    .toBuffer("image/png")
+    .toString("base64")
+    .replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
+  const responseData = new ImageResponse(levelImage, base64Data); // serialize the response data for caching
+  fs.writeFile(cacheFileName, JSON.stringify(responseData), function (err) {
+    if (err) {
+      console.error("Error writing cache file " + cacheFileName);
+      return console.error(err);
+    }
+  });
+  return responseData;
+}
+
+
 export async function mapData(req, res) {
     try {
         validationResult(req).throw();
@@ -119,30 +138,33 @@ export async function prefetch(req, res) {
         if (!process.env.DISABLE_PREFETCH) {
           const seed: string = pf.seed;
           const difficulty: string = pf.difficulty;
-          const cachedFile = `./cache/${seed}_${difficulty}.json`;
           if (pf.seed == undefined || pf.difficulty == undefined) {
             throw new Error("Invalid prefetch request");
           }
-          getAllMapsFromWine(seed, difficulty, cachedFile).then(levelList => {
+          res.status(200).send(`Prefetched ${pf.mapIds.length} maps`);
+          getAllMapData(seed, difficulty).then(seedData => {
             try {
               pf.mapIds.forEach(mapId => {
-                  let queryStr: string[] = [];
-                  pf.verbose !== undefined ? queryStr.push("verbose=" + pf.verbose) : "";
-                  pf.trim !== undefined ? queryStr.push("trim=" + pf.trim) : "";
-                  pf.isometric !== undefined ? queryStr.push("isometric=" + pf.isometric) : "";
-                  pf.edge !== undefined ? queryStr.push("edge=" + pf.edge) : "";
-                  pf.wallthickness !== undefined ? queryStr.push("wallthickness=" + pf.wallthickness) : "";
-                  pf.serverScale !== undefined ? queryStr.push("serverScale=" + pf.serverScale) : "";
-                  req.uest({
-                      method: 'GET',
-                      url: `/v1/map/${seed}/${difficulty}/${mapId}/image?${queryStr.join('&')}`
-                  }, (er, resp, body) => {
-                      //console.log(`${seed}/${difficulty}/${mapId}`);
-                  });
+                const reqConfig = new RequestConfig(
+                  seed,
+                  difficulty,
+                  mapId,
+                  pf.verbose == "true",
+                  pf.trim == "true",
+                  pf.isometric == "true",
+                  pf.edge == "true",
+                  parseFloat(pf.wallthickness),
+                  parseFloat(pf.serverScale),
+                  150,
+                  process.env.ENABLE_WATERMARK ? true : false
+                );
+                const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;
+                if (!fs.existsSync(cacheFileName)) {
+                  createImage(reqConfig, seedData, cacheFileName);
+                }
               });
-              res.send(`Prefetched 1 maps`);
             } catch (e) {
-              res.status(500).send("Error prefetching, invalid mapid list");
+              console.log("Error prefetching");
             }
           });
         } else {

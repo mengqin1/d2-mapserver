@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import { getAllMapData } from "../data/getMapData";
 import { generateMapImage } from "../map/generateMapImage";
 import { LevelImage } from "../types/LevelImage";
 import { RequestConfig } from "../types/RequestConfig";
@@ -164,13 +165,12 @@ async function createImage(
     2,
     150
   );
-
-  let levelImage: LevelImage = await generateMapImage(reqConfig);
+  const seedData = await getAllMapData(reqConfig.seed, reqConfig.difficulty);
+  let levelImage: LevelImage = await generateMapImage(reqConfig, seedData);
   fs.writeFileSync(
     "./build/" + reqConfig.mapid + "-" + filename + ".png",
     levelImage.canvas.toBuffer("image/png")
   );
-
 
   const reqConfig2 = new RequestConfig(
     seed,
@@ -185,7 +185,7 @@ async function createImage(
     150
   );
 
-  let levelImage2: LevelImage = await generateMapImage(reqConfig2);
+  let levelImage2: LevelImage = await generateMapImage(reqConfig2, seedData);
   fs.writeFileSync(
     "./build/" + reqConfig2.mapid + "-" + filename + "_4.png",
     levelImage2.canvas.toBuffer("image/png")

@@ -36,11 +36,11 @@ export async function generatePNG(
     drawWalls(ctx, levelData, scale, reqConfig)
   }
   await Promise.allSettled([
-    drawQuestItems(ctx, levelData, scale),
+    drawQuestItems(ctx, levelData, scale, reqConfig),
     drawObjects(ctx, levelData, scale),
     drawExits(ctx, levelData, scale, mapRefList, reqConfig),
     drawIcons(ctx, levelData, scale),
-    drawNPCs(ctx, levelData, scale),
+    drawNPCs(ctx, levelData, scale, reqConfig),
   ]);
   
   if (reqConfig.verbose) {
