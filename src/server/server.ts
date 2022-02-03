@@ -16,7 +16,7 @@ const moment = require('moment-timezone').tz(process.env.TZ)
 
 require( "console-stamp" )( console, {
   formatter: function(){
-      return moment().format("LLLL");
+      return moment().format("d HH:mm:ss.SS");
   }
 });
 
@@ -40,7 +40,7 @@ server.on('error', function (e) {
 });
 server.listen(PORT, async () => {
 
-  console.log(`**** D2-mapserver launched ****`);
+  console.log(`D2-mapserver launching...`);
   const generationQueue = './cache/queue.txt'
   if (fs.existsSync(generationQueue)) {
     fs.unlinkSync(generationQueue);
@@ -95,28 +95,25 @@ server.listen(PORT, async () => {
     
     if (!fs.existsSync(path.join(__dirname, "../static"))) {
       console.error("Did not find static files in build folder");
-      console.error("Check you have extracted the map server files correctly");
       console.error("Exiting....");
       exit();
     }
     if (!fs.existsSync(path.join(__dirname, "../../bin/d2-map.exe"))) {
-      console.error("Did not find ./bin/d2-map.exe files");
-      console.error("Check you have extracted the map server files correctly");
+      console.error("Did not find ./bin/d2-map.exe");
       console.error("Exiting....");
       exit();
     }
   }
-  console.log(`Test this server by opening this link in your browser: http://localhost:${PORT}/v1/map/12345/2/117/image`);
+  console.log(`Test this server by opening this link in your browser:`);
+  console.log(`http://localhost:${PORT}/v1/map/12345/2/117/image`);
   console.log(`For troubleshooting refer to https://github.com/joffreybesos/d2-mapserver/blob/master/INSTALLATION.md#troubleshooting`);
   console.log(`If you close this window the map server will shut down.`);
-  console.log(`Testing installation...`);
   const result = await testInstallation();
   if (result) {
     console.error(`Error generating map, here is a raw dump of the logs:`);
     console.error(result);
     exit();
   }
-
   console.log(`Running on http://localhost:${PORT}`);
 });
 

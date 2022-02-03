@@ -31,7 +31,6 @@ export async function getFromWindowsExe(
   return new Promise((resolve) => {
     let errorStream = fs.createWriteStream(errorFile, { flags: "a" });
     const binPath = path.join(__dirname, "../../bin/d2-map.exe");
-    console.log(binPath);
     var child = spawn(binPath, cmd);
     child.stdout.setEncoding("utf8");
     child.stdout.on("data", function (data) {
