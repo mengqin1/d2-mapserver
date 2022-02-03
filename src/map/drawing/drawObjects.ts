@@ -43,7 +43,7 @@ export async function drawObjects(ctx: CanvasRenderingContext2D, levelData: Leve
       // portals in act 5
       if (mapObject.name == "Portal") {
         if (mapObject.id == 60) {
-          drawImageOutline(ctx, x+95, y+85, path.join(__dirname, "../../..//=build/static/rightportal.png"), 50, 46, "#FF00FF");
+          drawImageOutline(ctx, x+95, y+85, path.join(__dirname, "../../../build/static/rightportal.png"), 50, 46, "#FF00FF");
         }
       }
 
