@@ -1,7 +1,6 @@
 import { generatePNG } from "./generatePNG";
 import { makeIsometric } from "./makeIsometric";
 import { getOutdoorConnectedMapIds, stitchOutdoorMaps } from "./outdoor";
-import { getAllMapData } from "../data/getMapData";
 import trim from 'trim-canvas';
 import { RequestConfig } from "../types/RequestConfig";
 import { LevelImage } from "../types/LevelImage";

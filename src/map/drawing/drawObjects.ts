@@ -25,7 +25,7 @@ export async function drawObjects(ctx: CanvasRenderingContext2D, levelData: Leve
       if (mapObject.id == 580) { // super chest
         let size = 8;
         //drawImage(ctx, x-12, y+25, "./build/static/superchest.png", scale * 12, scale * 20);
-        drawImageOutline(ctx, x-28, y+15, "./build/static/superchest.png", size * 3.25, size * 5.75, "gold");
+        drawImageOutline(ctx, x-28, y+15, path.join(__dirname, "../../../build/static/superchest.png"), size * 3.25, size * 5.75, "gold");
       }
       if (mapObject.id == 581) { // super chest
         let size = 8;

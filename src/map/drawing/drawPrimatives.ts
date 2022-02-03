@@ -1,4 +1,5 @@
 import { createCanvas, loadImage } from "canvas";
+import * as fs from "fs";
 
 export function drawRectangle(ctx, x, y, width, height, color) {
   ctx.beginPath();
@@ -54,40 +55,44 @@ export function drawStraightText(ctx, x, y, fontSize, text, textColor, rotate) {
 }
 
 export async function drawImage(ctx, x, y, fileName, width, height) {
-  ctx.save();
-  const image = await loadImage(fileName);
-  ctx.translate(x - image.width / 2, y - image.height / 2);
-  ctx.rotate((-45 * Math.PI) / 180);
-  ctx.scale(1, 1.8);
-  ctx.drawImage(image, 0, 0, width, height);
-  ctx.restore();
+  if (fs.existsSync(fileName)) {
+    ctx.save();
+    const image = await loadImage(fileName);
+    ctx.translate(x - image.width / 2, y - image.height / 2);
+    ctx.rotate((-45 * Math.PI) / 180);
+    ctx.scale(1, 1.8);
+    ctx.drawImage(image, 0, 0, width, height);
+    ctx.restore();
+  }
 }
 
 
 export async function drawImageOutline(ctx2, x, y, fileName, width, height, outlineColor) {
-  const padding = 5;
-  const image = await loadImage(fileName);
-  const canvas = createCanvas(width+padding, height+padding);
-  const ctx = canvas.getContext("2d");
-  
-  ctx.shadowColor = outlineColor;
-  ctx.shadowBlur = 0;
+  if (fs.existsSync(fileName)) {
+    const padding = 5;
+    const image = await loadImage(fileName);
+    const canvas = createCanvas(width+padding, height+padding);
+    const ctx = canvas.getContext("2d");
+    
+    ctx.shadowColor = outlineColor;
+    ctx.shadowBlur = 0;
 
-  for (var offsetX = -1; offsetX <= 1; offsetX++) {
-    for (var offsetY = -1; offsetY <= 1; offsetY++) {
-      // Set shadow offset
-      ctx.shadowOffsetX = offsetX;
-      ctx.shadowOffsetY = offsetY;
+    for (var offsetX = -1; offsetX <= 1; offsetX++) {
+      for (var offsetY = -1; offsetY <= 1; offsetY++) {
+        // Set shadow offset
+        ctx.shadowOffsetX = offsetX;
+        ctx.shadowOffsetY = offsetY;
 
-      // Draw image with shadow
-      ctx.drawImage(image, 0, 0, width, height);
+        // Draw image with shadow
+        ctx.drawImage(image, 0, 0, width, height);
+      }
     }
+    ctx2.save();
+    ctx2.translate(x-image.width / 2, y-image.height / 2);
+    ctx2.rotate((-45 * Math.PI) / 180);
+    ctx2.scale(1, 1.8);
+    ctx2.drawImage(ctx.canvas, 0, 0, width+padding, height+padding);
+    ctx2.restore();
   }
-  ctx2.save();
-  ctx2.translate(x-image.width / 2, y-image.height / 2);
-  ctx2.rotate((-45 * Math.PI) / 180);
-  ctx2.scale(1, 1.8);
-  ctx2.drawImage(ctx.canvas, 0, 0, width+padding, height+padding);
-  ctx2.restore();
 
 }

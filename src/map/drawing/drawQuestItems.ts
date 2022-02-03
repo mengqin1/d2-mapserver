@@ -89,7 +89,6 @@ export async function drawQuestItems(
         50,
         "#00FF00"
       );
-      //drawImage(ctx, x, y-15, "./build/static/inifusstree.png", scale * 20, scale * 30);
     }
 
     if (mapObject.name == "taintedsunaltar") {
