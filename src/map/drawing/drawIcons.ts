@@ -2,6 +2,7 @@ import { Level, ObjectType } from "../../types/level.type";
 import * as fs from "fs";
 import { drawImage } from "./drawPrimatives";
 import { CanvasRenderingContext2D } from "canvas";
+import path = require("path");
 
 export async function drawIcons(ctx: CanvasRenderingContext2D, levelData: Level, scale: number) {
   levelData.objects.forEach(async (mapObject) => {
@@ -14,25 +15,25 @@ export async function drawIcons(ctx: CanvasRenderingContext2D, levelData: Level,
         let fileName = "";
         switch (mapObject.id) {
           case 69:
-            fileName = "./build/static/talrasha-circle.png";
+            fileName = path.join(__dirname, "../../../build/static/talrasha-circle.png");
             break;
           case 70:
-            fileName = "./build/static/talrasha-chevron.png";
+            fileName = path.join(__dirname, "../../../build/static/talrasha-chevron.png");
             break;
           case 71:
-            fileName = "./build/static/talrasha-triangle.png";
+            fileName = path.join(__dirname, "../../../build/static/talrasha-triangle.png");
             break;
           case 72:
-            fileName = "./build/static/talrasha-circleline.png";
+            fileName = path.join(__dirname, "../../../build/static/talrasha-circleline.png");
             break;
           case 66:
-            fileName = "./build/static/talrasha-star.png";
+            fileName = path.join(__dirname, "../../../build/static/talrasha-star.png");
             break;
           case 67:
-            fileName = "./build/static/talrasha-square.png";
+            fileName = path.join(__dirname, "../../../build/static/talrasha-square.png");
             break;
           case 68:
-            fileName = "./build/static/talrasha-crescent.png";
+            fileName = path.join(__dirname, "../../../build/static/talrasha-crescent.png");
             break;
         }
         if (fs.existsSync(fileName)) {

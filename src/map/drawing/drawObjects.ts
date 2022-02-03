@@ -1,4 +1,5 @@
 import { CanvasRenderingContext2D } from "canvas";
+import path = require("path");
 import { Level, ObjectType } from "../../types/level.type";
 import { drawRectangle, drawImage, drawImageOutline, drawCenteredRectangle, drawCircle } from "./drawPrimatives";
 
@@ -19,7 +20,7 @@ export async function drawObjects(ctx: CanvasRenderingContext2D, levelData: Leve
       // chests
       if (mapObject.name == "chest") {
         let size = 8;
-        drawImage(ctx, x+6, y+16, "./build/static/chest.png", size * 2, size * 1.8);
+        drawImage(ctx, x+6, y+16, path.join(__dirname, "../../../build/static/chest.png"), size * 2, size * 1.8);
       }
       if (mapObject.id == 580) { // super chest
         let size = 8;
@@ -28,21 +29,21 @@ export async function drawObjects(ctx: CanvasRenderingContext2D, levelData: Leve
       }
       if (mapObject.id == 581) { // super chest
         let size = 8;
-        drawImage(ctx, x+8, y+16, "./build/static/chest.png", size, size * 0.9);
+        drawImage(ctx, x+8, y+16, path.join(__dirname, "../../../build/static/chest.png"), size, size * 0.9);
       }
       
       if (mapObject.name == "Shrine") {
-        drawImage(ctx, x-11, y+16, "./build/static/shrine.png", 19, 32);
+        drawImage(ctx, x-11, y+16, path.join(__dirname, "../../../build/static/shrine.png"), 19, 32);
       }
 
       if (mapObject.name == "Well") {
-        drawImage(ctx, x+13, y+21, "./build/static/well.png", 22, 18);
+        drawImage(ctx, x+13, y+21, path.join(__dirname, "../../../build/static/well.png"), 22, 18);
       }
 
       // portals in act 5
       if (mapObject.name == "Portal") {
         if (mapObject.id == 60) {
-          drawImageOutline(ctx, x+95, y+85, "./build/static/rightportal.png", 50, 46, "#FF00FF");
+          drawImageOutline(ctx, x+95, y+85, path.join(__dirname, "../../..//=build/static/rightportal.png"), 50, 46, "#FF00FF");
         }
       }
 

@@ -1,4 +1,5 @@
 import { CanvasRenderingContext2D } from "canvas";
+import path = require("path");
 import { Level, ObjectType } from "../../types/level.type";
 import { RequestConfig } from "../../types/RequestConfig";
 import { drawCircle, drawText, drawImageOutline } from "./drawPrimatives";
@@ -43,7 +44,7 @@ export async function drawQuestItems(
           ctx,
           x + 75,
           y + 63,
-          "./build/static/barbprison.png",
+          path.join(__dirname, "../../../build/static/barbprison.png"),
           44,
           30,
           "#00FF00"
@@ -57,7 +58,7 @@ export async function drawQuestItems(
         ctx,
         x - 60,
         y - 25,
-        "./build/static/pedastal.png",
+        path.join(__dirname, "../../../build/static/pedastal.png"),
         40,
         60,
         "#00FF00"
@@ -70,7 +71,7 @@ export async function drawQuestItems(
         ctx,
         x,
         y,
-        "./build/static/pedastal.png",
+        path.join(__dirname, "../../../build/static/pedastal.png"),
         20,
         30,
         "#00FF00"
@@ -83,7 +84,7 @@ export async function drawQuestItems(
         ctx,
         x - 25,
         y + 23,
-        "./build/static/inifusstree.png",
+        path.join(__dirname, "../../../build/static/inifusstree.png"),
         30,
         50,
         "#00FF00"
@@ -97,7 +98,7 @@ export async function drawQuestItems(
         ctx,
         x - 10,
         y + 10,
-        "./build/static/clawviperaltar.png",
+        path.join(__dirname, "../../../build/static/clawviperaltar.png"),
         40,
         40,
         "#00FF00"
@@ -110,7 +111,7 @@ export async function drawQuestItems(
         ctx,
         x - 5,
         y + 15,
-        "./build/static/seal.png",
+        path.join(__dirname, "../../../build/static/seal.png"),
         30,
         30,
         "#00FF00"
@@ -144,7 +145,7 @@ export async function drawQuestItems(
           ctx,
           x - 18,
           y + 18,
-          "./build/static/stone.png",
+          path.join(__dirname, "../../../build/static/stone.png"),
           scale * 4,
           scale * 13,
           "#00FF00"
@@ -164,7 +165,7 @@ export async function drawQuestItems(
           ctx,
           x - 18,
           y + 18,
-          "./build/static/stone.png",
+          path.join(__dirname, "../../../build/static/stone.png"),
           scale * 4,
           scale * 13,
           "#00FF00"

@@ -25,7 +25,7 @@ export async function testInstallation(): Promise<string> {
     let successful = false;
     return new Promise((resolve) => {
       let errorStream = fs.createWriteStream(errorFile, { flags: "a" });
-      var child = spawn("bin/d2-map.exe", cmd);
+      var child = spawn(path.join(__dirname, "../../bin/d2-map.exe"), cmd);
       child.stdout.setEncoding("utf8");
       child.stdout.on("data", function (data) {
         data = data.toString();

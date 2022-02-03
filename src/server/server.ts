@@ -93,13 +93,13 @@ server.listen(PORT, async () => {
       exit();
     }
     
-    if (!fs.existsSync("./build/static")) {
+    if (!fs.existsSync(path.join(__dirname, "../static"))) {
       console.error("Did not find static files in build folder");
       console.error("Check you have extracted the map server files correctly");
       console.error("Exiting....");
       exit();
     }
-    if (!fs.existsSync("./bin/d2-map.exe")) {
+    if (!fs.existsSync(path.join(__dirname, "../../bin/d2-map.exe"))) {
       console.error("Did not find ./bin/d2-map.exe files");
       console.error("Check you have extracted the map server files correctly");
       console.error("Exiting....");

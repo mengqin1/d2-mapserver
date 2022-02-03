@@ -2,7 +2,8 @@ import { Level } from "../types/level.type";
 import * as fs from "fs";
 import { spawn } from "child_process";
 import { performance } from "perf_hooks";
-import path = require("path/posix");
+import path = require("path");
+
 
 export async function getFromWindowsExe(
   seed: string,
@@ -29,7 +30,9 @@ export async function getFromWindowsExe(
 
   return new Promise((resolve) => {
     let errorStream = fs.createWriteStream(errorFile, { flags: "a" });
-    var child = spawn("bin/d2-map.exe", cmd);
+    const binPath = path.join(__dirname, "../../bin/d2-map.exe");
+    console.log(binPath);
+    var child = spawn(binPath, cmd);
     child.stdout.setEncoding("utf8");
     child.stdout.on("data", function (data) {
       data = data.toString();
