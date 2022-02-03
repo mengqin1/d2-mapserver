@@ -8,4 +8,5 @@ export interface PrefetchRequest {
     edge?: string;
     wallthickness?: string;
     serverScale?: string;
+    centerServerScale?: string;
 }

@@ -109,6 +109,12 @@ function getQuestHeaderdata(levelData: Level): string {
         questData.push(`Anya,${x},${y}`);
       }
     }
+    // canyon of the magi
+    if (levelData.id == 46) {
+      if (mapObject.isGoodExit) {
+        questData.push(`Tal Rashs,${x},${y}`);
+      }
+    }
   });
 
   return questData.join("|");

@@ -51,6 +51,7 @@ export async function mapImage(req, res) {
           encoding: "utf8",
         });
         responseData = JSON.parse(cachedText);
+        console.log("Reading cached image " + cacheFileName);
         cached = true;
       } catch (err) {
         console.error("Error reading cached image " + cacheFileName);
@@ -155,6 +156,25 @@ export async function prefetch(req, res) {
                   pf.edge == "true",
                   parseFloat(pf.wallthickness),
                   parseFloat(pf.serverScale),
+                  150,
+                  process.env.ENABLE_WATERMARK ? true : false
+                );
+                const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;
+                if (!fs.existsSync(cacheFileName)) {
+                  createImage(reqConfig, seedData, cacheFileName);
+                }
+              });
+              pf.mapIds.forEach(mapId => {
+                const reqConfig = new RequestConfig(
+                  seed,
+                  difficulty,
+                  mapId,
+                  pf.verbose == "true",
+                  pf.trim == "true",
+                  pf.isometric == "true",
+                  pf.edge == "true",
+                  parseFloat(pf.wallthickness),
+                  parseFloat(pf.centerServerScale),
                   150,
                   process.env.ENABLE_WATERMARK ? true : false
                 );
