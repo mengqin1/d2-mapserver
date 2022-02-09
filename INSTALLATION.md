@@ -28,17 +28,19 @@ Minimize this window, if you close it the map server will stop.
 You should then be able to access this URL in your browser <http://localhost:3002/v1/map/12345/2/117/image>  
 If you open this URL in your browser and see a game map appear, then your server is working correctly!
 
-### Configure the Map Hack
+## Setup the map hack
 
 Download the latest version here:
 <https://github.com/joffreybesos/d2r-mapview/releases/latest>
 
-- Download the `d2r-v2.x.x.exe` and `settings.ini` files
-- Edit the `settings.ini` file change the baseUrl setting to `baseUrl=http://localhost:3002`  
+**Save the d2r-map.exe to the same folder as your d2-mapserver.exe**
 
-Now you can start D2R and then run the `d2rmap-v2.x.x.exe` after you start the game.
+Follow the setup guide
+https://github.com/joffreybesos/d2r-mapview/blob/master/README.md#setup
 
-### Troubleshooting
+With d2-map v2.5.8 you no longer need to configure `settings.ini`
+
+## Troubleshooting
 
 If the window quickly pops up and disappears straight away, try running `d2-mapserver.exe` from the cmd prompt.
 That will give you a more detailed error message.
@@ -47,7 +49,7 @@ If you are having startup issues, delete this temp folder: `C:\Users\<username>\
 
 If you continually have problems, then you can try running the server with docker, see this guide: [DOCKERSERVER.md](./DOCKERSERVER.md)
 
-#### Error messages
+### Error messages
 
 1. `"Did not find the Diablo 2 LoD files in the expected location"`
     This means you may have extracted the D2 LOD files incorrectly. In the zip file, the folder is called `Diablo II 1.13c` but it should be `game`
