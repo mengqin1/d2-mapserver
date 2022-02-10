@@ -16,3 +16,4 @@ dockerstop.bat
 buildlod.bat
 dockerbuildlod.bat
 dockerbuildtest.bat
+server.log

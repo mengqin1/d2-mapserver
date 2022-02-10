@@ -12,14 +12,18 @@ const uest = require('uest')
 const bodyParser = require('body-parser');
 const { registerFont } = require('canvas')
 var morgan = require('morgan')
-const moment = require('moment-timezone').tz(process.env.TZ)
+const moment = require('moment-timezone')
 
-require( "console-stamp" )( console, {
-  formatter: function(){
-      return moment().format("d HH:mm:ss.SS");
-  }
-});
+const logFile = "./server.log";
+let logStream = fs.createWriteStream(logFile, { flags: "a" });
 
+var originalLog = console.log;
+
+console.log = function(str){
+  originalLog(str);
+  var currentDate = moment().tz(process.env.TZ).toISOString();
+  logStream.write(currentDate + " " + str.toString() + "\n");
+}
 
 const D2_GAME_FILES = process.env.D2_GAME_FILES || "./game";
 if (!fs.existsSync("./cache")) {
@@ -40,14 +44,14 @@ server.on('error', function (e) {
 });
 server.listen(PORT, async () => {
 
-  console.log(`D2-mapserver launching...`);
+  console.log(`D2-mapserver beta v10 launching...`);
   const generationQueue = './cache/queue.txt'
   if (fs.existsSync(generationQueue)) {
     fs.unlinkSync(generationQueue);
   }
 
   // delete cache json files
-  console.log(`Deleting cache files...`);
+  console.log(`Cleaning up cache files...`);
   const filenames = fs.readdirSync("./cache");
   filenames.forEach(file => {
     if (file.endsWith('.json')) {
@@ -114,7 +118,6 @@ server.listen(PORT, async () => {
   console.log(`http://localhost:${PORT}/v1/map/12345/2/117/image`);
   console.log(`For troubleshooting refer to https://github.com/joffreybesos/d2-mapserver/blob/master/INSTALLATION.md#troubleshooting`);
   console.log(`If you close this window the map server will shut down.`);
-  
   console.log(`Running on http://localhost:${PORT}`);
 });
 
