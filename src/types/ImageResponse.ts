@@ -13,6 +13,9 @@ export class ImageResponse {
     bosses: string;
     quests: string;
     serverScale: number;
+    prerotated: string;
+    originalwidth: number;
+    originalheight: number;
     base64Data: string;
 
     mapName: string;
@@ -31,6 +34,9 @@ export class ImageResponse {
         this.quests = levelImage?.quests
         this.serverScale = levelImage?.serverScale
         this.base64Data = base64Data
+        this.prerotated = levelImage.rotate ? "true" : "false"
+        this.originalwidth = levelImage?.originalwidth
+        this.originalheight = levelImage?.originalheight
 
         this.mapName = levelImage.mapData?.name;
         this.mapId = levelImage.mapData?.id;

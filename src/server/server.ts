@@ -14,17 +14,6 @@ const { registerFont } = require('canvas')
 var morgan = require('morgan')
 const moment = require('moment-timezone')
 
-const logFile = "./server.log";
-let logStream = fs.createWriteStream(logFile, { flags: "a" });
-
-var originalLog = console.log;
-
-console.log = function(str){
-  originalLog(str);
-  var currentDate = moment().tz(process.env.TZ).toISOString();
-  logStream.write(currentDate + " " + str.toString() + "\n");
-}
-
 const D2_GAME_FILES = process.env.D2_GAME_FILES || "./game";
 if (!fs.existsSync("./cache")) {
   fs.mkdirSync("./cache")

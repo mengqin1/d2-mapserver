@@ -40,6 +40,7 @@ export async function mapImage(req, res) {
       "#AAA",
       showTextLabels,
       showLevelTitles,
+      req.query.rotate == "true"
     );
     
     const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;
@@ -77,6 +78,10 @@ export async function mapImage(req, res) {
       bosses: responseData?.bosses,
       quests: responseData?.quests,
       serverScale: responseData?.serverScale,
+      originalwidth: responseData?.originalwidth,
+      originalheight: responseData?.originalheight,
+      prerotated: responseData?.prerotated,
+      
       info: "AUTOKEYCLICK IS A SCAM",
       info2: "D2RESURREKTED IS A SCAM",
       info3: "YOU SHOULD NOT HAVE PAID FOR THIS",
@@ -157,7 +162,11 @@ export async function prefetch(req, res) {
                   parseFloat(pf.wallthickness),
                   parseFloat(pf.serverScale),
                   150,
-                  process.env.ENABLE_WATERMARK ? true : false
+                  process.env.ENABLE_WATERMARK ? true : false,
+                  "#AAA",
+                  true,
+                  true,
+                  pf.rotate == "true"
                 );
                 const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;
                 if (!fs.existsSync(cacheFileName)) {
@@ -176,7 +185,11 @@ export async function prefetch(req, res) {
                   parseFloat(pf.wallthickness),
                   parseFloat(pf.centerServerScale),
                   150,
-                  process.env.ENABLE_WATERMARK ? true : false
+                  process.env.ENABLE_WATERMARK ? true : false,
+                  "#AAA",
+                  true,
+                  true,
+                  pf.rotate == "true"
                 );
                 const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;
                 if (!fs.existsSync(cacheFileName)) {

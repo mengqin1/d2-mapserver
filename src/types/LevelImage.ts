@@ -13,6 +13,9 @@ export class LevelImage {
   bosses?: string;
   quests?: string;
   padding: number;
+  rotate?: string;
+  originalwidth: number;
+  originalheight: number;
   constructor() {
     this.leftTrimmed = 0;
     this.topTrimmed = 0;

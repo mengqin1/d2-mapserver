@@ -6,7 +6,7 @@ export function drawWatermark(ctx: CanvasRenderingContext2D, reqConfig: RequestC
     let watermarks = [];
     watermarks.push("If you paid for this you \nhave been scammed\nSearch 'd2r-mapview' on Github");
     watermarks.push("You are using the free map server\nRun your own to remove this watermark");
-    watermarks.push("This free map server is\nshutting down in a few weeks.");   
+    watermarks.push("This free map server is\nshutting down 6pm 13 Feb PST");   
     watermarks.push("如果您为此付款，您就被骗了。\n在 Github 上搜索 d2r-mapview");
     watermarks.push("收费行为均为诈骗");
     watermarks.push("당신이 이것을 지불했다면\n당신은 사기를 당한 것입니다.\nGithub에서 'd2r-mapview' 검색");

@@ -1,0 +1,85 @@
+2022-02-11T04:43:17.460Z D2-mapserver beta v10 launching...
+2022-02-11T04:43:17.462Z Cleaning up cache files...
+2022-02-11T04:43:17.465Z Running test: bin/d2-map.exe E:\Dev\d2-mapserver\game --seed 12345 --difficulty 1 --map 1
+2022-02-11T04:43:17.705Z Test successful!
+2022-02-11T04:43:17.706Z Test this server by opening this link in your browser:
+2022-02-11T04:43:17.706Z http://localhost:3002/v1/map/12345/2/117/image
+2022-02-11T04:43:17.707Z For troubleshooting refer to https://github.com/joffreybesos/d2-mapserver/blob/master/INSTALLATION.md#troubleshooting
+2022-02-11T04:43:17.707Z If you close this window the map server will shut down.
+2022-02-11T04:43:17.708Z Running on http://localhost:3002
+2022-02-11T04:43:19.367Z New request for image 4173866 2 5...
+2022-02-11T04:43:19.370Z Spawning process: bin/d2-map.exe E:\Dev\d2-mapserver\game --seed 4173866 --difficulty 2
+2022-02-11T04:43:21.616Z Windows exe done generation 4173866 2 0, took 2246ms
+2022-02-11T04:43:21.646Z Saved JSON ./cache/4173866_2.json
+2022-02-11T04:43:21.646Z Generated full map data for 4173866 2, took 2277ms
+2022-02-11T04:43:21.725Z Generated PNG 5 'Dark Wood', took 76ms
+2022-02-11T04:43:21.745Z Generated PNG 6 'Black Marsh', took 19ms
+2022-02-11T04:43:21.818Z Generated image for map 5 'Dark Wood', took 2451ms total
+2022-02-11T04:49:52.717Z D2-mapserver beta v10 launching...
+2022-02-11T04:49:52.719Z Cleaning up cache files...
+2022-02-11T04:49:52.721Z Running test: bin/d2-map.exe E:\Dev\d2-mapserver\game --seed 12345 --difficulty 1 --map 1
+2022-02-11T04:49:52.947Z Test successful!
+2022-02-11T04:49:52.948Z Test this server by opening this link in your browser:
+2022-02-11T04:49:52.949Z http://localhost:3002/v1/map/12345/2/117/image
+2022-02-11T04:49:52.949Z For troubleshooting refer to https://github.com/joffreybesos/d2-mapserver/blob/master/INSTALLATION.md#troubleshooting
+2022-02-11T04:49:52.949Z If you close this window the map server will shut down.
+2022-02-11T04:49:52.950Z Running on http://localhost:3002
+2022-02-11T04:49:58.829Z New request for image 964521606 2 1...
+2022-02-11T04:49:58.836Z Spawning process: bin/d2-map.exe E:\Dev\d2-mapserver\game --seed 964521606 --difficulty 2
+2022-02-11T04:50:01.555Z Windows exe done generation 964521606 2 0, took 2719ms
+2022-02-11T04:50:01.598Z Saved JSON ./cache/964521606_2.json
+2022-02-11T04:50:01.599Z Generated full map data for 964521606 2, took 2767ms
+2022-02-11T04:50:01.726Z Generated PNG 1 'Rogue Encampment', took 123ms
+2022-02-11T04:50:01.835Z Generated PNG 2 'Blood Moor', took 108ms
+2022-02-11T04:50:01.889Z Generated image for map 1 'Rogue Encampment', took 3059ms total
+2022-02-11T04:50:01.943Z Reading cache file ./cache/964521606_2.json
+2022-02-11T04:50:01.958Z Read cached file E:\Dev\d2-mapserver\cache\964521606_2.json, took 15ms
+2022-02-11T04:50:02.483Z Generated PNG 1 'Rogue Encampment', took 522ms
+2022-02-11T04:50:02.496Z Generated PNG 2 'Blood Moor', took 496ms
+2022-02-11T04:50:02.510Z Generated PNG 4 'Stony Field', took 461ms
+2022-02-11T04:50:02.521Z Generated PNG 83 'Travincal', took 411ms
+2022-02-11T04:50:02.534Z Generated PNG 39 'Moo Moo Farm', took 387ms
+2022-02-11T04:50:02.551Z Generated PNG 1 'Rogue Encampment', took 344ms
+2022-02-11T04:50:02.575Z Generated PNG 2 'Blood Moor', took 341ms
+2022-02-11T04:50:02.601Z Generated PNG 4 'Stony Field', took 313ms
+2022-02-11T04:50:02.629Z Generated PNG 83 'Travincal', took 276ms
+2022-02-11T04:50:02.666Z Generated PNG 39 'Moo Moo Farm', took 269ms
+2022-02-11T04:50:03.149Z Generated PNG 2 'Blood Moor', took 481ms
+2022-02-11T04:50:03.155Z Generated PNG 1 'Rogue Encampment', took 425ms
+2022-02-11T04:50:03.171Z Generated PNG 3 'Cold Plains', took 425ms
+2022-02-11T04:50:03.175Z Generated PNG 82 'Kurast Causeway', took 386ms
+2022-02-11T04:50:03.200Z Generated PNG 2 'Blood Moor', took 394ms
+2022-02-11T04:50:03.218Z Generated PNG 1 'Rogue Encampment', took 351ms
+2022-02-11T04:50:03.246Z Generated PNG 3 'Cold Plains', took 358ms
+2022-02-11T04:50:03.256Z Generated PNG 82 'Kurast Causeway', took 304ms
+2022-02-11T04:50:03.473Z Generated PNG 3 'Cold Plains', took 208ms
+2022-02-11T04:50:03.674Z Generated PNG 3 'Cold Plains', took 321ms
+2022-02-11T04:50:41.133Z New request for image 964521606 2 1...
+2022-02-11T04:50:41.136Z Reading cached image ./cache/image_964521606_2_1_0_0_0_1_1.0000_2.0000_0_AAA_1_1_150.json
+2022-02-11T04:50:41.137Z Generated image for map 1 'Rogue Encampment', took 3ms total
+2022-02-11T04:50:41.179Z Reading cache file ./cache/964521606_2.json
+2022-02-11T04:50:41.210Z Read cached file E:\Dev\d2-mapserver\cache\964521606_2.json, took 31ms
+2022-02-11T04:50:56.884Z New request for image 891557 2 1...
+2022-02-11T04:50:56.887Z Spawning process: bin/d2-map.exe E:\Dev\d2-mapserver\game --seed 891557 --difficulty 2
+2022-02-11T04:50:59.658Z Windows exe done generation 891557 2 0, took 2770ms
+2022-02-11T04:50:59.724Z Saved JSON ./cache/891557_2.json
+2022-02-11T04:50:59.724Z Generated full map data for 891557 2, took 2839ms
+2022-02-11T04:50:59.739Z Generated PNG 1 'Rogue Encampment', took 12ms
+2022-02-11T04:50:59.773Z Generated PNG 2 'Blood Moor', took 32ms
+2022-02-11T04:50:59.805Z Generated image for map 1 'Rogue Encampment', took 2920ms total
+2022-02-11T04:51:02.787Z New request for image 2168414 2 1...
+2022-02-11T04:51:02.790Z Spawning process: bin/d2-map.exe E:\Dev\d2-mapserver\game --seed 2168414 --difficulty 2
+2022-02-11T04:51:05.592Z Windows exe done generation 2168414 2 0, took 2802ms
+2022-02-11T04:51:05.638Z Saved JSON ./cache/2168414_2.json
+2022-02-11T04:51:05.638Z Generated full map data for 2168414 2, took 2850ms
+2022-02-11T04:51:05.685Z Generated PNG 1 'Rogue Encampment', took 45ms
+2022-02-11T04:51:05.786Z Generated PNG 2 'Blood Moor', took 99ms
+2022-02-11T04:51:05.828Z Generated image for map 1 'Rogue Encampment', took 3040ms total
+2022-02-11T04:52:32.828Z New request for image 964521606 2 1...
+2022-02-11T04:52:32.830Z Reading cached image ./cache/image_964521606_2_1_0_0_0_1_1.0000_2.0000_0_AAA_1_1_150.json
+2022-02-11T04:52:32.832Z Generated image for map 1 'Rogue Encampment', took 4ms total
+2022-02-11T04:52:32.880Z Reading cache file ./cache/964521606_2.json
+2022-02-11T04:52:32.904Z Read cached file E:\Dev\d2-mapserver\cache\964521606_2.json, took 23ms
+2022-02-11T04:52:48.274Z New request for image 964521606 2 1...
+2022-02-11T04:52:48.275Z Reading cached image ./cache/image_964521606_2_1_0_0_0_1_1.0000_2.0000_0_AAA_1_1_150.json
+2022-02-11T04:52:48.276Z Generated image for map 1 'Rogue Encampment', took 2ms total

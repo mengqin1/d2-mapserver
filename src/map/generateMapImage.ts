@@ -5,6 +5,7 @@ import trim from 'trim-canvas';
 import { RequestConfig } from "../types/RequestConfig";
 import { LevelImage } from "../types/LevelImage";
 import { LevelList } from "../types/level.type";
+import { rotateImage } from "./rotateImage";
 
 export async function generateMapImage(reqConfig: RequestConfig, seedData: LevelList): Promise<any> {
     
@@ -22,7 +23,12 @@ export async function generateMapImage(reqConfig: RequestConfig, seedData: Level
     }
 
     if (reqConfig.isometric) {
-        levelImage = await makeIsometric(levelImage)
+      levelImage = await makeIsometric(levelImage)
+    }
+
+    if (reqConfig.rotate) {
+      levelImage.rotate = "true";
+      levelImage = await rotateImage(levelImage)
     }
     
     if (reqConfig.trim) {

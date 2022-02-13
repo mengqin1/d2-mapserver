@@ -57,6 +57,8 @@ export async function generatePNG(
   levelImage.waypoint = headers.waypointLocation;
   levelImage.bosses = headers.bossLocations;
   levelImage.quests = headers.questLocations;
+  levelImage.originalwidth = finalCanvas.width;
+  levelImage.originalheight = finalCanvas.height;
   levelImage.canvas = finalCanvas;
 
   const mapName = mapRefList.find((map) => map.id == levelData.id);
