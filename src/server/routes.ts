@@ -9,6 +9,7 @@ import { PrefetchRequest } from "../types/PrefetchRequest";
 import { LevelImage } from "../types/LevelImage";
 import { RequestConfig } from "../types/RequestConfig";
 
+
 export async function mapImage(req, res) {
   try {
     validationResult(req).throw();
@@ -107,6 +108,8 @@ async function createImage(reqConfig: RequestConfig, seedData: LevelList, cacheF
     .toString("base64")
     .replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
   const responseData = new ImageResponse(levelImage, base64Data); // serialize the response data for caching
+  // var start = new Date().getTime();
+  // while (new Date().getTime() < start + 68000);
   fs.writeFile(cacheFileName, JSON.stringify(responseData), function (err) {
     if (err) {
       console.error("Error writing cache file " + cacheFileName);
@@ -148,58 +151,58 @@ export async function prefetch(req, res) {
             throw new Error("Invalid prefetch request");
           }
           res.status(200).send(`Prefetched ${pf.mapIds.length} maps`);
-          getAllMapData(seed, difficulty).then(seedData => {
-            try {
-              pf.mapIds.forEach(mapId => {
-                const reqConfig = new RequestConfig(
-                  seed,
-                  difficulty,
-                  mapId,
-                  pf.verbose == "true",
-                  pf.trim == "true",
-                  pf.isometric == "true",
-                  pf.edge == "true",
-                  parseFloat(pf.wallthickness),
-                  parseFloat(pf.serverScale),
-                  150,
-                  process.env.ENABLE_WATERMARK ? true : false,
-                  "#AAA",
-                  true,
-                  true,
-                  pf.rotate == "true"
-                );
-                const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;
-                if (!fs.existsSync(cacheFileName)) {
-                  createImage(reqConfig, seedData, cacheFileName);
-                }
-              });
-              pf.mapIds.forEach(mapId => {
-                const reqConfig = new RequestConfig(
-                  seed,
-                  difficulty,
-                  mapId,
-                  pf.verbose == "true",
-                  pf.trim == "true",
-                  pf.isometric == "true",
-                  pf.edge == "true",
-                  parseFloat(pf.wallthickness),
-                  parseFloat(pf.centerServerScale),
-                  150,
-                  process.env.ENABLE_WATERMARK ? true : false,
-                  "#AAA",
-                  true,
-                  true,
-                  pf.rotate == "true"
-                );
-                const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;
-                if (!fs.existsSync(cacheFileName)) {
-                  createImage(reqConfig, seedData, cacheFileName);
-                }
-              });
-            } catch (e) {
-              console.log("Error prefetching");
-            }
-          });
+          // getAllMapData(seed, difficulty).then(seedData => {
+          //   try {
+          //     pf.mapIds.forEach(mapId => {
+          //       const reqConfig = new RequestConfig(
+          //         seed,
+          //         difficulty,
+          //         mapId,
+          //         pf.verbose == "true",
+          //         pf.trim == "true",
+          //         pf.isometric == "true",
+          //         pf.edge == "true",
+          //         parseFloat(pf.wallthickness),
+          //         parseFloat(pf.serverScale),
+          //         150,
+          //         process.env.ENABLE_WATERMARK ? true : false,
+          //         "#AAA",
+          //         true,
+          //         true,
+          //         pf.rotate == "true"
+          //       );
+          //       const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;
+          //       if (!fs.existsSync(cacheFileName)) {
+          //         createImage(reqConfig, seedData, cacheFileName);
+          //       }
+          //     });
+          //     pf.mapIds.forEach(mapId => {
+          //       const reqConfig = new RequestConfig(
+          //         seed,
+          //         difficulty,
+          //         mapId,
+          //         pf.verbose == "true",
+          //         pf.trim == "true",
+          //         pf.isometric == "true",
+          //         pf.edge == "true",
+          //         parseFloat(pf.wallthickness),
+          //         parseFloat(pf.centerServerScale),
+          //         150,
+          //         process.env.ENABLE_WATERMARK ? true : false,
+          //         "#AAA",
+          //         true,
+          //         true,
+          //         pf.rotate == "true"
+          //       );
+          //       const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;
+          //       if (!fs.existsSync(cacheFileName)) {
+          //         createImage(reqConfig, seedData, cacheFileName);
+          //       }
+          //     });
+          //   } catch (e) {
+          //     console.log("Error prefetching");
+          //   }
+          // });
         } else {
           res.send("Prefetch not available on public free server.\nPlease run your own server\nRefer to this guide https://github.com/joffreybesos/d2r-mapview/blob/master/SERVER.md");
         }
