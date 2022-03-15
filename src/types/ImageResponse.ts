@@ -12,6 +12,10 @@ export class ImageResponse {
     waypoint: string;
     bosses: string;
     quests: string;
+    chests: string;
+    superchests: string;
+    shrines: string;
+    wells: string;
     serverScale: number;
     prerotated: string;
     originalwidth: number;
@@ -32,6 +36,10 @@ export class ImageResponse {
         this.waypoint = levelImage?.waypoint
         this.bosses = levelImage?.bosses
         this.quests = levelImage?.quests
+        this.chests = levelImage?.chests;
+        this.superchests = levelImage?.superchests;
+        this.shrines = levelImage?.shrines;
+        this.wells = levelImage?.wells;
         this.serverScale = levelImage?.serverScale
         this.base64Data = base64Data
         this.prerotated = levelImage.rotate ? "true" : "false"

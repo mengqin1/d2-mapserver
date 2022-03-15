@@ -12,6 +12,10 @@ export class LevelImage {
   waypoint?: string;
   bosses?: string;
   quests?: string;
+  chests?: string;
+  superchests?: string;
+  shrines?: string;
+  wells?: string;
   padding: number;
   rotate?: string;
   originalwidth: number;

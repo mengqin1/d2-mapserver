@@ -57,6 +57,10 @@ export async function generatePNG(
   levelImage.waypoint = headers.waypointLocation;
   levelImage.bosses = headers.bossLocations;
   levelImage.quests = headers.questLocations;
+  levelImage.chests = headers.chestLocations;
+  levelImage.superchests = headers.superchestLocations;
+  levelImage.shrines = headers.shrineLocations;
+  levelImage.wells = headers.wellLocations;
   levelImage.originalwidth = finalCanvas.width;
   levelImage.originalheight = finalCanvas.height;
   levelImage.canvas = finalCanvas;

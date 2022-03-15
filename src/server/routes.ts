@@ -60,7 +60,7 @@ export async function mapImage(req, res) {
       }
     }
     if (!cached) {
-      const seedData = await getAllMapData(reqConfig.seed, reqConfig.difficulty);
+      const seedData: LevelList = await getAllMapData(reqConfig.seed, reqConfig.difficulty);
       responseData = await createImage(reqConfig, seedData, cacheFileName)
     }
 
@@ -78,6 +78,10 @@ export async function mapImage(req, res) {
       waypoint: responseData?.waypoint,
       bosses: responseData?.bosses,
       quests: responseData?.quests,
+      chests: responseData?.chests,
+      superchests: responseData?.superchests,
+      shrines: responseData?.shrines,
+      wells: responseData?.wells,
       serverScale: responseData?.serverScale,
       originalwidth: responseData?.originalwidth,
       originalheight: responseData?.originalheight,
@@ -151,58 +155,58 @@ export async function prefetch(req, res) {
             throw new Error("Invalid prefetch request");
           }
           res.status(200).send(`Prefetched ${pf.mapIds.length} maps`);
-          // getAllMapData(seed, difficulty).then(seedData => {
-          //   try {
-          //     pf.mapIds.forEach(mapId => {
-          //       const reqConfig = new RequestConfig(
-          //         seed,
-          //         difficulty,
-          //         mapId,
-          //         pf.verbose == "true",
-          //         pf.trim == "true",
-          //         pf.isometric == "true",
-          //         pf.edge == "true",
-          //         parseFloat(pf.wallthickness),
-          //         parseFloat(pf.serverScale),
-          //         150,
-          //         process.env.ENABLE_WATERMARK ? true : false,
-          //         "#AAA",
-          //         true,
-          //         true,
-          //         pf.rotate == "true"
-          //       );
-          //       const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;
-          //       if (!fs.existsSync(cacheFileName)) {
-          //         createImage(reqConfig, seedData, cacheFileName);
-          //       }
-          //     });
-          //     pf.mapIds.forEach(mapId => {
-          //       const reqConfig = new RequestConfig(
-          //         seed,
-          //         difficulty,
-          //         mapId,
-          //         pf.verbose == "true",
-          //         pf.trim == "true",
-          //         pf.isometric == "true",
-          //         pf.edge == "true",
-          //         parseFloat(pf.wallthickness),
-          //         parseFloat(pf.centerServerScale),
-          //         150,
-          //         process.env.ENABLE_WATERMARK ? true : false,
-          //         "#AAA",
-          //         true,
-          //         true,
-          //         pf.rotate == "true"
-          //       );
-          //       const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;
-          //       if (!fs.existsSync(cacheFileName)) {
-          //         createImage(reqConfig, seedData, cacheFileName);
-          //       }
-          //     });
-          //   } catch (e) {
-          //     console.log("Error prefetching");
-          //   }
-          // });
+          getAllMapData(seed, difficulty).then(seedData => {
+            try {
+              pf.mapIds.forEach(mapId => {
+                const reqConfig = new RequestConfig(
+                  seed,
+                  difficulty,
+                  mapId,
+                  pf.verbose == "true",
+                  pf.trim == "true",
+                  pf.isometric == "true",
+                  pf.edge == "true",
+                  parseFloat(pf.wallthickness),
+                  parseFloat(pf.serverScale),
+                  150,
+                  process.env.ENABLE_WATERMARK ? true : false,
+                  "#AAA",
+                  true,
+                  true,
+                  pf.rotate == "true"
+                );
+                const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;
+                if (!fs.existsSync(cacheFileName)) {
+                  createImage(reqConfig, seedData, cacheFileName);
+                }
+              });
+              pf.mapIds.forEach(mapId => {
+                const reqConfig = new RequestConfig(
+                  seed,
+                  difficulty,
+                  mapId,
+                  pf.verbose == "true",
+                  pf.trim == "true",
+                  pf.isometric == "true",
+                  pf.edge == "true",
+                  parseFloat(pf.wallthickness),
+                  parseFloat(pf.centerServerScale),
+                  150,
+                  process.env.ENABLE_WATERMARK ? true : false,
+                  "#AAA",
+                  true,
+                  true,
+                  pf.rotate == "true"
+                );
+                const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;
+                if (!fs.existsSync(cacheFileName)) {
+                  createImage(reqConfig, seedData, cacheFileName);
+                }
+              });
+            } catch (e) {
+              console.log("Error prefetching");
+            }
+          });
         } else {
           res.send("Prefetch not available on public free server.\nPlease run your own server\nRefer to this guide https://github.com/joffreybesos/d2r-mapview/blob/master/SERVER.md");
         }
