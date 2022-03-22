@@ -15,29 +15,29 @@ export async function drawIcons(ctx: CanvasRenderingContext2D, levelData: Level,
         let fileName = "";
         switch (mapObject.id) {
           case 69:
-            fileName = path.join(__dirname, "../../../build/static/talrasha-circle.png");
+            fileName = path.join(__dirname, "../../../build/static/tal_4_circle.png");
             break;
           case 70:
-            fileName = path.join(__dirname, "../../../build/static/talrasha-chevron.png");
+            fileName = path.join(__dirname, "../../../build/static/tal_5_chevron.png");
             break;
           case 71:
-            fileName = path.join(__dirname, "../../../build/static/talrasha-triangle.png");
+            fileName = path.join(__dirname, "../../../build/static/tal_6_triangle.png");
             break;
           case 72:
-            fileName = path.join(__dirname, "../../../build/static/talrasha-circleline.png");
+            fileName = path.join(__dirname, "../../../build/static/tal_7_crescentmoon.png");
             break;
           case 66:
-            fileName = path.join(__dirname, "../../../build/static/talrasha-star.png");
+            fileName = path.join(__dirname, "../../../build/static/tal_1_star.png");
             break;
           case 67:
-            fileName = path.join(__dirname, "../../../build/static/talrasha-square.png");
+            fileName = path.join(__dirname, "../../../build/static/tal_2_square.png");
             break;
           case 68:
-            fileName = path.join(__dirname, "../../../build/static/talrasha-crescent.png");
+            fileName = path.join(__dirname, "../../../build/static/tal_3_crescent.png");
             break;
         }
         if (fs.existsSync(fileName)) {
-          drawImage(ctx, x-47, y-10, fileName, 50, 50);
+          drawImage(ctx, x-70, y-20, fileName, 76, 69);
         }
       }
     }
