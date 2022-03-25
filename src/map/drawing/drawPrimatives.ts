@@ -57,7 +57,8 @@ export function drawStraightText(ctx, x, y, fontSize, text, textColor, rotate) {
 export async function drawImage(ctx, x, y, fileName, width, height) {
   if (fs.existsSync(fileName)) {
     ctx.save();
-    const image = await loadImage(fileName);
+    const buffer: Buffer = fs.readFileSync(fileName);
+    const image = await loadImage(buffer);
     ctx.translate(x - image.width / 2, y - image.height / 2);
     ctx.rotate((-45 * Math.PI) / 180);
     ctx.scale(1, 1.8);
@@ -70,7 +71,8 @@ export async function drawImage(ctx, x, y, fileName, width, height) {
 export async function drawImageOutline(ctx2, x, y, fileName, width, height, outlineColor) {
   if (fs.existsSync(fileName)) {
     const padding = 5;
-    const image = await loadImage(fileName);
+    const buffer: Buffer = fs.readFileSync(fileName);
+    const image = await loadImage(buffer);
     const canvas = createCanvas(width+padding, height+padding);
     const ctx = canvas.getContext("2d");
     

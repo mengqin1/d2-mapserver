@@ -6,6 +6,7 @@ game/
 node_modules/
 .vscode/
 dist/
+dist2/
 run.sh
 runbeta.sh
 dockerbuild.sh

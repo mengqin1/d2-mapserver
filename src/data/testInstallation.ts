@@ -3,7 +3,7 @@ import * as fs from "fs";
 import { spawn } from "child_process";
 import { performance } from "perf_hooks";
 import path = require("path");
-
+var clc = require("cli-color");
 
 export async function testInstallation(): Promise<string> {
     const start = performance.now();
@@ -17,21 +17,24 @@ export async function testInstallation(): Promise<string> {
       "--map",
       "1"
     ];
-    
-    console.log("Running test: bin/d2-map.exe " + cmd.join(" ").toString());
+    let localExe = path.dirname(process.execPath) + "/bin/d2-map.exe";
+    if (!fs.existsSync(localExe)) {
+      localExe = path.join(__dirname, "../../bin/d2-map.exe");
+    }
+    console.log(clc.green("Running test: " + localExe + " " + cmd.join(" ").toString()));
     let scriptOutput: string = "";
     const errorFile = "./cache/windowserrors.log";
-    
+
     let successful = false;
     return new Promise((resolve) => {
       let errorStream = fs.createWriteStream(errorFile, { flags: "a" });
-      var child = spawn(path.join(__dirname, "../../bin/d2-map.exe"), cmd);
+      var child = spawn(localExe, cmd);
       child.stdout.setEncoding("utf8");
       child.stdout.on("data", function (data) {
         data = data.toString();
         scriptOutput += data;
         if (data.includes("Map:Generation:Done")) {
-            console.log("Test successful!");
+            console.log(clc.green("Test successful!"));
             successful = true;
             return resolve("");
         }

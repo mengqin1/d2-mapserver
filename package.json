@@ -28,16 +28,28 @@
   "dependencies": {
     "body-parser": "^1.19.1",
     "canvas": "^2.9.0",
-    "caxa": "^2.1.0",
+    "cli-color": "^2.0.1",
     "console-stamp": "^3.0.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-validator": "^6.13.0",
     "moment-timezone": "^0.5.33",
     "morgan": "^1.10.0",
+    "pkg": "^5.5.2",
     "trim-canvas": "^0.1.2",
     "uest": "^1.0.20",
     "uuid": "^8.3.2"
+  },
+  "pkg": {
+    "scripts": "build/**/*.js",
+    "assets": [
+      "./bin/d2-map.exe",
+      "./node_modules/canvas/build/Release/*.dll"
+    ],
+    "targets": [
+      "node16-win-x64"
+    ],
+    "outputPath": "dist2"
   },
   "bin": "build/server/server.js"
 }

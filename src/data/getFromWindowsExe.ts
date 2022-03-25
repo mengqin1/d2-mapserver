@@ -12,6 +12,10 @@ export async function getFromWindowsExe(
 ): Promise<Level[]> {
   const start = performance.now();
   const D2_GAME_FILES = process.env.D2_GAME_FILES || "game";
+  let localExe = path.dirname(process.execPath) + "/bin/d2-map.exe";
+  if (!fs.existsSync(localExe)) {
+    localExe = path.join(__dirname, "../../bin/d2-map.exe");
+  }
   const cmd = [
     path.resolve(D2_GAME_FILES),
     "--seed",
@@ -23,14 +27,15 @@ export async function getFromWindowsExe(
     cmd.push("--map");
     cmd.push(mapId.toString());
   }
-  console.log("Spawning process: bin/d2-map.exe " + cmd.join(" ").toString());
+  console.log("Spawning process: " + localExe + " " + cmd.join(" ").toString());
   let scriptOutput: string = "";
   const errorFile = "./cache/windowserrors.log";
   let mapLines: Level[] = [];
 
   return new Promise((resolve) => {
     let errorStream = fs.createWriteStream(errorFile, { flags: "a" });
-    const binPath = path.join(__dirname, "../../bin/d2-map.exe");
+
+    const binPath = localExe;
     var child = spawn(binPath, cmd);
     child.stdout.setEncoding("utf8");
     child.stdout.on("data", function (data) {

@@ -13,6 +13,7 @@ const bodyParser = require('body-parser');
 const { registerFont } = require('canvas')
 var morgan = require('morgan')
 const moment = require('moment-timezone')
+var clc = require("cli-color");
 
 const D2_GAME_FILES = process.env.D2_GAME_FILES || "./game";
 if (!fs.existsSync("./cache")) {
@@ -33,7 +34,7 @@ server.on('error', function (e) {
 });
 server.listen(PORT, async () => {
 
-  console.log(`D2-mapserver beta v10 launching...`);
+  console.log(clc.blue.bold(`D2-mapserver v11 launching...`));
   const generationQueue = './cache/queue.txt'
   if (fs.existsSync(generationQueue)) {
     fs.unlinkSync(generationQueue);
@@ -79,35 +80,43 @@ server.listen(PORT, async () => {
     execSync("winecfg", { env: { WINEPREFIX: '/app/wine_d2', WINEDEBUG: '-all,fixme-all', WINEARCH: 'win32' } });
   } else {
     if (!fs.existsSync(path.join(D2_GAME_FILES, "Fog.dll"))) {
-      console.error("Did not find the Diablo 2 LoD files in the expected location");
-      console.error("Expected game files in this folder: " + path.resolve(D2_GAME_FILES));
-      console.error("You can configure the folder with 'set D2_GAME_FILES=D:\\Games\\Diablo 2'");
+      console.error(clc.redBright.bold("ERROR: Did not find the Diablo 2 LoD files in the expected location"));
+      console.error(clc.redBright("Expected game files in this folder: " + path.resolve(D2_GAME_FILES)));
+      console.error(clc.redBright("You can configure the folder with the command " + clc.white("'set D2_GAME_FILES=D:\\Games\\Diablo 2'")));
       console.error("Exiting....");
       exit();
+    } else {
+      console.log(clc.green("Found D2 LoD game files " + D2_GAME_FILES));
     }
     
-    if (!fs.existsSync(path.join(__dirname, "../static"))) {
-      console.error("Did not find static files in build folder");
-      console.error("Exiting....");
-      exit();
-    }
+    // if (!fs.existsSync(path.join(__dirname, "../static"))) {
+    //   console.error(clc.redBright("Did not find static files in build folder"));
+    //   console.error("Exiting....");
+    //   exit();
+    // }
     if (!fs.existsSync(path.join(__dirname, "../../bin/d2-map.exe"))) {
-      console.error("Did not find ./bin/d2-map.exe");
+      console.error(clc.redBright.bold("ERROR: Did not find ./bin/d2-map.exe, please restore this file from the original download"));
       console.error("Exiting....");
       exit();
+    } else {
+      console.log(clc.green("Found bin/d2-map.exe tool " + path.join(__dirname, "../../bin/d2-map.exe")));
     }
     const result = await testInstallation();
-    if (result) {
-      console.error(`Error generating map, here is a raw dump of the logs:`);
+    if (result) { 
+      console.error(clc.redBright.bold(`ERROR: Error generating map data, here is a raw dump of the logs:`));
       console.error(result);
+      console.error("Please refer to the below troubleshooting guide: (ctrl+click link to open)");
+      console.error(clc.underline(`https://github.com/joffreybesos/d2r-mapview/wiki/Setup-guide#troubleshooting`));
       exit();
     }
   }
-  console.log(`Test this server by opening this link in your browser:`);
-  console.log(`http://localhost:${PORT}/v1/map/12345/2/117/image`);
-  console.log(`For troubleshooting refer to https://github.com/joffreybesos/d2-mapserver/blob/master/INSTALLATION.md#troubleshooting`);
+  console.log(`You can test this server by opening this link in your browser: (ctrl+click link to open)`);
+  console.log(clc.underline(`http://localhost:3002/v1/map/12345/2/129/image?edge=true&isometric=true`));
+  console.log(`For troubleshooting refer to ` + clc.underline(`https://github.com/joffreybesos/d2r-mapview/wiki/Setup-guide#troubleshooting`));
   console.log(`If you close this window the map server will shut down.`);
-  console.log(`Running on http://localhost:${PORT}`);
+  console.log(`Download latest map hack from ` + clc.underline(`https://github.com/joffreybesos/d2r-mapview/releases/latest`));
+  console.log(clc.green.bold(`Successfully started map server, you can now minimise this window and run d2r-map-vx.x.x.exe`));
+  console.log(clc.green.bold(`Running on http://localhost:${PORT}`));
 });
 
 // Add headers before the routes are defined
@@ -155,7 +164,7 @@ app.get('/health', (req, res) => {
 });
 
 function exit() {
-  var start = new Date().getTime(), expire = start + 15000;
+  var start = new Date().getTime(), expire = start + 60000;
   while (new Date().getTime() < expire) { }
   process.exit();
 }
