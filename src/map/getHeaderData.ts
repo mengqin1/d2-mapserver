@@ -6,6 +6,10 @@ export function getHeaderData(levelData: Level, mapRefList) {
         waypointLocation: getWaypointHeaderData(levelData),
         bossLocations: getBossHeaderData(levelData),
         questLocations: getQuestHeaderdata(levelData),
+        chestLocations: getChests(levelData),
+        superchestLocations: getSuperChests(levelData),
+        shrineLocations: getShrines(levelData),
+        wellLocations: getWells(levelData),
     }
 }
 
@@ -118,4 +122,62 @@ function getQuestHeaderdata(levelData: Level): string {
   });
 
   return questData.join("|");
+}
+
+function getChests(levelData: Level): string {
+  let chestData = [];
+  // this part adds the special objects (doors, waypoints etc)
+  levelData.objects.forEach((mapObject) => {
+    let x = mapObject.x;
+    let y = mapObject.y;
+    
+    if (mapObject.name == "chest") {
+      chestData.push(`${x},${y}`);
+    }  
+  });
+  return chestData.join("|");
+}
+
+
+function getSuperChests(levelData: Level): string {
+  let chestData = [];
+  // this part adds the special objects (doors, waypoints etc)
+  levelData.objects.forEach((mapObject) => {
+    let x = mapObject.x;
+    let y = mapObject.y;
+    
+    if (mapObject.id == 580) {
+      chestData.push(`${x},${y}`);
+    }  
+  });
+  return chestData.join("|");
+}
+
+
+function getShrines(levelData: Level): string {
+  let shrineData = [];
+  // this part adds the special objects (doors, waypoints etc)
+  levelData.objects.forEach((mapObject) => {
+    let x = mapObject.x;
+    let y = mapObject.y;
+    
+    if (mapObject.name == "Shrine") {
+      shrineData.push(`${x},${y}`);
+    }  
+  });
+  return shrineData.join("|");
+}
+
+function getWells(levelData: Level): string {
+  let shrineData = [];
+  // this part adds the special objects (doors, waypoints etc)
+  levelData.objects.forEach((mapObject) => {
+    let x = mapObject.x;
+    let y = mapObject.y;
+    
+    if (mapObject.name == "Well") {
+      shrineData.push(`${x},${y}`);
+    }  
+  });
+  return shrineData.join("|");
 }

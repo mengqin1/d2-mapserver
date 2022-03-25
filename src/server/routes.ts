@@ -60,7 +60,7 @@ export async function mapImage(req, res) {
       }
     }
     if (!cached) {
-      const seedData = await getAllMapData(reqConfig.seed, reqConfig.difficulty);
+      const seedData: LevelList = await getAllMapData(reqConfig.seed, reqConfig.difficulty);
       responseData = await createImage(reqConfig, seedData, cacheFileName)
     }
 
@@ -78,6 +78,10 @@ export async function mapImage(req, res) {
       waypoint: responseData?.waypoint,
       bosses: responseData?.bosses,
       quests: responseData?.quests,
+      chests: responseData?.chests,
+      superchests: responseData?.superchests,
+      shrines: responseData?.shrines,
+      wells: responseData?.wells,
       serverScale: responseData?.serverScale,
       originalwidth: responseData?.originalwidth,
       originalheight: responseData?.originalheight,

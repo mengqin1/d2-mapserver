@@ -11,41 +11,41 @@ export async function drawObjects(ctx: CanvasRenderingContext2D, levelData: Leve
 
     if (mapObject.type === ObjectType.Object) {
       // waypoints
-      if (mapObject.name == "Waypoint") {
-        let size = 25;
-        drawRectangle(ctx, x - size + 7, y - size / 2 - 3, size, size, "#FFFF00");
-        //drawImage(ctx, x+11, y+21, "./build/static/waypoint.png", scale * 15, scale * 10);
-      }
+      // if (mapObject.name == "Waypoint") {
+      //   let size = 25;
+      //   drawRectangle(ctx, x - size + 7, y - size / 2 - 3, size, size, "#FFFF00");
+      //   //drawImage(ctx, x+11, y+21, "./build/static/waypoint.png", scale * 15, scale * 10);
+      // }
 
       // chests
-      if (mapObject.name == "chest") {
-        let size = 8;
-        drawImage(ctx, x+6, y+16, path.join(__dirname, "../../../build/static/chest.png"), size * 2, size * 1.8);
-      }
-      if (mapObject.id == 580) { // super chest
-        let size = 8;
-        //drawImage(ctx, x-12, y+25, "./build/static/superchest.png", scale * 12, scale * 20);
-        drawImageOutline(ctx, x-28, y+15, path.join(__dirname, "../../../build/static/superchest.png"), size * 3.25, size * 5.75, "gold");
-      }
-      if (mapObject.id == 581) { // super chest
-        let size = 8;
-        drawImage(ctx, x+8, y+16, path.join(__dirname, "../../../build/static/chest.png"), size, size * 0.9);
-      }
+      // if (mapObject.name == "chest") {
+      //   let size = 8;
+      //   drawImage(ctx, x+6, y+16, path.join(__dirname, "../../../build/static/chest.png"), size * 2, size * 1.8);
+      // }
+      // if (mapObject.id == 580) { // super chest
+      //   let size = 8;
+      //   //drawImage(ctx, x-12, y+25, "./build/static/superchest.png", scale * 12, scale * 20);
+      //   drawImageOutline(ctx, x-28, y+15, path.join(__dirname, "../../../build/static/superchest.png"), size * 3.25, size * 5.75, "gold");
+      // }
+      // if (mapObject.id == 581) { // super chest
+      //   let size = 8;
+      //   drawImage(ctx, x+8, y+16, path.join(__dirname, "../../../build/static/chest.png"), size, size * 0.9);
+      // }
       
-      if (mapObject.name == "Shrine") {
-        drawImage(ctx, x-11, y+16, path.join(__dirname, "../../../build/static/shrine.png"), 19, 32);
-      }
+      // if (mapObject.name == "Shrine") {
+      //   drawImage(ctx, x-11, y+16, path.join(__dirname, "../../../build/static/shrine.png"), 19, 32);
+      // }
 
-      if (mapObject.name == "Well") {
-        drawImage(ctx, x+13, y+21, path.join(__dirname, "../../../build/static/well.png"), 22, 18);
-      }
+      // if (mapObject.name == "Well") {
+      //   drawImage(ctx, x+13, y+21, path.join(__dirname, "../../../build/static/well.png"), 22, 18);
+      // }
 
-      // portals in act 5
-      if (mapObject.name == "Portal") {
-        if (mapObject.id == 60) {
-          drawImageOutline(ctx, x+95, y+85, path.join(__dirname, "../../../build/static/rightportal.png"), 50, 46, "#FF00FF");
-        }
-      }
+      // // portals in act 5
+      // if (mapObject.name == "Portal") {
+      //   if (mapObject.id == 60) {
+      //     drawImageOutline(ctx, x+95, y+85, path.join(__dirname, "../../../build/static/rightportal.png"), 50, 46, "#FF00FF");
+      //   }
+      // }
 
       // yellow doors
       if (mapObject.name == "door" || mapObject.name == "Door") {
@@ -72,6 +72,8 @@ export async function drawObjects(ctx: CanvasRenderingContext2D, levelData: Leve
         // 58 Claw Viper Temple Level 1
         // 59 Stony Tomb Level 2
         // 60 Halls of the Dead Level 3
+        // 62 Maggot Lair Level 1
+        // 63 Maggot Lair Level 2
         // 64 Maggot Lair Level 3
         // 72 Tal Rasha's Tomb
         // 73 Duriel's Lair
