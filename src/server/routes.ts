@@ -41,7 +41,8 @@ export async function mapImage(req, res) {
       "#AAA",
       showTextLabels,
       showLevelTitles,
-      req.query.rotate == "true"
+      req.query.rotate == "true",
+      req.query.showObjects == "true"
     );
     
     const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;

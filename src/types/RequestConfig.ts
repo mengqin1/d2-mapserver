@@ -12,6 +12,7 @@ export class RequestConfig {
   showLevelTitles?: boolean;
   padding: number;
   rotate: boolean;
+  showObjects?: boolean;
 
   seed: string;
   difficulty: string;
@@ -32,7 +33,8 @@ export class RequestConfig {
     wallColor: string = "#AAA",
     showTextLabels: boolean = true,
     showLevelTitles: boolean = false,
-    rotate: boolean = false
+    rotate: boolean = false,
+    showObjects: boolean = true
   ) {
     this.seed = seed;
     this.difficulty = difficulty;
@@ -49,6 +51,7 @@ export class RequestConfig {
     this.showLevelTitles = showLevelTitles;
     this.padding = padding;
     this.rotate = rotate;
+    this.showObjects = showObjects;
 
     if (isNaN(this.wallthickness)) this.wallthickness = 1;
     if (this.wallthickness > 10) this.wallthickness = 10;

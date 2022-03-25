@@ -37,7 +37,7 @@ export async function generatePNG(
   }
   await Promise.allSettled([
     drawQuestItems(ctx, levelData, scale, reqConfig),
-    drawObjects(ctx, levelData, scale),
+    drawObjects(ctx, levelData, scale, reqConfig),
     drawExits(ctx, levelData, scale, mapRefList, reqConfig),
     drawIcons(ctx, levelData, scale),
     drawNPCs(ctx, levelData, scale, reqConfig),
