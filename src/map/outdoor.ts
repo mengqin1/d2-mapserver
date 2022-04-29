@@ -98,25 +98,25 @@ export async function stitchOutdoorMaps(
       // console.log(`${mapData.name} is right of ${primaryMapData.name}`);
       const textX = topX + padding + indent;
       let textY = topY + mapData.size.height + padding;
-      textY = minmaxY(textY, canvas);
+      textY = minmaxY(textY, canvas, padding);
       drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#DDD", 270);
     } else if (topX == -(mapData.size.width * scale)) {
       // console.log(`${mapData.name} is left of ${primaryMapData.name}`);
       const textX = topX + (mapData.size.width * scale) + padding - indent;
       let textY = topY + mapData.size.height + padding;
-      textY = minmaxY(textY, canvas);
+      textY = minmaxY(textY, canvas, padding);
       drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#DDD", 270);
     } else if (topY == -(mapData.size.height * scale)) {
       // console.log(`${mapData.name} is above ${primaryMapData.name}`);
       let textX = topX + mapData.size.width + padding;
       const textY = topY + (mapData.size.height * scale) + padding - indent;
-      textX = minmaxX(textX, canvas);
+      textX = minmaxX(textX, canvas, padding);
       drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#DDD", 0);
     } else if (topY == (primaryMapData.size.height * scale)) {
       // console.log(`${mapData.name} is below ${primaryMapData.name}`);
       let textX = topX + primaryMapData.size.width + padding;
       const textY = topY + padding + indent;
-      textX = minmaxX(textX, canvas);
+      textX = minmaxX(textX, canvas, padding);
       drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#DDD", 0);
     }
   }
@@ -125,50 +125,50 @@ export async function stitchOutdoorMaps(
   outdoorctx.globalCompositeOperation = "destination-out";
   
   // add some fading to the edges
-  edgeGradientTop(outdoorctx, primaryMap.canvas);
-  edgeGradientBottom(outdoorctx, primaryMap.canvas);
-  edgeGradientLeft(outdoorctx, primaryMap.canvas);
-  edgeGradientRight(outdoorctx, primaryMap.canvas);
+  edgeGradientTop(outdoorctx, primaryMap.canvas, padding);
+  edgeGradientBottom(outdoorctx, primaryMap.canvas, padding);
+  edgeGradientLeft(outdoorctx, primaryMap.canvas, padding);
+  edgeGradientRight(outdoorctx, primaryMap.canvas, padding);
   primaryMap.canvas = canvas;
   return primaryMap;
 }
 
-function edgeGradientBottom(outdoorctx: CanvasRenderingContext2D, canvas: Canvas) {
-  const gradient = outdoorctx.createLinearGradient(0, canvas.height-100, 0, canvas.height);
+function edgeGradientBottom(outdoorctx: CanvasRenderingContext2D, canvas: Canvas, padding: number) {
+  const gradient = outdoorctx.createLinearGradient(0, canvas.height-padding, 0, canvas.height);
   gradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
   gradient.addColorStop(1, 'rgba(255, 255, 255, 1)');
   outdoorctx.fillStyle = gradient;
-  outdoorctx.fillRect(0, canvas.height-100, canvas.width, canvas.height);
+  outdoorctx.fillRect(0, canvas.height-padding, canvas.width, canvas.height);
 }
 
-function edgeGradientTop(outdoorctx: CanvasRenderingContext2D, canvas: Canvas) {
-  const gradient = outdoorctx.createLinearGradient(0, 0, 0, 100);
+function edgeGradientTop(outdoorctx: CanvasRenderingContext2D, canvas: Canvas, padding: number) {
+  const gradient = outdoorctx.createLinearGradient(0, 0, 0, padding);
   gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
   gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
   outdoorctx.fillStyle = gradient;
-  outdoorctx.fillRect(0, 0, canvas.width, 100);
+  outdoorctx.fillRect(0, 0, canvas.width, padding);
 }
 
-function edgeGradientLeft(outdoorctx: CanvasRenderingContext2D, canvas: Canvas) {
-  const gradient = outdoorctx.createLinearGradient(0, 0, 100, 0);
+function edgeGradientLeft(outdoorctx: CanvasRenderingContext2D, canvas: Canvas, padding: number) {
+  const gradient = outdoorctx.createLinearGradient(0, 0, padding, 0);
   gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
   gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
   outdoorctx.fillStyle = gradient;
-  outdoorctx.fillRect(0, 0, 100, canvas.height);
+  outdoorctx.fillRect(0, 0, padding, canvas.height);
 }
 
-function edgeGradientRight(outdoorctx: CanvasRenderingContext2D, canvas: Canvas) {
-  const gradient = outdoorctx.createLinearGradient(canvas.width-100, 0, canvas.width, 0);
+function edgeGradientRight(outdoorctx: CanvasRenderingContext2D, canvas: Canvas, padding: number) {
+  const gradient = outdoorctx.createLinearGradient(canvas.width-padding, 0, canvas.width, 0);
   gradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
   gradient.addColorStop(1, 'rgba(255, 255, 255, 1)');
   outdoorctx.fillStyle = gradient;
-  outdoorctx.fillRect(canvas.width-100, 0, 100, canvas.height);
+  outdoorctx.fillRect(canvas.width-padding, 0, padding, canvas.height);
 }
 
 
-function minmaxY(textY, canvas: Canvas) {
-  const maxY = (canvas.height - 150);
-  const minY = 150;
+function minmaxY(textY, canvas: Canvas, padding) {
+  const maxY = (canvas.height - padding);
+  const minY = padding;
   if (textY > maxY) {
     return maxY;
   } else if (textY < minY) {
@@ -178,9 +178,9 @@ function minmaxY(textY, canvas: Canvas) {
   }
 }
 
-function minmaxX(textX, canvas: Canvas) {
-  const maxX = (canvas.width - 150);
-  const minX = 150;
+function minmaxX(textX, canvas: Canvas, padding) {
+  const maxX = (canvas.width - padding);
+  const minX = padding;
   if (textX > maxX) {
     return maxX;
   } else if (textX < minX) {

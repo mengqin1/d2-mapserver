@@ -26,6 +26,10 @@ export async function mapImage(req, res) {
     if (req.query.showLevelTitles == "false") {
       showLevelTitles = false;
     }
+    let showObjects = true;
+    if (req.query.showObjects == "false") {
+      showObjects = false;
+    }
     const reqConfig = new RequestConfig(
       seed,
       difficulty,
@@ -36,13 +40,13 @@ export async function mapImage(req, res) {
       req.query.edge == "true",
       parseFloat(req.query.wallthickness),
       parseFloat(req.query.serverScale),
-      150,
+      req.query.padding ? parseInt(req.query.padding) : 150,
       process.env.ENABLE_WATERMARK ? true : false,
       "#AAA",
       showTextLabels,
       showLevelTitles,
       req.query.rotate == "true",
-      req.query.showObjects == "true"
+      showObjects
     );
     
     const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;

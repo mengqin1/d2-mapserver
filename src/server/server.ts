@@ -34,7 +34,7 @@ server.on('error', function (e) {
 });
 server.listen(PORT, async () => {
 
-  console.log(clc.blue.bold(`D2-mapserver v11 launching...`));
+  console.log(clc.blue.bold(`D2-mapserver v12 launching...`));
   const generationQueue = './cache/queue.txt'
   if (fs.existsSync(generationQueue)) {
     fs.unlinkSync(generationQueue);
@@ -94,7 +94,11 @@ server.listen(PORT, async () => {
     //   console.error("Exiting....");
     //   exit();
     // }
-    if (!fs.existsSync(path.join(__dirname, "../../bin/d2-map.exe"))) {
+    let localExe = path.dirname(process.execPath) + "/bin/d2-map.exe";
+    if (!fs.existsSync(localExe)) {
+      localExe = path.join(__dirname, "../../bin/d2-map.exe");
+    }
+    if (!fs.existsSync(localExe)) {
       console.error(clc.redBright.bold("ERROR: Did not find ./bin/d2-map.exe, please restore this file from the original download"));
       console.error("Exiting....");
       exit();
@@ -161,6 +165,10 @@ app.get('/health', (req, res) => {
     date: new Date()
   }
   res.status(200).send(data);
+});
+
+process.on('uncaughtException', function(err) {
+  exit();
 });
 
 function exit() {

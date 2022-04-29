@@ -43,7 +43,7 @@
   "pkg": {
     "scripts": "build/**/*.js",
     "assets": [
-      "./bin/d2-map.exe",
+      "./node_modules/canvas/build/Release/**",
       "./node_modules/canvas/build/Release/*.dll"
     ],
     "targets": [
