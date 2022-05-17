@@ -34,7 +34,7 @@ server.on('error', function (e) {
 });
 server.listen(PORT, async () => {
 
-  console.log(clc.blue.bold(`D2-mapserver v13 launching...`));
+  console.log(clc.blue.bold(`D2-mapserver v14 launching...`));
   const generationQueue = './cache/queue.txt'
   if (fs.existsSync(generationQueue)) {
     fs.unlinkSync(generationQueue);
@@ -107,8 +107,10 @@ server.listen(PORT, async () => {
     }
     const result = await testInstallation();
     if (result) { 
-      console.error(clc.redBright.bold(`ERROR: Error generating map data, here is a raw dump of the logs:`));
-      console.error(result);
+      console.error(clc.redBright.bold(`ERROR: Error generating map data`));
+      console.error(clc.redBright.bold(`Try restarting your PC, or follow the troubleshooting guide`));
+      console.error(clc.redBright.bold(`Here is a raw dump of the logs:`));
+      console.error(result.toString());
       console.error("Please refer to the below troubleshooting guide: (ctrl+click link to open)");
       console.error(clc.underline(`https://github.com/joffreybesos/d2r-mapview/wiki/Setup-guide#troubleshooting`));
       exit();
