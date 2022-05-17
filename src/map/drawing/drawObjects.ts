@@ -22,7 +22,7 @@ export async function drawObjects(ctx: CanvasRenderingContext2D, levelData: Leve
         // chests
         if (mapObject.name == "chest") {
           let size = 8;
-          if (levelData.id == 84 || levelData.id == 91) {
+          if (levelData.id == 84 || levelData.id == 85 || levelData.id == 91) {
             // superchest for spider cave and flayer dungeon lvl 3
             drawImageOutline(ctx, x-28, y+15, path.join(__dirname, "../../../build/static/superchest.png"), size * 3.25, size * 5.75, "gold");
           } else {
