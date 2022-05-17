@@ -22,14 +22,17 @@ export async function drawObjects(ctx: CanvasRenderingContext2D, levelData: Leve
         // chests
         if (mapObject.name == "chest") {
           let size = 8;
-          drawImage(ctx, x+6, y+16, path.join(__dirname, "../../../build/static/chest.png"), size * 2, size * 1.8);
-        }
-        if (mapObject.id == 580) { // super chest
+          if (levelData.id == 84 || levelData.id == 91) {
+            // superchest for spider cave and flayer dungeon lvl 3
+            drawImageOutline(ctx, x-28, y+15, path.join(__dirname, "../../../build/static/superchest.png"), size * 3.25, size * 5.75, "gold");
+          } else {
+            drawImage(ctx, x+6, y+16, path.join(__dirname, "../../../build/static/chest.png"), size * 2, size * 1.8);
+          }
+        } else if (mapObject.id == 580) { // super chest
           let size = 8;
           //drawImage(ctx, x-12, y+25, "./build/static/superchest.png", scale * 12, scale * 20);
           drawImageOutline(ctx, x-28, y+15, path.join(__dirname, "../../../build/static/superchest.png"), size * 3.25, size * 5.75, "gold");
-        }
-        if (mapObject.id == 581) { // super chest
+        } else if (mapObject.id == 581) { // super chest
           let size = 8;
           drawImage(ctx, x+8, y+16, path.join(__dirname, "../../../build/static/chest.png"), size, size * 0.9);
         }
