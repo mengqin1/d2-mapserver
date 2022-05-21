@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import { execSync } from "child_process";
 import * as express from "express";
 import { param } from "express-validator";
@@ -14,7 +15,7 @@ const { registerFont } = require('canvas')
 var morgan = require('morgan')
 const moment = require('moment-timezone')
 var clc = require("cli-color");
-
+console.log(process.env.D2_GAME_FILES)
 const D2_GAME_FILES = process.env.D2_GAME_FILES || "./game";
 if (!fs.existsSync("./cache")) {
   fs.mkdirSync("./cache")
@@ -60,9 +61,9 @@ server.listen(PORT, async () => {
     const fontFileExocet = path.resolve("./build/static/exocetblizzardot-medium.otf");
     const fontFileSC = path.resolve("./build/static/NotoSansSC-Regular.otf");
     const fontFileKR = path.resolve("./build/static/NotoSansKR-Regular.otf");
-    
+
     if (fs.existsSync(fontFile)) {
-      
+
       console.log("Adding font " + fontFileExocet);
       registerFont(fontFileExocet, { family: 'ExocetBlizzardMixedCapsOTMedium', weight: 'bold' })
       registerFont(fontFileExocet, { family: 'ExocetBlizzardMixedCapsOTMedium' })
@@ -74,7 +75,7 @@ server.listen(PORT, async () => {
       registerFont(fontFile, { family: 'Roboto' })
       console.log("Adding font " + fontFileBold);
       registerFont(fontFileBold, { family: 'Roboto', weight: 'bold' })
-      
+
     }
     console.log(`Setting up wine config...`);
     execSync("winecfg", { env: { WINEPREFIX: '/app/wine_d2', WINEDEBUG: '-all,fixme-all', WINEARCH: 'win32' } });
@@ -88,7 +89,7 @@ server.listen(PORT, async () => {
     } else {
       console.log(clc.green("Found D2 LoD game files " + D2_GAME_FILES));
     }
-    
+
     // if (!fs.existsSync(path.join(__dirname, "../static"))) {
     //   console.error(clc.redBright("Did not find static files in build folder"));
     //   console.error("Exiting....");
@@ -106,7 +107,7 @@ server.listen(PORT, async () => {
       console.log(clc.green("Found bin/d2-map.exe tool " + path.join(__dirname, "../../bin/d2-map.exe")));
     }
     const result = await testInstallation();
-    if (result) { 
+    if (result) {
       console.error(clc.redBright.bold(`ERROR: Error generating map data`));
       console.error(clc.redBright.bold(`Try restarting your PC, or follow the troubleshooting guide`));
       console.error(clc.redBright.bold(`Here is a raw dump of the logs:`));
