@@ -5,6 +5,7 @@ cache/*
 game/
 node_modules/
 .vscode/
+.idea
 dist/
 dist2/
 run.sh
@@ -18,3 +19,4 @@ buildlod.bat
 dockerbuildlod.bat
 dockerbuildtest.bat
 server.log
+.env
