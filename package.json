@@ -13,7 +13,8 @@
     "samples": "npm run build && node build/test/samples.js",
     "build-exe": "caxa -i . -e \"game\" \"dist\" -o \"dist/d2-mapserver.exe\" -- \"{{caxa}}/node_modules/.bin/node\" \"{{caxa}}/build/server/server.js\"",
     "build-exe2": "caxa -i . -e \"game\" \"dist\" \"src\" --force -m \"Extract d2-mapserver files...\" -o \"dist/d2-mapserver.exe\" -- \"{{caxa}}/node_modules/.bin/node\" \"{{caxa}}/build/server/server.js\"",
-    "obfuscate": "javascript-obfuscator ./build --output ./build --string-array true --options-preset low-obfuscation --string-array-encoding rc4 && npm run copy-files"
+    "obfuscate": "javascript-obfuscator ./build --output ./build --string-array true --options-preset low-obfuscation --string-array-encoding rc4 && npm run copy-files",
+    "postinstall": "cp .env-dev .env"
   },
   "author": "",
   "license": "ISC",
@@ -31,6 +32,7 @@
     "cli-color": "^2.0.1",
     "console-stamp": "^3.0.3",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
     "express": "^4.17.1",
     "express-validator": "^6.13.0",
     "moment-timezone": "^0.5.33",
