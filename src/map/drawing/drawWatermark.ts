@@ -4,12 +4,18 @@ import { RequestConfig } from "../../types/RequestConfig";
 export function drawWatermark(ctx: CanvasRenderingContext2D, reqConfig: RequestConfig): Canvas {
   
     let watermarks = [];
-    watermarks.push("이 서버는 PST 오후\n1시에 종료됩니다.");
-    watermarks.push("Этот сервер отключается\nв 13:00 по тихоокеанскому\nстандартному времени.");
-    watermarks.push("此服务器将于太平洋标准时间下午\n1 点关闭");   
-    watermarks.push("Este servidor\nse cerrará a la\n1 p. m. PST");
-    watermarks.push("Ce serveur s'arrête\nà 13h00 PST");
-    watermarks.push("Бұл сервер PST 13:00-де жабылады");
+    watermarks.push("If you paid for this\nyou have been scammed");
+    watermarks.push("如果您為此付出了，\n您已經被騙了");
+    watermarks.push("Wenn Sie dafür bezahlt haben, \nwurden Sie betrogen");
+    watermarks.push("Si pagaste por esto, \nhas sido estafado");
+    watermarks.push("Si vous avez payé pour cela, \nvous avez été arnaque");
+    watermarks.push("Se hai pagato per questo \nsei stato truffato");
+    watermarks.push("당신이 이것을 지불했다면 \n당신은 사기를당했습니다");
+    watermarks.push("Jeśli za to zapłaciłeś, \nzostałeś oszukany");
+    watermarks.push("Si pagaste por esto, \nhas sido estafado");
+    watermarks.push("あなたがこれに対して支払った場合、\nあなたは詐欺されています");
+    watermarks.push("Se você pagou por isso, \nfoi enganado");
+    watermarks.push("Если вы заплатили за это, \nвас обманули");
 
     let watermarkText = watermarks[Math.floor(Math.random()*watermarks.length)];
     if (!reqConfig.watermark) watermarkText = "";
