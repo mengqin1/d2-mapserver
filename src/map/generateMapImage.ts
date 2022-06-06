@@ -16,7 +16,7 @@ export async function generateMapImage(reqConfig: RequestConfig, seedData: Level
     levelImage.seedData = seedData;
     levelImage.mapData = levelImage.seedData.levels.find((map) => map.id === (reqConfig.mapid));
     const connectedMaps = await getOutdoorConnectedMapIds(reqConfig.mapid);
-    if (connectedMaps.length > 0) {
+    if (connectedMaps.length > 0 && !reqConfig.nostitch) {
       // if outdoors then force downloading of all seed data
       levelImage = await stitchOutdoorMaps(levelImage, reqConfig, connectedMaps);
     } else {

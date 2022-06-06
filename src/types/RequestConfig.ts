@@ -13,6 +13,7 @@ export class RequestConfig {
   padding: number;
   rotate: boolean;
   showObjects?: boolean;
+  nostitch: boolean;
   pathFinding?: boolean;
   paths?: string;
 
@@ -37,6 +38,7 @@ export class RequestConfig {
     showLevelTitles: boolean = false,
     rotate: boolean = false,
     showObjects: boolean = true,
+    nostitch: boolean = false,
     pathFinding: boolean = true,
     paths: string = ""
   ) {
@@ -56,6 +58,7 @@ export class RequestConfig {
     this.padding = padding;
     this.rotate = rotate;
     this.showObjects = showObjects;
+    this.nostitch = nostitch;
     this.pathFinding = pathFinding;
     this.paths = paths;
 

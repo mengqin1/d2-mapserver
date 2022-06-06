@@ -8,7 +8,6 @@ import { Level, LevelList } from "../types/level.type";
 import { PrefetchRequest } from "../types/PrefetchRequest";
 import { LevelImage } from "../types/LevelImage";
 import { RequestConfig } from "../types/RequestConfig";
-import { generatePathFinding } from "../map/pathFinding";
 import { generatePaths } from "../map/generateAllPaths";
 
 
@@ -49,6 +48,7 @@ export async function mapImage(req, res) {
       showLevelTitles,
       req.query.rotate == "true",
       showObjects,
+      req.query.nostitch == "true",
       req.query.pathFinding == "true",
       req.query.paths,
     );

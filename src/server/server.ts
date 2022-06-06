@@ -35,7 +35,7 @@ server.on('error', function (e) {
 });
 server.listen(PORT, async () => {
 
-  console.log(clc.blue.bold(`D2-mapserver v14 launching...`));
+  console.log(clc.blue.bold(`D2-mapserver v15 launching...`));
   const generationQueue = './cache/queue.txt'
   if (fs.existsSync(generationQueue)) {
     fs.unlinkSync(generationQueue);
