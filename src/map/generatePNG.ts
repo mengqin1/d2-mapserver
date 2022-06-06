@@ -15,6 +15,7 @@ import { drawQuestItems } from "./drawing/drawQuestItems";
 import { trimCanvasRightBottom } from "./trim";
 import { LevelImage } from "../types/LevelImage";
 import { RequestConfig } from "../types/RequestConfig";
+import { drawPaths } from "./drawing/drawPaths";
 
 export async function generatePNG(
   levelImage: LevelImage,
@@ -41,6 +42,7 @@ export async function generatePNG(
     drawExits(ctx, levelData, scale, mapRefList, reqConfig),
     drawIcons(ctx, levelData, scale),
     drawNPCs(ctx, levelData, scale, reqConfig),
+    drawPaths(ctx, levelData, scale, reqConfig),
   ]);
   
   if (reqConfig.verbose) {

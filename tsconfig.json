@@ -6,6 +6,7 @@
         "sourceMap": false,
         "resolveJsonModule": true,
         "noImplicitAny": false,
+        "allowJs": true,
         "lib": [
             "es2016",
             "dom",

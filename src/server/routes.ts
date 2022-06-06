@@ -8,6 +8,7 @@ import { Level, LevelList } from "../types/level.type";
 import { PrefetchRequest } from "../types/PrefetchRequest";
 import { LevelImage } from "../types/LevelImage";
 import { RequestConfig } from "../types/RequestConfig";
+import { generatePathFinding } from "../map/pathFinding";
 
 
 export async function mapImage(req, res) {
@@ -46,7 +47,9 @@ export async function mapImage(req, res) {
       showTextLabels,
       showLevelTitles,
       req.query.rotate == "true",
-      showObjects
+      showObjects,
+      req.query.pathFinding == "true",
+      req.query.paths,
     );
     
     const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;
@@ -140,6 +143,7 @@ export async function mapData(req, res) {
             const mapid: number = parseInt(req.params.mapid);
             console.log(`New request for data ${seed} ${difficulty} ${mapid}...`);
             const mapData: Level = await getMapData(seed, difficulty, mapid);
+            // const pathfinding = await generatePathFinding(mapData,);
             const end = performance.now();
             console.log(`Generated JSON for map ${mapData.id} '${mapData?.name}', took ${Math.trunc(end - start)}ms total`);
             res.json(mapData);

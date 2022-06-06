@@ -13,6 +13,8 @@ export class RequestConfig {
   padding: number;
   rotate: boolean;
   showObjects?: boolean;
+  pathFinding?: boolean;
+  paths?: string;
 
   seed: string;
   difficulty: string;
@@ -34,7 +36,9 @@ export class RequestConfig {
     showTextLabels: boolean = true,
     showLevelTitles: boolean = false,
     rotate: boolean = false,
-    showObjects: boolean = true
+    showObjects: boolean = true,
+    pathFinding: boolean = true,
+    paths: string = ""
   ) {
     this.seed = seed;
     this.difficulty = difficulty;
@@ -52,6 +56,8 @@ export class RequestConfig {
     this.padding = padding;
     this.rotate = rotate;
     this.showObjects = showObjects;
+    this.pathFinding = pathFinding;
+    this.paths = paths;
 
     if (isNaN(this.wallthickness)) this.wallthickness = 1;
     if (this.wallthickness > 10) this.wallthickness = 10;
