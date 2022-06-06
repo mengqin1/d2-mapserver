@@ -36,7 +36,7 @@ export async function drawPaths(
         console.error("Paths not valid " + reqConfig.paths);
       }
     } else {
-        console.log("Generating all paths");
+      console.log("Generating all paths");
       const pathfindingPoints = levelData.objects.filter(
         (object) => object.name == "Waypoint" || object.type == "exit"
       );

@@ -9,6 +9,7 @@ import { PrefetchRequest } from "../types/PrefetchRequest";
 import { LevelImage } from "../types/LevelImage";
 import { RequestConfig } from "../types/RequestConfig";
 import { generatePathFinding } from "../map/pathFinding";
+import { generatePaths } from "../map/generateAllPaths";
 
 
 export async function mapImage(req, res) {
@@ -143,6 +144,9 @@ export async function mapData(req, res) {
             const mapid: number = parseInt(req.params.mapid);
             console.log(`New request for data ${seed} ${difficulty} ${mapid}...`);
             const mapData: Level = await getMapData(seed, difficulty, mapid);
+            const pathFinding = await generatePaths(mapData);
+            mapData.pathFinding = pathFinding;
+
             // const pathfinding = await generatePathFinding(mapData,);
             const end = performance.now();
             console.log(`Generated JSON for map ${mapData.id} '${mapData?.name}', took ${Math.trunc(end - start)}ms total`);

@@ -13,6 +13,7 @@ export interface Level {
     size:    Size;
     objects: Object[];
     map:     Array<number[]>;
+    pathFinding: Array<PathFinding[]>;
 }
 
 export interface Object {
@@ -46,4 +47,10 @@ export interface Size {
 
 export enum LevelType {
     Map = "map",
+}
+
+export interface PathFinding {
+    start: number;
+    end: number;
+    points: any[];
 }
