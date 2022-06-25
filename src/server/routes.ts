@@ -8,7 +8,7 @@ import { Level, LevelList } from "../types/level.type";
 import { PrefetchRequest } from "../types/PrefetchRequest";
 import { LevelImage } from "../types/LevelImage";
 import { RequestConfig } from "../types/RequestConfig";
-import { generatePaths } from "../map/generateAllPaths";
+import { generateAllPaths, generatePath } from "../map/generateAllPaths";
 
 
 export async function mapImage(req, res) {
@@ -136,6 +136,7 @@ async function createImage(reqConfig: RequestConfig, seedData: LevelList, cacheF
 
 
 export async function mapData(req, res) {
+
     try {
         validationResult(req).throw();
         if (!process.env.DISABLE_JSON) {  // disable JSON on public server
@@ -143,10 +144,18 @@ export async function mapData(req, res) {
             const seed: string = req.params.seed;
             const difficulty: string = req.params.difficulty;
             const mapid: number = parseInt(req.params.mapid);
+            const pathStart: string = req.query.pathStart;
+            const pathEnd: string = req.query.pathEnd;
+            console.log(pathStart + " " + pathEnd);
             console.log(`New request for data ${seed} ${difficulty} ${mapid}...`);
             const mapData: Level = await getMapData(seed, difficulty, mapid);
-            const pathFinding = await generatePaths(mapData);
-            mapData.pathFinding = pathFinding;
+            if (pathStart && pathEnd) {
+              const pathFinding = await generatePath(mapData, pathStart, pathEnd);
+              mapData.pathFinding = pathFinding;
+            } else {
+              const pathFinding = await generateAllPaths(mapData);
+              mapData.pathFinding = pathFinding;
+            }
 
             // const pathfinding = await generatePathFinding(mapData,);
             const end = performance.now();

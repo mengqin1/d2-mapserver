@@ -65,7 +65,7 @@ export async function drawPaths(
   }
 }
 
-function getObject(levelData: Level, id: string) {
+export function getObject(levelData: Level, id: string) {
   if (id == "wp") {  // is waypoint
     return levelData.objects.find((object) => object.name == "Waypoint");
   } else if (id.includes(",")) {
