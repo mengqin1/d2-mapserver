@@ -15,7 +15,7 @@ const { registerFont } = require('canvas')
 var morgan = require('morgan')
 const moment = require('moment-timezone')
 var clc = require("cli-color");
-console.log(process.env.D2_GAME_FILES)
+
 const D2_GAME_FILES = process.env.D2_GAME_FILES || "./game";
 if (!fs.existsSync("./cache")) {
   fs.mkdirSync("./cache")
