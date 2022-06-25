@@ -17,7 +17,8 @@ export async function drawPaths(
 
           // nasty hack to avoid the exit starting inside the wall
           startPoint.x = startPoint.x + 3;
-          endPoint.x = endPoint.x + 3;
+          endPoint.x = endPoint.x + 5;
+          endPoint.y = endPoint.y + 1;
           const pathfinding = generatePathFinding(levelData, startPoint, endPoint);
           pathfinding.forEach((point) => {
             ctx.beginPath();
