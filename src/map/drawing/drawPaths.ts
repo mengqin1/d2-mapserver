@@ -1,4 +1,4 @@
-import { Level } from "../../types/level.type";
+import { Level, Object, ObjectType } from "../../types/level.type";
 import { RequestConfig } from "../../types/RequestConfig";
 import { generatePathFinding } from "../pathFinding";
 
@@ -9,14 +9,13 @@ export async function drawPaths(
   reqConfig: RequestConfig
 ) {
   if (reqConfig.pathFinding) {
-    if (reqConfig.paths) {
-        console.log("Generating paths " + reqConfig.paths);
+    if (reqConfig.pathStart && reqConfig.pathEnd) {
       try {
-        const paths = reqConfig.paths.split(",");
-        for (var i = 0; i < paths.length; i += 2) {
-          console.log("Generating path " + paths[i] + " " + paths[i+1]);
-          const startPoint = getObject(levelData, paths[i]);
-          const endPoint = getObject(levelData, paths[i + 1]);
+          console.log("Generating path " + reqConfig.pathStart + " to " + reqConfig.pathEnd);
+          const startPoint = getObject(levelData, reqConfig.pathStart);
+          const endPoint = getObject(levelData, reqConfig.pathEnd);
+
+          // nasty hack to avoid the exit starting inside the wall
           startPoint.x = startPoint.x + 3;
           endPoint.x = endPoint.x + 3;
           const pathfinding = generatePathFinding(levelData, startPoint, endPoint);
@@ -31,9 +30,9 @@ export async function drawPaths(
             );
             ctx.stroke();
           });
-        }
+        
       } catch (e) {
-        console.error("Paths not valid " + reqConfig.paths);
+        console.error("Paths not valid " + reqConfig.pathStart + " " + reqConfig.pathEnd);
       }
     } else {
       console.log("Generating all paths");
@@ -67,9 +66,13 @@ export async function drawPaths(
 }
 
 function getObject(levelData: Level, id: string) {
-  if (id == "wp") {
+  if (id == "wp") {  // is waypoint
     return levelData.objects.find((object) => object.name == "Waypoint");
-  } else {
+  } else if (id.includes(",")) {
+    const coords = id.split(",");
+    const newObj: Object = { id: 0, type: ObjectType.Exit, x: parseInt(coords[0]) - levelData.offset.x, y: parseInt(coords[1]) - levelData.offset.y }
+    return newObj;
+  } else {  // if specifying the object id e.g. exit number
     return levelData.objects.find((object) => object.id == parseInt(id));
   }
 }

@@ -15,7 +15,8 @@ export class RequestConfig {
   showObjects?: boolean;
   nostitch: boolean;
   pathFinding?: boolean;
-  paths?: string;
+  pathStart?: string;
+  pathEnd?: string;
 
   seed: string;
   difficulty: string;
@@ -40,7 +41,8 @@ export class RequestConfig {
     showObjects: boolean = true,
     nostitch: boolean = false,
     pathFinding: boolean = true,
-    paths: string = ""
+    pathStart: string = "",
+    pathEnd: string = ""
   ) {
     this.seed = seed;
     this.difficulty = difficulty;
@@ -60,7 +62,8 @@ export class RequestConfig {
     this.showObjects = showObjects;
     this.nostitch = nostitch;
     this.pathFinding = pathFinding;
-    this.paths = paths;
+    this.pathStart = pathStart
+    this.pathEnd = pathEnd
 
     if (isNaN(this.wallthickness)) this.wallthickness = 1;
     if (this.wallthickness > 10) this.wallthickness = 10;
@@ -84,7 +87,9 @@ export class RequestConfig {
     str += this.showTextLabels ? "1_" : "0_"
     str += this.showLevelTitles ? "1_" : "0_"
     str += this.padding.toString() + "_";
-    str += this.rotate ? "1" : "0"
+    str += this.rotate ? "1_" : "0_"
+    str += this.pathStart.toString() + "_";
+    str += this.pathEnd.toString()
     return str;
   }
 }

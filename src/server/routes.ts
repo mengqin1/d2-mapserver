@@ -50,7 +50,8 @@ export async function mapImage(req, res) {
       showObjects,
       req.query.nostitch == "true",
       req.query.pathFinding == "true",
-      req.query.paths,
+      req.query.pathStart,
+      req.query.pathEnd,
     );
     
     const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;
