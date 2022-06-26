@@ -14,6 +14,13 @@ This repo leverages this package - [blacha/diablo2](https://github.com/blacha/di
 
 See [INSTALLATION.md](./INSTALLATION.md)
 
+By default it uses port 3002. If you want to use a different port you can set a windows environment variable called `PORT`.  
+Or you can open the map server in a batch file, e.g.:
+```
+set PORT=3113
+START d2-mapserver.exe
+```
+
 ## Endpoints
 
 ### Map image
@@ -36,6 +43,9 @@ You can also add query parameters onto the URL to change the generated image
 | wallthickness | 1.0     | Only applies for edge mode, but is the wall thickness, can be a decimal |
 | serverScale   | 2       | Render scaling of the map image, larger the size the bigger the image   |
 | verbose       | false   | Will mark ALL objects/NPC map data on the map image, used for debugging |
+| pathFinding   | true    | Turn on to draw paths between wps and exits, if you don't specify a start and end it will draw all paths |
+| pathStart     | <x,y>   | This value can be 'x,y' e.g 5341,1432 or it can be 'wp' for the waypoint, or just the exit number for a specific exit |
+| pathEnd       | <x,y>   | This is the same as start. Note that 'pathFinding=true' needs to be set for pathstart and end to work |
 
 e.g. <http://localhost:3002/v1/map/54534535/2/49/image?edge=true&wallthickness=2&isometric=true>
 
@@ -47,6 +57,12 @@ Returns the JSON payload used to create the map image.
 ```
 http://localhost:3002/v1/map/:seed/:difficulty/:mapid
 ```
+
+| Parameter     | Default | Description                                                             |
+| :------------ | :------ | :---------------------------------------------------------------------- |
+| pathFinding   | true    | Turn on to draw return path data between wps and exits, if you don't specify a start and end it will create all paths |
+| pathStart     | <x,y>   | This value can be 'x,y' e.g 5341,1432 or it can be 'wp' for the waypoint, or just the exit number for a specific exit |
+| pathEnd       | <x,y>   | This is the same as start. Note that 'pathFinding=true' needs to be set for pathstart and end to work |
 
 #### Seed
 
