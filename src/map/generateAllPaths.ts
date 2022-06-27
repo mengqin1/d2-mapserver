@@ -1,4 +1,4 @@
-import { Level } from "../types/level.type";
+import { Level, ObjectType, Object } from "../types/level.type";
 import { getObject } from "./drawing/drawPaths";
 import { generatePathFinding } from "./pathFinding";
 
@@ -44,8 +44,8 @@ export async function generatePath(levelData: Level, pathStart: string, pathEnd:
 
     // nasty hack to avoid the exit starting inside the wall
     startPoint.x = startPoint.x + 3;
-    endPoint.x = endPoint.x + 3;
-    const pathfinding = generatePathFinding(levelData, startPoint, endPoint);
+    const newEndpoint: Object = { id: 0, type: ObjectType.Exit, x: endPoint.x + 5, y: endPoint.y + 1 }
+    const pathfinding = generatePathFinding(levelData, startPoint, newEndpoint);
     let paths = [];
     let points = [];
     pathfinding.forEach((point) => {
