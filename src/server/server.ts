@@ -26,7 +26,7 @@ fs.writeFileSync('./cache/access.log', "");
 var accessLogStream = fs.createWriteStream('./cache/access.log', { flags: 'a' })
 
 const app = express();
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3003;
 
 var server = http.createServer(app);
 server.on('error', function (e) {
@@ -35,7 +35,7 @@ server.on('error', function (e) {
 });
 server.listen(PORT, async () => {
 
-  console.log(clc.blue.bold(`D2-mapserver v17 launching...`));
+  console.log(clc.blue.bold(`D2-mapserver v18 launching...`));
   const generationQueue = './cache/queue.txt'
   if (fs.existsSync(generationQueue)) {
     fs.unlinkSync(generationQueue);

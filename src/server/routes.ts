@@ -52,6 +52,7 @@ export async function mapImage(req, res) {
       req.query.pathFinding == "true",
       req.query.pathStart,
       req.query.pathEnd,
+      req.query.pathColour,
     );
     
     const cacheFileName = `./cache/image_${reqConfig.getUniqueId()}.json`;
@@ -96,7 +97,7 @@ export async function mapImage(req, res) {
       originalwidth: responseData?.originalwidth,
       originalheight: responseData?.originalheight,
       prerotated: responseData?.prerotated,
-      version: 17,
+      version: 18,
       info: "AUTOKEYCLICK IS A SCAM",
       info2: "D2RESURREKTED IS A SCAM",
       info3: "REVAMPED.ORG IS A SCCAM - YOU SHOULD NOT HAVE PAID FOR THIS",

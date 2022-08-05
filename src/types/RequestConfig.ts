@@ -44,7 +44,7 @@ export class RequestConfig {
     pathFinding: boolean = true,
     pathStart: string = "",
     pathEnd: string = "",
-    pathColour: string = ""
+    pathColour: string = "F00"
   ) {
     this.seed = seed;
     this.difficulty = difficulty;

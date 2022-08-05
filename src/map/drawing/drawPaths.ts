@@ -21,7 +21,7 @@ export async function drawPaths(
           const pathfinding = generatePathFinding(levelData, startPoint, newEndpoint);
           pathfinding.forEach((point) => {
             ctx.beginPath();
-            ctx.fillStyle = reqConfig.pathColour;
+            ctx.fillStyle = "#" + reqConfig.pathColour;
             ctx.fillRect(
               point.y * scale,
               point.x * scale,
@@ -46,7 +46,7 @@ export async function drawPaths(
                     const pathfinding = generatePathFinding(levelData, startPoint, endPoint);
                     pathfinding.forEach((point) => {
                     ctx.beginPath();
-                    ctx.fillStyle = reqConfig.pathColour;
+                    ctx.fillStyle = "#" + reqConfig.pathColour;
                     ctx.fillRect(
                         point.y * scale,
                         point.x * scale,
