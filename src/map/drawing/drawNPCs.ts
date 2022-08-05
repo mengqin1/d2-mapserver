@@ -46,19 +46,19 @@ export async function drawNPCs(ctx: CanvasRenderingContext2D, levelData: Level, 
           drawCircle(ctx, x, y, 2 * 2, "#FF0000");
           x = x / scale;
           y = y / scale;
-          if (x == 30 && y == 208) {
+          if (x == 30 && y == 208) { // bottom right
             x = 392;
             y = 201;
           }
-          if (x == 206 && y == 32) {
+          if (x == 206 && y == 32) { // bottom left
             x = 207;
             y = 386;
           }
-          if (x == 207 && y == 393) {
+          if (x == 207 && y == 393) { // top right
             x = 207;
             y = 16;
           }
-          if (x == 388 && y == 216) {
+          if (x == 388 && y == 216) { //top left
             x = 22;
             y = 201;
           }

@@ -96,7 +96,7 @@ export async function mapImage(req, res) {
       originalwidth: responseData?.originalwidth,
       originalheight: responseData?.originalheight,
       prerotated: responseData?.prerotated,
-      version: 16,
+      version: 17,
       info: "AUTOKEYCLICK IS A SCAM",
       info2: "D2RESURREKTED IS A SCAM",
       info3: "REVAMPED.ORG IS A SCCAM - YOU SHOULD NOT HAVE PAID FOR THIS",

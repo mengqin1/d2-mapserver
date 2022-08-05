@@ -17,6 +17,7 @@ export class RequestConfig {
   pathFinding?: boolean;
   pathStart?: string;
   pathEnd?: string;
+  pathColour?: string;
 
   seed: string;
   difficulty: string;
@@ -42,7 +43,8 @@ export class RequestConfig {
     nostitch: boolean = false,
     pathFinding: boolean = true,
     pathStart: string = "",
-    pathEnd: string = ""
+    pathEnd: string = "",
+    pathColour: string = ""
   ) {
     this.seed = seed;
     this.difficulty = difficulty;
@@ -64,6 +66,7 @@ export class RequestConfig {
     this.pathFinding = pathFinding;
     this.pathStart = pathStart
     this.pathEnd = pathEnd
+    this.pathColour = pathColour
 
     if (isNaN(this.wallthickness)) this.wallthickness = 1;
     if (this.wallthickness > 10) this.wallthickness = 10;
@@ -89,7 +92,8 @@ export class RequestConfig {
     str += this.padding.toString() + "_";
     str += this.rotate ? "1_" : "0_"
     str += this.pathStart.toString() + "_";
-    str += this.pathEnd.toString()
+    str += this.pathEnd.toString();
+    str += this.pathColour.toString();
     return str;
   }
 }

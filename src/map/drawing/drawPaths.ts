@@ -16,12 +16,12 @@ export async function drawPaths(
           const endPoint = getObject(levelData, reqConfig.pathEnd);
 
           // nasty hack to avoid the exit starting inside the wall
-          startPoint.x = startPoint.x + 3;
-          const newEndpoint: Object = { id: 0, type: ObjectType.Exit, x: endPoint.x + 5, y: endPoint.y + 1}
+          //startPoint.x = startPoint.x;
+          const newEndpoint: Object = { id: 0, type: ObjectType.Exit, x: endPoint.x, y: endPoint.y}
           const pathfinding = generatePathFinding(levelData, startPoint, newEndpoint);
           pathfinding.forEach((point) => {
             ctx.beginPath();
-            ctx.fillStyle = "#F00";
+            ctx.fillStyle = reqConfig.pathColour;
             ctx.fillRect(
               point.y * scale,
               point.x * scale,
@@ -46,7 +46,7 @@ export async function drawPaths(
                     const pathfinding = generatePathFinding(levelData, startPoint, endPoint);
                     pathfinding.forEach((point) => {
                     ctx.beginPath();
-                    ctx.fillStyle = "#F00";
+                    ctx.fillStyle = reqConfig.pathColour;
                     ctx.fillRect(
                         point.y * scale,
                         point.x * scale,
@@ -73,6 +73,9 @@ export function getObject(levelData: Level, id: string) {
     const newObj: Object = { id: 0, type: ObjectType.Exit, x: parseInt(coords[0]) - levelData.offset.x, y: parseInt(coords[1]) - levelData.offset.y }
     return newObj;
   } else {  // if specifying the object id e.g. exit number
-    return levelData.objects.find((object) => object.id == parseInt(id));
+    let obj = levelData.objects.find((object) => object.id == parseInt(id));
+    obj.x = obj.x + 1
+    obj.y = obj.y + 1
+    return obj
   }
 }
