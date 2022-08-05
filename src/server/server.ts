@@ -26,7 +26,7 @@ fs.writeFileSync('./cache/access.log', "");
 var accessLogStream = fs.createWriteStream('./cache/access.log', { flags: 'a' })
 
 const app = express();
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 3002;
 
 var server = http.createServer(app);
 server.on('error', function (e) {
