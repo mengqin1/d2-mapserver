@@ -7,6 +7,7 @@ import { LevelImage } from "../types/LevelImage";
 import { LevelList } from "../types/level.type";
 import { rotateImage } from "./rotateImage";
 import trimCanvas from "trim-canvas";
+import { getWalkableExits } from "../data/getWalkableExits";
 
 export async function generateMapImage(reqConfig: RequestConfig, seedData: LevelList): Promise<any> {
     
@@ -14,7 +15,9 @@ export async function generateMapImage(reqConfig: RequestConfig, seedData: Level
     levelImage.padding = reqConfig.padding;
     
     levelImage.seedData = seedData;
+    levelImage.seedData = await getWalkableExits(levelImage.seedData);
     levelImage.mapData = levelImage.seedData.levels.find((map) => map.id === (reqConfig.mapid));
+    
     const connectedMaps = await getOutdoorConnectedMapIds(reqConfig.mapid);
     if (connectedMaps.length > 0 && !reqConfig.nostitch) {
       // if outdoors then force downloading of all seed data

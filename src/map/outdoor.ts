@@ -92,33 +92,33 @@ export async function stitchOutdoorMaps(
     const topX = (thisMapImage.mapData.offset.x - primaryMap.mapData.offset.x) * scale;
     const topY = (thisMapImage.mapData.offset.y - primaryMap.mapData.offset.y) * scale;
     outdoorctx.drawImage(thisMapImage.canvas, topX, topY);
-    const fontSize = 20;
-    const indent = 20;
-    if (topX == (primaryMapData.size.width * scale)) {
-      // console.log(`${mapData.name} is right of ${primaryMapData.name}`);
-      const textX = topX + padding + indent;
-      let textY = topY + mapData.size.height + padding;
-      textY = minmaxY(textY, canvas, padding);
-      drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#DDD", 270);
-    } else if (topX == -(mapData.size.width * scale)) {
-      // console.log(`${mapData.name} is left of ${primaryMapData.name}`);
-      const textX = topX + (mapData.size.width * scale) + padding - indent;
-      let textY = topY + mapData.size.height + padding;
-      textY = minmaxY(textY, canvas, padding);
-      drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#DDD", 270);
-    } else if (topY == -(mapData.size.height * scale)) {
-      // console.log(`${mapData.name} is above ${primaryMapData.name}`);
-      let textX = topX + mapData.size.width + padding;
-      const textY = topY + (mapData.size.height * scale) + padding - indent;
-      textX = minmaxX(textX, canvas, padding);
-      drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#DDD", 0);
-    } else if (topY == (primaryMapData.size.height * scale)) {
-      // console.log(`${mapData.name} is below ${primaryMapData.name}`);
-      let textX = topX + primaryMapData.size.width + padding;
-      const textY = topY + padding + indent;
-      textX = minmaxX(textX, canvas, padding);
-      drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#DDD", 0);
-    }
+    // const fontSize = 20;
+    // const indent = 20;
+    // if (topX == (primaryMapData.size.width * scale)) {
+    //   // console.log(`${mapData.name} is right of ${primaryMapData.name}`);
+    //   const textX = topX + padding + indent;
+    //   let textY = topY + mapData.size.height + padding;
+    //   textY = minmaxY(textY, canvas, padding);
+    //   drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#DDD", 270);
+    // } else if (topX == -(mapData.size.width * scale)) {
+    //   // console.log(`${mapData.name} is left of ${primaryMapData.name}`);
+    //   const textX = topX + (mapData.size.width * scale) + padding - indent;
+    //   let textY = topY + mapData.size.height + padding;
+    //   textY = minmaxY(textY, canvas, padding);
+    //   drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#DDD", 270);
+    // } else if (topY == -(mapData.size.height * scale)) {
+    //   // console.log(`${mapData.name} is above ${primaryMapData.name}`);
+    //   let textX = topX + mapData.size.width + padding;
+    //   const textY = topY + (mapData.size.height * scale) + padding - indent;
+    //   textX = minmaxX(textX, canvas, padding);
+    //   drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#DDD", 0);
+    // } else if (topY == (primaryMapData.size.height * scale)) {
+    //   // console.log(`${mapData.name} is below ${primaryMapData.name}`);
+    //   let textX = topX + primaryMapData.size.width + padding;
+    //   const textY = topY + padding + indent;
+    //   textX = minmaxX(textX, canvas, padding);
+    //   drawStraightText(outdoorctx, textX, textY, fontSize, mapData.name, "#DDD", 0);
+    // }
   }
   outdoorctx.drawImage(primaryMap.canvas, 0, 0);
 

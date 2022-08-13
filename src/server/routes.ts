@@ -9,6 +9,7 @@ import { PrefetchRequest } from "../types/PrefetchRequest";
 import { LevelImage } from "../types/LevelImage";
 import { RequestConfig } from "../types/RequestConfig";
 import { generateAllPaths, generatePath } from "../map/generateAllPaths";
+import { getWalkableExits } from "../data/getWalkableExits";
 
 
 export async function mapImage(req, res) {
@@ -97,7 +98,7 @@ export async function mapImage(req, res) {
       originalwidth: responseData?.originalwidth,
       originalheight: responseData?.originalheight,
       prerotated: responseData?.prerotated,
-      version: 18,
+      version: 19,
       info: "AUTOKEYCLICK IS A SCAM",
       info2: "D2RESURREKTED IS A SCAM",
       info3: "REVAMPED.ORG IS A SCCAM - YOU SHOULD NOT HAVE PAID FOR THIS",
@@ -149,7 +150,10 @@ export async function mapData(req, res) {
             const pathEnd: string = req.query.pathEnd;
             console.log(pathStart + " " + pathEnd);
             console.log(`New request for data ${seed} ${difficulty} ${mapid}...`);
-            const mapData: Level = await getMapData(seed, difficulty, mapid);
+            let seedData: LevelList = await getAllMapData(seed, difficulty);
+            seedData = await getWalkableExits(seedData);
+            let mapData: Level = seedData.levels.find((map) => map.id === mapid);
+            
             if (pathStart && pathEnd) {
               const pathFinding = await generatePath(mapData, pathStart, pathEnd);
               mapData.pathFinding = pathFinding;

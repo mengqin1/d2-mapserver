@@ -6,9 +6,9 @@ import { RequestConfig } from "../types/RequestConfig";
 
 // this is very lazy, sue me
 async function test() {
-  const seed = "1034522"
-  createImage(seed, "2", 1, "Rogue Encampment");
-  // createImage(seed, "2", 2, "Blood Moor");
+  const seed = "354555"
+  // createImage(seed, "2", 1, "Rogue Encampment");
+  createImage(seed, "2", 2, "Blood Moor");
   // createImage(seed, "2", 3, "Cold Plains");
   // createImage(seed, "2", 4, "Stony Field");
   // createImage(seed, "2", 5, "Dark Wood");
