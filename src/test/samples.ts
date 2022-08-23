@@ -1,161 +1,167 @@
 import * as fs from "fs";
 import { getAllMapData } from "../data/getMapData";
 import { generateMapImage } from "../map/generateMapImage";
+import { LevelList } from "../types/level.type";
 import { LevelImage } from "../types/LevelImage";
 import { RequestConfig } from "../types/RequestConfig";
 
 // this is very lazy, sue me
 async function test() {
   const seed = "354555"
-  // createImage(seed, "2", 1, "Rogue Encampment");
-  createImage(seed, "2", 2, "Blood Moor");
-  // createImage(seed, "2", 3, "Cold Plains");
-  // createImage(seed, "2", 4, "Stony Field");
-  // createImage(seed, "2", 5, "Dark Wood");
-  // createImage(seed, "2", 6, "Black Marsh");
-  // createImage(seed, "2", 7, "Tamoe Highland");
-  // createImage(seed, "2", 8, "Den of Evil");
-  // createImage(seed, "2", 9, "Cave Level 1");
-  // createImage(seed, "2", 10, "Underground Passage Level 1");
-  // createImage(seed, "2", 11, "Hole Level 1");
-  // createImage(seed, "2", 12, "Pit Level 1");
-  // createImage(seed, "2", 13, "Cave Level 2");
-  // createImage(seed, "2", 14, "Underground Passage Level 2");
-  // createImage(seed, "2", 15, "Hole Level 2");
-  // createImage(seed, "2", 16, "Pit Level 2");
-  // createImage(seed, "2", 17, "Burial Grounds");
-  // createImage(seed, "2", 18, "Crypt");
-  // createImage(seed, "2", 19, "Mausoleum");
-  // createImage(seed, "2", 20, "Forgotten Tower");
-  // createImage(seed, "2", 21, "Tower Cellar Level 1");
-  // createImage(seed, "2", 22, "Tower Cellar Level 2");
-  // createImage(seed, "2", 23, "Tower Cellar Level 3");
-  // createImage(seed, "2", 24, "Tower Cellar Level 4");
-  // createImage(seed, "2", 25, "Tower Cellar Level 5");
-  // createImage(seed, "2", 26, "Monastery Gate");
-  // createImage(seed, "2", 27, "Outer Cloister");
-  // createImage(seed, "2", 28, "Barracks");
-  // createImage(seed, "2", 29, "Jail Level 1");
-  // createImage(seed, "2", 30, "Jail Level 2");
-  // createImage(seed, "2", 31, "Jail Level 3");
-  // createImage(seed, "2", 32, "Inner Cloister");
-  // createImage(seed, "2", 33, "Cathedral");
-  // createImage(seed, "2", 34, "Catacombs Level 1");
-  // createImage(seed, "2", 35, "Catacombs Level 2");
-  // createImage(seed, "2", 36, "Catacombs Level 3");
-  // createImage(seed, "2", 37, "Catacombs Level 4");
-  // createImage(seed, "2", 38, "Tristram");
-  // createImage(seed, "2", 39, "Moo Moo Farm");
-  // createImage(seed, "2", 40, "Lut Gholein");
-  // createImage(seed, "2", 41, "Rocky Waste");
-  // createImage(seed, "2", 42, "Dry Hills");
-  // createImage(seed, "2", 43, "Far Oasis");
-  // createImage(seed, "2", 44, "Lost City");
-  // createImage(seed, "2", 45, "Valley of Snakes");
-  // createImage(seed, "2", 46, "Canyon of the Magi");
-  // createImage(seed, "2", 47, "Sewers Level 1");
-  // createImage(seed, "2", 48, "Sewers Level 2");
-  // createImage(seed, "2", 49, "Sewers Level 3");
-  // createImage(seed, "2", 50, "Harem Level 1");
-  // createImage(seed, "2", 51, "Harem Level 2");
-  // createImage(seed, "2", 52, "Palace Cellar Level 1");
-  // createImage(seed, "2", 53, "Palace Cellar Level 2");
-  // createImage(seed, "2", 54, "Palace Cellar Level 3");
-  // createImage(seed, "2", 55, "Stony Tomb Level 1");
-  // createImage(seed, "2", 56, "Halls of the Dead Level 1");
-  // createImage(seed, "2", 57, "Halls of the Dead Level 2");
-  // createImage(seed, "2", 58, "Claw Viper Temple Level 1");
-  // createImage(seed, "2", 59, "Stony Tomb Level 2");
-  // createImage(seed, "2", 60, "Halls of the Dead Level 3");
-  // createImage(seed, "2", 61, "Claw Viper Temple Level 2");
-  // createImage(seed, "2", 62, "Maggot Lair Level 1");
-  // createImage(seed, "2", 63, "Maggot Lair Level 2");
-  // createImage(seed, "2", 64, "Maggot Lair Level 3");
-  // createImage(seed, "2", 65, "Ancient Tunnels");
-  // createImage(seed, "2", 66, "Tal Rasha's Tomb");
-  // createImage(seed, "2", 67, "Tal Rasha's Tomb");
-  // createImage(seed, "2", 68, "Tal Rasha's Tomb");
-  // createImage(seed, "2", 69, "Tal Rasha's Tomb");
-  // createImage(seed, "2", 70, "Tal Rasha's Tomb");
-  // createImage(seed, "2", 71, "Tal Rasha's Tomb");
-  // createImage(seed, "2", 72, "Tal Rasha's Tomb");
-  // createImage(seed, "2", 73, "Duriel's Lair");
-  // createImage(seed, "2", 74, "Arcane Sanctuary");
-  // createImage(seed, "2", 75, "Kurast Docktown");
-  // createImage(seed, "2", 76, "Spider Forest");
-  // createImage(seed, "2", 77, "Great Marsh");
-  // createImage(seed, "2", 78, "Flayer Jungle");
-  // createImage(seed, "2", 79, "Lower Kurast");
-  // createImage(seed, "2", 80, "Kurast Bazaar");
-  // createImage(seed, "2", 81, "Upper Kurast");
-  // createImage(seed, "2", 82, "Kurast Causeway");
-  // createImage(seed, "2", 83, "Travincal");
-  // createImage(seed, "2", 84, "Spider Cave");
-  // createImage(seed, "2", 85, "Spider Cavern");
-  // createImage(seed, "2", 86, "Swampy Pit Level 1");
-  // createImage(seed, "2", 87, "Swampy Pit Level 2");
-  // createImage(seed, "2", 88, "Flayer Dungeon Level 1");
-  // createImage(seed, "2", 89, "Flayer Dungeon Level 2");
-  // createImage(seed, "2", 90, "Swampy Pit Level 3");
-  // createImage(seed, "2", 91, "Flayer Dungeon Level 3");
-  // createImage(seed, "2", 92, "Sewers Level 1");
-  // createImage(seed, "2", 93, "Sewers Level 2");
-  // createImage(seed, "2", 94, "Ruined Temple");
-  // createImage(seed, "2", 95, "Disused Fane");
-  // createImage(seed, "2", 96, "Forgotten Reliquary");
-  // createImage(seed, "2", 97, "Forgotten Temple");
-  // createImage(seed, "2", 98, "Ruined Fane");
-  // createImage(seed, "2", 99, "Disused Reliquary");
-  // createImage(seed, "2", 100, "Durance of Hate Level 1");
-  // createImage(seed, "2", 101, "Durance of Hate Level 2");
-  // createImage(seed, "2", 102, "Durance of Hate Level 3");
-  // createImage(seed, "2", 103, "The Pandemonium Fortress");
-  // createImage(seed, "2", 104, "Outer Steppes");
-  // createImage(seed, "2", 105, "Plains of Despair");
-  // createImage(seed, "2", 106, "City of the Damned");
-  // createImage(seed, "2", 107, "River of Flame");
-  // createImage(seed, "2", 108, "Chaos Sanctum");
-  // createImage(seed, "2", 109, "Harrogath");
-  // createImage(seed, "2", 110, "Bloody Foothills");
-  // createImage(seed, "2", 111, "Rigid Highlands");
-  // createImage(seed, "2", 112, "Arreat Plateau");
-  // createImage(seed, "2", 113, "Crystalized Cavern Level 1");
-  // createImage(seed, "2", 114, "Cellar of Pity");
-  // createImage(seed, "2", 115, "Crystalized Cavern Level 2");
-  // createImage(seed, "2", 116, "Echo Chamber");
-  // createImage(seed, "2", 117, "Tundra Wastelands");
-  // createImage(seed, "2", 118, "Glacial Caves Level 1");
-  // createImage(seed, "2", 119, "Glacial Caves Level 2");
-  // createImage(seed, "2", 120, "Rocky Summit");
-  // createImage(seed, "2", 121, "Nihlathaks Temple");
-  // createImage(seed, "2", 122, "Halls of Anguish");
-  // createImage(seed, "2", 123, "Halls of Death's Calling");
-  // createImage(seed, "2", 124, "Halls of Vaught");
-  // createImage(seed, "2", 125, "Hell1");
-  // createImage(seed, "2", 126, "Hell2");
-  // createImage(seed, "2", 127, "Hell3");
-  // createImage(seed, "2", 128, "The Worldstone Keep Level 1");
-  // createImage(seed, "2", 129, "The Worldstone Keep Level 2");
-  // createImage(seed, "2", 130, "The Worldstone Keep Level 3");
-  // createImage(seed, "2", 131, "Throne of Destruction");
-  // createImage(seed, "2", 132, "The Worldstone Chamber");
+  const start = performance.now();
+  const seedData = await getAllMapData(seed, "2");
+  await Promise.allSettled([
+    createImage(seedData, 1, "Rogue Encampment"),
+    createImage(seedData, 2, "Blood Moor"),
+    createImage(seedData, 3, "Cold Plains"),
+    createImage(seedData, 4, "Stony Field"),
+    createImage(seedData, 5, "Dark Wood"),
+    createImage(seedData, 6, "Black Marsh"),
+    createImage(seedData, 7, "Tamoe Highland"),
+    createImage(seedData, 8, "Den of Evil"),
+    createImage(seedData, 9, "Cave Level 1"),
+    createImage(seedData, 10, "Underground Passage Level 1"),
+    createImage(seedData, 11, "Hole Level 1"),
+    createImage(seedData, 12, "Pit Level 1"),
+    createImage(seedData, 13, "Cave Level 2"),
+    createImage(seedData, 14, "Underground Passage Level 2"),
+    createImage(seedData, 15, "Hole Level 2"),
+    createImage(seedData, 16, "Pit Level 2"),
+    createImage(seedData, 17, "Burial Grounds"),
+    createImage(seedData, 18, "Crypt"),
+    createImage(seedData, 19, "Mausoleum"),
+    createImage(seedData, 20, "Forgotten Tower"),
+    createImage(seedData, 21, "Tower Cellar Level 1"),
+    createImage(seedData, 22, "Tower Cellar Level 2"),
+    createImage(seedData, 23, "Tower Cellar Level 3"),
+    createImage(seedData, 24, "Tower Cellar Level 4"),
+    createImage(seedData, 25, "Tower Cellar Level 5"),
+    createImage(seedData, 26, "Monastery Gate"),
+    createImage(seedData, 27, "Outer Cloister"),
+    createImage(seedData, 28, "Barracks"),
+    createImage(seedData, 29, "Jail Level 1"),
+    createImage(seedData, 30, "Jail Level 2"),
+    createImage(seedData, 31, "Jail Level 3"),
+    createImage(seedData, 32, "Inner Cloister"),
+    createImage(seedData, 33, "Cathedral"),
+    createImage(seedData, 34, "Catacombs Level 1"),
+    createImage(seedData, 35, "Catacombs Level 2"),
+    createImage(seedData, 36, "Catacombs Level 3"),
+    createImage(seedData, 37, "Catacombs Level 4"),
+    createImage(seedData, 38, "Tristram"),
+    createImage(seedData, 39, "Moo Moo Farm"),
+    createImage(seedData, 40, "Lut Gholein"),
+    createImage(seedData, 41, "Rocky Waste"),
+    createImage(seedData, 42, "Dry Hills"),
+    createImage(seedData, 43, "Far Oasis"),
+    createImage(seedData, 44, "Lost City"),
+    createImage(seedData, 45, "Valley of Snakes"),
+    createImage(seedData, 46, "Canyon of the Magi"),
+    createImage(seedData, 47, "Sewers Level 1"),
+    createImage(seedData, 48, "Sewers Level 2"),
+    createImage(seedData, 49, "Sewers Level 3"),
+    createImage(seedData, 50, "Harem Level 1"),
+    createImage(seedData, 51, "Harem Level 2"),
+    createImage(seedData, 52, "Palace Cellar Level 1"),
+    createImage(seedData, 53, "Palace Cellar Level 2"),
+    createImage(seedData, 54, "Palace Cellar Level 3"),
+    createImage(seedData, 55, "Stony Tomb Level 1"),
+    createImage(seedData, 56, "Halls of the Dead Level 1"),
+    createImage(seedData, 57, "Halls of the Dead Level 2"),
+    createImage(seedData, 58, "Claw Viper Temple Level 1"),
+    createImage(seedData, 59, "Stony Tomb Level 2"),
+    createImage(seedData, 60, "Halls of the Dead Level 3"),
+    createImage(seedData, 61, "Claw Viper Temple Level 2"),
+    createImage(seedData, 62, "Maggot Lair Level 1"),
+    createImage(seedData, 63, "Maggot Lair Level 2"),
+    createImage(seedData, 64, "Maggot Lair Level 3"),
+    createImage(seedData, 65, "Ancient Tunnels"),
+    createImage(seedData, 66, "Tal Rasha's Tomb"),
+    createImage(seedData, 67, "Tal Rasha's Tomb"),
+    createImage(seedData, 68, "Tal Rasha's Tomb"),
+    createImage(seedData, 69, "Tal Rasha's Tomb"),
+    createImage(seedData, 70, "Tal Rasha's Tomb"),
+    createImage(seedData, 71, "Tal Rasha's Tomb"),
+    createImage(seedData, 72, "Tal Rasha's Tomb"),
+    createImage(seedData, 73, "Duriel's Lair"),
+    createImage(seedData, 74, "Arcane Sanctuary"),
+    createImage(seedData, 75, "Kurast Docktown"),
+    createImage(seedData, 76, "Spider Forest"),
+    createImage(seedData, 77, "Great Marsh"),
+    createImage(seedData, 78, "Flayer Jungle"),
+    createImage(seedData, 79, "Lower Kurast"),
+    createImage(seedData, 80, "Kurast Bazaar"),
+    createImage(seedData, 81, "Upper Kurast"),
+    createImage(seedData, 82, "Kurast Causeway"),
+    createImage(seedData, 83, "Travincal"),
+    createImage(seedData, 84, "Spider Cave"),
+    createImage(seedData, 85, "Spider Cavern"),
+    createImage(seedData, 86, "Swampy Pit Level 1"),
+    createImage(seedData, 87, "Swampy Pit Level 2"),
+    createImage(seedData, 88, "Flayer Dungeon Level 1"),
+    createImage(seedData, 89, "Flayer Dungeon Level 2"),
+    createImage(seedData, 90, "Swampy Pit Level 3"),
+    createImage(seedData, 91, "Flayer Dungeon Level 3"),
+    createImage(seedData, 92, "Sewers Level 1"),
+    createImage(seedData, 93, "Sewers Level 2"),
+    createImage(seedData, 94, "Ruined Temple"),
+    createImage(seedData, 95, "Disused Fane"),
+    createImage(seedData, 96, "Forgotten Reliquary"),
+    createImage(seedData, 97, "Forgotten Temple"),
+    createImage(seedData, 98, "Ruined Fane"),
+    createImage(seedData, 99, "Disused Reliquary"),
+    createImage(seedData, 100, "Durance of Hate Level 1"),
+    createImage(seedData, 101, "Durance of Hate Level 2"),
+    createImage(seedData, 102, "Durance of Hate Level 3"),
+    createImage(seedData, 103, "The Pandemonium Fortress"),
+    createImage(seedData, 104, "Outer Steppes"),
+    createImage(seedData, 105, "Plains of Despair"),
+    createImage(seedData, 106, "City of the Damned"),
+    createImage(seedData, 107, "River of Flame"),
+    createImage(seedData, 108, "Chaos Sanctum"),
+    createImage(seedData, 109, "Harrogath"),
+    createImage(seedData, 110, "Bloody Foothills"),
+    createImage(seedData, 111, "Rigid Highlands"),
+    createImage(seedData, 112, "Arreat Plateau"),
+    createImage(seedData, 113, "Crystalized Cavern Level 1"),
+    createImage(seedData, 114, "Cellar of Pity"),
+    createImage(seedData, 115, "Crystalized Cavern Level 2"),
+    createImage(seedData, 116, "Echo Chamber"),
+    createImage(seedData, 117, "Tundra Wastelands"),
+    createImage(seedData, 118, "Glacial Caves Level 1"),
+    createImage(seedData, 119, "Glacial Caves Level 2"),
+    createImage(seedData, 120, "Rocky Summit"),
+    createImage(seedData, 121, "Nihlathaks Temple"),
+    createImage(seedData, 122, "Halls of Anguish"),
+    createImage(seedData, 123, "Halls of Death's Calling"),
+    createImage(seedData, 124, "Halls of Vaught"),
+    createImage(seedData, 125, "Hell1"),
+    createImage(seedData, 126, "Hell2"),
+    createImage(seedData, 127, "Hell3"),
+    createImage(seedData, 128, "The Worldstone Keep Level 1"),
+    createImage(seedData, 129, "The Worldstone Keep Level 2"),
+    createImage(seedData, 130, "The Worldstone Keep Level 3"),
+    createImage(seedData, 131, "Throne of Destruction"),
+    createImage(seedData, 132, "The Worldstone Chamber")
   // createImage("65464564", "2", "124", "vaught-topleft");
   // createImage("35481586", "2", "124", "vaught-topright");
   // createImage("33333", "2", "124", "vaught-bottomleft");
   // createImage("543523", "2", "124", "vaught-bottomright");
+  ]);
+  const end = performance.now();
+  console.log(` ${Math.trunc(end - start)}ms`);
 }
 
 async function createImage(
-  seed: string,
-  difficulty: string,
+  seedData: LevelList,
   mapid: number,
   filename: string
-) {
-  console.log(`Getting ${seed} ${difficulty} ${mapid}`);
+): Promise<void> {
+  console.log(`Getting ${mapid}`);
 
   const reqConfig = new RequestConfig(
-    seed,
-    difficulty,
+    seedData.seed,
+    seedData.difficulty,
     mapid,
     false, //verbose
     false, //trim
@@ -163,33 +169,42 @@ async function createImage(
     true, //edge
     0.8,
     2,
-    150
+    150,
+    false,
+    "#AAA",
+    false,
+    false,
+    true,  //rotate
+    false, // show objs
+    true,   // nostitch
+    false
   );
-  const seedData = await getAllMapData(reqConfig.seed, reqConfig.difficulty);
-  let levelImage: LevelImage = await generateMapImage(reqConfig, seedData);
-  fs.writeFileSync(
-    "./build/" + reqConfig.mapid + "-" + filename + ".png",
-    levelImage.canvas.toBuffer("image/png")
-  );
+  
+  return generateMapImage(reqConfig, seedData).then(levelImage => {;
+    fs.writeFileSync(
+      "./build/" + reqConfig.mapid + "-" + filename + ".png",
+      levelImage.canvas.toBuffer("image/png")
+    );
+  });
 
-  const reqConfig2 = new RequestConfig(
-    seed,
-    difficulty,
-    mapid,
-    false, //verbose
-    false, //trim
-    false, //isometric
-    true, //edge
-    0.8,
-    4,
-    150
-  );
+  // const reqConfig2 = new RequestConfig(
+  //   seed,
+  //   difficulty,
+  //   mapid,
+  //   false, //verbose
+  //   false, //trim
+  //   false, //isometric
+  //   true, //edge
+  //   0.8,
+  //   2,
+  //   150
+  // );
 
-  let levelImage2: LevelImage = await generateMapImage(reqConfig2, seedData);
-  fs.writeFileSync(
-    "./build/" + reqConfig2.mapid + "-" + filename + "_4.png",
-    levelImage2.canvas.toBuffer("image/png")
-  );
+  // let levelImage2: LevelImage = await generateMapImage(reqConfig2, seedData);
+  // fs.writeFileSync(
+  //   "./build/" + reqConfig2.mapid + "-" + filename + "_4.png",
+  //   levelImage2.canvas.toBuffer("image/png")
+  // );
 }
 
 test();
