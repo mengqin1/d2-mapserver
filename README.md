@@ -21,6 +21,12 @@ set PORT=3113
 START d2-mapserver.exe
 ```
 
+### Simple instructions for Linux users:
+
+1. Your system needs to have docker.
+2. Use dockerbuild.sh to compile the docker image.
+3. Start the docker container using dockerstart.sh. You need to prepare a cache directory, and D2-LoD 1.13c game files.
+
 ## Endpoints
 
 ### Map image

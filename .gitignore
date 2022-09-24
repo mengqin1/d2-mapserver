@@ -10,7 +10,6 @@ dist/
 dist2/
 run.sh
 runbeta.sh
-dockerbuild.sh
 dockerbeta.bat
 dockerpush.bat
 dockerpushbeta.bat
